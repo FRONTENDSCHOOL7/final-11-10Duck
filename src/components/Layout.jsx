@@ -42,7 +42,6 @@ const TabMenuBar = styled.footer`
     gap: 14px;
 `;
 const TabMenu = styled.button`
-    background-color: gold;
     width: 84px;
     border: none;
     /* background-image: url('/images/icon-home.png');
@@ -51,7 +50,7 @@ const TabMenu = styled.button`
 `;
 
 const TabIcon = styled.img`
-    src: '/public/images/icon-home.png';
+    src: './images/icon-home.png';
     width: 24px;
     height: 24px;
 `;
