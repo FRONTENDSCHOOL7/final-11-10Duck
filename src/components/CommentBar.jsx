@@ -43,7 +43,7 @@ const ProfileImg = styled.img`
 `;
 const CommentInput = styled.input`
     border: none;
-    padding-left: 18px;
+    margin-left: 18px;
 
     &::placeholder {
         color: var(--C4C4C4, #c4c4c4);
@@ -56,4 +56,5 @@ const CommentBtn = styled.button`
     color: ${(props) => (props.inputLength === 0 ? `var(--C4C4C4, #c4c4c4)` : `var( --font-orange-color)`)};
     font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
 `;
