@@ -13,7 +13,7 @@ export default function TabBar() {
         { text: '프로필', imgSrc: profileIcon },
     ];
     return (
-        <>
+        <TapBarContainer>
             {menus.map((tab) => {
                 return (
                     <TabMenu>
@@ -22,9 +22,18 @@ export default function TabBar() {
                     </TabMenu>
                 );
             })}
-        </>
+        </TapBarContainer>
     );
 }
+
+const TapBarContainer = styled.footer`
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid var(--font-primary-color);
+`;
 
 const TabMenu = styled.button`
     width: 84px;
@@ -37,7 +46,7 @@ const TabIcon = styled.img`
     vertical-align: top;
 `;
 const TabText = styled.p`
-    color: var(--767676, #767676);
+    color: var(--font-primary-color);
     font-size: 10px;
     margin-top: 4px;
 `;

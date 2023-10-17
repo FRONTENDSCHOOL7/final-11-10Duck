@@ -1,19 +1,15 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import TabBar from './TabBar';
-// import homeIcon from '../images/icon-home.png';
-// import chatIcon from '../images/icon-message-circle.png';
-// import postIcon from '../images/icon-edit.png';
-// import profileIcon from '../images/icon-user.png';
+import CommentBar from './CommentBar';
 
 export default function Layout() {
     return (
         <LayoutContainer>
             <HomeHeader></HomeHeader>
             Layout
-            <LayoutFooter>
-                <TabBar></TabBar>
-            </LayoutFooter>
+            {/* TabBar.jsx 또는 CommentBar.jsx */}
+            <CommentBar mode={'post'}></CommentBar>
         </LayoutContainer>
     );
 }
@@ -30,13 +26,4 @@ const LayoutContainer = styled.div`
 const HomeHeader = styled.header`
     border: 1px solid black;
     height: 48px;
-`;
-
-const LayoutFooter = styled.footer`
-    border: 1px solid black;
-
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    gap: 14px;
 `;
