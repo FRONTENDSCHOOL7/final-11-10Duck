@@ -17,7 +17,10 @@ export default function Button(props) {
 
 const ButtonStyle = styled.button`
   display: block;
-  color: ${(props) => (props.reversed ? "#767676" : "#FFFFFF")};
+  color: ${(props) =>
+    props.reversed
+      ? "var(--font-primary-color)"
+      : "var(--font-secondary-color)"};
   width: 100%;
   max-width: ${(props) =>
     props.size.toUpperCase() === "L"
@@ -39,7 +42,11 @@ const ButtonStyle = styled.button`
   border-radius: 44px;
 
   background-color: ${(props) =>
-    props.reversed ? "#FFFFFF" : props.disabled ? "#FFC7A7" : "#f26e22"};
+    props.reversed
+      ? "var(--secondary-color)"
+      : props.disabled
+      ? "var(--disabled-color)"
+      : "var(--primary-color)"};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   font-size: ${(props) => (props.size.toUpperCase() === "S" ? "12px" : "14px")};
 `;
