@@ -1,24 +1,26 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import homeIcon from '../images/icon-home.png';
-import chatIcon from '../images/icon-message-circle.png';
-import postIcon from '../images/icon-edit.png';
-import profileIcon from '../images/icon-user.png';
+
+import { ReactComponent as HomeIcon } from '../images/icon-home.svg';
+import { ReactComponent as ChatIcon } from '../images/icon-message-circle.svg';
+import { ReactComponent as PostIcon } from '../images/icon-edit.svg';
+import { ReactComponent as ProfileIcon } from '../images/icon-user.svg';
 
 export default function TabBar() {
     const menus = [
-        { text: '홈', imgSrc: homeIcon },
-        { text: '채팅', imgSrc: chatIcon },
-        { text: '게시물 작성', imgSrc: postIcon },
-        { text: '프로필', imgSrc: profileIcon },
+        { label: '홈', icon: HomeIcon },
+        { label: '채팅', icon: ChatIcon },
+        { label: '게시물 작성', icon: PostIcon },
+        { label: '프로필', icon: ProfileIcon },
     ];
+    // 아이콘 클릭시 svg fill stroke 변경 기능 필요
     return (
         <TapBarContainer>
             {menus.map((tab) => {
                 return (
                     <TabMenu>
-                        <TabIcon src={tab.imgSrc}></TabIcon>
-                        <TabText>{tab.text}</TabText>
+                        <tab.icon width={24} height={24} />
+                        <TabText>{tab.label}</TabText>
                     </TabMenu>
                 );
             })}
@@ -39,12 +41,9 @@ const TabMenu = styled.button`
     width: 84px;
     border: none;
     background: none;
+    cursor: pointer;
 `;
-const TabIcon = styled.img`
-    width: 24px;
-    height: 24px;
-    vertical-align: top;
-`;
+
 const TabText = styled.p`
     color: var(--font-primary-color);
     font-size: 10px;

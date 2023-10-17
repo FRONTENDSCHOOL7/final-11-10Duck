@@ -15,7 +15,8 @@ export default function Layout() {
             Layout
             {/* footer 컴포넌트 */}
             {/* TabBar.jsx 또는 CommentBar.jsx */}
-            <CommentBar mode={'post'}></CommentBar>
+            {/* <CommentBar mode={'post'}></CommentBar> */}
+            <TabBar></TabBar>
         </LayoutContainer>
     );
 }

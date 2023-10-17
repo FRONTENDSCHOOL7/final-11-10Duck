@@ -20,7 +20,10 @@ export default function CommentBar({ mode }) {
             <div>
                 <ProfileImg src={profileImgSrc} alt="프로필 이미지" />
                 {/* 입력값 길이 늘어났을때 처리 필요 */}
-                <CommentInput type="text" value={textInput} placeholder={mode === 'post' ? '댓글 입력하기...' : '메시지 입력하기...'} onChange={inputHandle} />
+                <label className="a11y-hidden" htmlFor="commentId">
+                    댓글 입력하기
+                </label>
+                <CommentInput type="text" id="commentId" value={textInput} placeholder={mode === 'post' ? '댓글 입력하기...' : '메시지 입력하기...'} onChange={inputHandle} />
             </div>
             <CommentBtn inputLength={textInput.length}>{mode === 'post' ? '게시' : '전송'}</CommentBtn>
         </FormContainer>
@@ -34,6 +37,17 @@ const FormContainer = styled.form`
     padding: 13px 16px;
 
     border-top: 1px solid var(--font-primary-color);
+
+    .a11y-hidden {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+    }
 `;
 const ProfileImg = styled.img`
     width: 36px;
