@@ -15,20 +15,20 @@ export default function TabBar() {
     ];
     // 아이콘 클릭시 svg fill stroke 변경 기능 필요
     return (
-        <TapBarContainer>
-            {menus.map((tab) => {
+        <NavBarContainer>
+            {menus.map((nav) => {
                 return (
-                    <TabMenu>
-                        <tab.icon width={24} height={24} />
-                        <TabText>{tab.label}</TabText>
-                    </TabMenu>
+                    <NavStyle>
+                        <nav.icon width={24} height={24} />
+                        <NavText>{nav.label}</NavText>
+                    </NavStyle>
                 );
             })}
-        </TapBarContainer>
+        </NavBarContainer>
     );
 }
 
-const TapBarContainer = styled.footer`
+const NavBarContainer = styled.footer`
     height: 60px;
     display: flex;
     justify-content: center;
@@ -37,14 +37,14 @@ const TapBarContainer = styled.footer`
     border-top: 1px solid var(--font-primary-color);
 `;
 
-const TabMenu = styled.button`
+const NavStyle = styled.button`
     width: 84px;
     border: none;
     background: none;
     cursor: pointer;
 `;
 
-const TabText = styled.p`
+const NavText = styled.p`
     color: var(--font-primary-color);
     font-size: 10px;
     margin-top: 4px;
