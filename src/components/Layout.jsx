@@ -3,11 +3,12 @@ import { styled } from 'styled-components';
 import TabBar from './TabBar';
 import CommentBar from './CommentBar';
 import BasicHeader from './Header/BasicHeader';
+import SearchHeader from './Header/SearchHeader';
 
 export default function Layout() {
     return (
         <LayoutContainer>
-            <BasicHeader />
+            <SearchHeader />
             Layout
             {/* TabBar.jsx 또는 CommentBar.jsx */}
             <CommentBar mode={'post'}></CommentBar>
