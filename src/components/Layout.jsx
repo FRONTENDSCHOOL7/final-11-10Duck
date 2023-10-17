@@ -1,20 +1,19 @@
 import React from 'react';
 import { styled } from 'styled-components';
+import TabBar from './TabBar';
+// import homeIcon from '../images/icon-home.png';
+// import chatIcon from '../images/icon-message-circle.png';
+// import postIcon from '../images/icon-edit.png';
+// import profileIcon from '../images/icon-user.png';
 
 export default function Layout() {
     return (
         <LayoutContainer>
             <HomeHeader></HomeHeader>
             Layout
-            <TabMenuBar>
-                <TabMenu>
-                    <TabIcon></TabIcon>
-                    <p>홈</p>
-                </TabMenu>
-                <TabMenu>채팅</TabMenu>
-                <TabMenu>게시물 작성</TabMenu>
-                <TabMenu>프로필</TabMenu>
-            </TabMenuBar>
+            <LayoutFooter>
+                <TabBar></TabBar>
+            </LayoutFooter>
         </LayoutContainer>
     );
 }
@@ -33,24 +32,11 @@ const HomeHeader = styled.header`
     height: 48px;
 `;
 
-const TabMenuBar = styled.footer`
+const LayoutFooter = styled.footer`
     border: 1px solid black;
-    background-color: aqua;
+
     height: 60px;
     display: flex;
     justify-content: center;
     gap: 14px;
-`;
-const TabMenu = styled.button`
-    width: 84px;
-    border: none;
-    /* background-image: url('/images/icon-home.png');
-    background-repeat: no-repeat;
-    background-position: center; */
-`;
-
-const TabIcon = styled.img`
-    src: './images/icon-home.png';
-    width: 24px;
-    height: 24px;
 `;
