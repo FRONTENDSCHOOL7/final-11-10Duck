@@ -4,11 +4,12 @@ import TabBar from './TabBar';
 import CommentBar from './CommentBar';
 import BasicHeader from './Header/BasicHeader';
 import SearchHeader from './Header/SearchHeader';
+import UploadHeader from './Header/UploadHeader';
 
 export default function Layout() {
     return (
         <LayoutContainer>
-            <SearchHeader />
+            <UploadHeader></UploadHeader>
             Layout
             {/* TabBar.jsx 또는 CommentBar.jsx */}
             <CommentBar mode={'post'}></CommentBar>
