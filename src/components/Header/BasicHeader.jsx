@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import ArrowIcon from '../../images/icon-arrow-left.png';
-import moreIcon from '../../images/icon- more-vertical.png';
+import moreIcon from '../../images/icon-more-vertical.png';
 
 export default function BasicHeader({ mode }) {
     ////유저 정보 state에서 사용자 이름 저장
