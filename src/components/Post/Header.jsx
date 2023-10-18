@@ -2,9 +2,13 @@ import React from "react";
 import ProfileImage from "../../imgs/basic-profile-img.png";
 import { styled } from "styled-components";
 import Button from "../Button";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil/atom";
 
 export default function Header(props) {
   const { hasButton } = props;
+
+  const user = useRecoilValue(userState);
   return (
     <HeaderStyle>
       <ProfileContainerStyle>
