@@ -2,8 +2,8 @@ import React from "react";
 import { styled } from "styled-components";
 import Header from "./Header";
 import Content from "./Content";
-
-import PostImage from "../../imgs/productImage.jpg";
+import PostImage from "../../assets/post-img-example.png";
+import { COLOR } from "../../utils";
 
 export default function Post(props) {
   const { post } = props;
@@ -31,5 +31,5 @@ export default function Post(props) {
 
 const PostStyle = styled.article`
   width: 358px;
-  background-color: var(--bg-primary-color);
+  background-color: ${COLOR.bgPrimaryColor};
 `;
