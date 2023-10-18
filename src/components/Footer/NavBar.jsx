@@ -1,12 +1,12 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-import { ReactComponent as HomeIcon } from '../images/icon-home.svg';
-import { ReactComponent as ChatIcon } from '../images/icon-message-circle.svg';
-import { ReactComponent as PostIcon } from '../images/icon-edit.svg';
-import { ReactComponent as ProfileIcon } from '../images/icon-user.svg';
+import { ReactComponent as HomeIcon } from '../../images/icon-home.svg';
+import { ReactComponent as ChatIcon } from '../../images/icon-message-circle.svg';
+import { ReactComponent as PostIcon } from '../../images/icon-edit.svg';
+import { ReactComponent as ProfileIcon } from '../../images/icon-user.svg';
 
-export default function TabBar() {
+export default function NavBar() {
     const menus = [
         { label: '홈', icon: HomeIcon },
         { label: '채팅', icon: ChatIcon },
@@ -18,7 +18,7 @@ export default function TabBar() {
         <NavBarContainer>
             {menus.map((nav) => {
                 return (
-                    <NavStyle>
+                    <NavStyle key={nav.label}>
                         <nav.icon width={24} height={24} />
                         <NavText>{nav.label}</NavText>
                     </NavStyle>
