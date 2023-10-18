@@ -14,6 +14,7 @@ export const COLOR = {
   fontSecondaryColor: "#FFFFFF",
   fontDarkColor: "#000000",
   fontOrangeColor: "#F26E22",
+  fontRedColor: "#EB5757",
 };
 
 export const FONT_SIZE = {

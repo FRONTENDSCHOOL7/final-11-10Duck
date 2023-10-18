@@ -4,7 +4,7 @@ import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
 
 export default function Input(props) {
-  const { labelText, type, onChangeHandler } = props;
+  const { labelText, type, alert, onChangeHandler } = props;
   return (
     <InputContainerStyle>
       <LabelStyle>{labelText}</LabelStyle>
@@ -14,6 +14,7 @@ export default function Input(props) {
           onChangeHandler(event.target.value);
         }}
       />
+      {alert && <AlertStyle>{alert}</AlertStyle>}
     </InputContainerStyle>
   );
 }
@@ -37,4 +38,10 @@ const InputStyle = styled.input`
     outline: none;
     border-bottom: 1px solid ${COLOR.borderOrangeColor};
   }
+`;
+
+const AlertStyle = styled.div`
+  color: ${COLOR.fontRedColor};
+  font-size: ${FONT_SIZE.medium};
+  margin-top: 6px;
 `;
