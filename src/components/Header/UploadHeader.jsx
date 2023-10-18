@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import ArrowIcon from '../../images/icon-arrow-left.png';
+import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
 import Button from '../Button';
 
 export default function UploadHeader() {

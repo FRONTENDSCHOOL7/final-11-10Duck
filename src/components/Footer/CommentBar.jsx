@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import basicProfile from '../../images/basic-profile.png';
+import basicProfile from '../../assets/basic-profile-img.png';
+import { COLOR } from '../../utils';
 
 export default function CommentBar({ mode }) {
     //유저 정보 state에서 프로필 이미지 경로 저장
@@ -35,7 +36,6 @@ const FormContainer = styled.form`
     justify-content: space-between;
     align-items: center;
     padding: 13px 16px;
-
     border-top: 1px solid var(--font-primary-color);
 
     .a11y-hidden {

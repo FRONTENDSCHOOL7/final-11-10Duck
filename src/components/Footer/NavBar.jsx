@@ -1,10 +1,9 @@
 import React from 'react';
 import { styled } from 'styled-components';
-
-import { ReactComponent as HomeIcon } from '../../images/icon-home.svg';
-import { ReactComponent as ChatIcon } from '../../images/icon-message-circle.svg';
-import { ReactComponent as PostIcon } from '../../images/icon-edit.svg';
-import { ReactComponent as ProfileIcon } from '../../images/icon-user.svg';
+import { ReactComponent as HomeIcon } from '../../assets/icon/icon-home.svg';
+import { ReactComponent as ChatIcon } from '../../assets/icon/icon-message-circle.svg';
+import { ReactComponent as PostIcon } from '../../assets/icon/icon-edit.svg';
+import { ReactComponent as ProfileIcon } from '../../assets/icon/icon-user.svg';
 
 export default function NavBar() {
     const menus = [

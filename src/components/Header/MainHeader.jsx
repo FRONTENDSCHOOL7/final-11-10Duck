@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import SearchIcon from '../../images/icon-search.png';
+import SearchIcon from '../../assets/icon/icon-search.png';
 
 export default function MainHeader() {
     return (

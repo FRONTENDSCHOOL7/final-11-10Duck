@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import ArrowIcon from '../../images/icon-arrow-left.png';
+import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
 
 export default function SearchHeader() {
     const [searchInput, setSerchInput] = useState('');
