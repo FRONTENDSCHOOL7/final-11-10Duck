@@ -7,7 +7,7 @@ export default function UploadHeader() {
     return (
         <HeaderContainer>
             <IconImg src={ArrowIcon} alt="뒤로가기 아이콘" />
-            <Button buttonText={'저장'} disabled={false} size={'M'} reversed={false}></Button>
+            <Button buttonText={'저장'} disabled={false} size={'M'} reversed={false} />
         </HeaderContainer>
     );
 }

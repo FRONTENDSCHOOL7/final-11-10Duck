@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import basicProfile from '../images/basic-profile.png';
+import basicProfile from '../../images/basic-profile.png';
 
 export default function CommentBar({ mode }) {
     //유저 정보 state에서 프로필 이미지 경로 저장
