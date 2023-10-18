@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
+import { COLOR, FONT_SIZE } from '../../utils';
 
 export default function SearchHeader() {
     const [searchInput, setSerchInput] = useState('');
@@ -24,7 +25,7 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--font-primary-color);
+    border-bottom: 1px solid ${COLOR.fontPrimaryColor};
     padding: 13px 16px;
 
     .a11y-hidden {
@@ -52,6 +53,7 @@ const SearchInput = styled.input`
     border-radius: 32px;
     padding-left: 15px;
     margin-left: 10px;
+    font-size: ${FONT_SIZE.large};
 
     &::placeholder {
         color: var(--C4C4C4, #c4c4c4);
