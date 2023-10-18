@@ -1,5 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
+import { COLOR } from "../utils";
+import { FONT_SIZE } from "../utils";
 
 export default function Button(props) {
   const { buttonText, disabled, size = "L", reversed, onClickHandler } = props;
@@ -18,9 +20,7 @@ export default function Button(props) {
 const ButtonStyle = styled.button`
   display: block;
   color: ${(props) =>
-    props.reversed
-      ? "var(--font-primary-color)"
-      : "var(--font-secondary-color)"};
+    props.reversed ? COLOR.fontPrimaryColor : COLOR.fontSecondaryColor};
   width: 100%;
   max-width: ${(props) =>
     props.size.toUpperCase() === "L"
@@ -43,10 +43,11 @@ const ButtonStyle = styled.button`
 
   background-color: ${(props) =>
     props.reversed
-      ? "var(--secondary-color)"
+      ? COLOR.btnSecondaryColor
       : props.disabled
-      ? "var(--disabled-color)"
-      : "var(--primary-color)"};
+      ? COLOR.btnDisabledColor
+      : COLOR.btnPrimaryColor};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-  font-size: ${(props) => (props.size.toUpperCase() === "S" ? "12px" : "14px")};
+  font-size: ${(props) =>
+    props.size.toUpperCase() === "S" ? FONT_SIZE.medium : FONT_SIZE.large};
 `;

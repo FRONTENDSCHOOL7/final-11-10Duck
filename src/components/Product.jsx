@@ -1,7 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
-import TestImage from "../imgs/productImage.jpg";
+import TestImage from "../assets/product-img-example.png";
 import { useNavigate } from "react-router-dom";
+import { COLOR } from "../utils";
 
 export default function Product(props) {
   const { product } = props;
@@ -29,7 +30,7 @@ export default function Product(props) {
 const ProductStyle = styled.li`
   width: 140px;
   height: 132px;
-  background-color: var(--bg-primary-color);
+  background-color: ${COLOR.bgPrimaryColor};
   list-style: none;
   cursor: pointer;
 `;
@@ -43,7 +44,7 @@ const ProductImage = styled.img`
 
 const ProductName = styled.div`
   font-size: 14px;
-  color: var(--font-dark-color);
+  color: ${COLOR.fontDarkColor};
   margin: 6px 2px 0 2px;
 
   /* 말줄임표 */
@@ -54,7 +55,7 @@ const ProductName = styled.div`
 
 const ProductPrice = styled.div`
   font-size: 12px;
-  color: var(--font-orange-color);
+  color: ${COLOR.fontOrangeColor};
   font-weight: bold;
   margin: 4px 2px 0 2px;
 `;
