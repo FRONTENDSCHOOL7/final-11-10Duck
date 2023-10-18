@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import SearchIcon from '../../images/icon-search.png';
+import SearchIcon from '../../assets/icon/icon-search.png';
+import { COLOR } from '../../utils';
 
 export default function MainHeader() {
     return (
@@ -15,7 +16,8 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--font-primary-color);
+    border-bottom: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
 `;
 const IconImg = styled.img`
