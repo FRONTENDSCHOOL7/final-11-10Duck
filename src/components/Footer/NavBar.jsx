@@ -34,7 +34,8 @@ const NavBarContainer = styled.footer`
     justify-content: center;
     align-items: center;
     gap: 14px;
-    border-top: 1px solid ${COLOR.fontPrimaryColor};
+    border-top: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
 `;
 
 const NavStyle = styled.button`

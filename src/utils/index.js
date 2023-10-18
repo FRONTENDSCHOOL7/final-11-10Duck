@@ -1,6 +1,7 @@
 export const COLOR = {
     bgPrimaryColor: '#FFFFFF',
     bgLayoutColor: '#F2F2F2',
+    bgBorderColor: `#DBDBDB`,
 
     btnPrimaryColor: '#F26E22',
     btnSecondaryColor: 'FFFFFF',

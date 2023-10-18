@@ -32,7 +32,8 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid ${COLOR.fontPrimaryColor};
+    border-bottom: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
 `;
 const ArrowStyle = styled.div`

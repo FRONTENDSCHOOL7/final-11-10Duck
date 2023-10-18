@@ -36,7 +36,8 @@ const FormContainer = styled.form`
     justify-content: space-between;
     align-items: center;
     padding: 13px 16px;
-    border-top: 1px solid ${COLOR.fontPrimaryColor};
+    border-top: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
 
     .a11y-hidden {
         clip: rect(1px, 1px, 1px, 1px);
