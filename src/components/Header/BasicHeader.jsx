@@ -1,7 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import ArrowIcon from '../../images/icon-arrow-left.png';
-import moreIcon from '../../images/icon-more-vertical.png';
+import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
+import moreIcon from '../../assets/icon/icon-more-vertical.png';
+import { COLOR, FONT_SIZE } from '../../utils';
 
 export default function BasicHeader({ mode }) {
     ////유저 정보 state에서 사용자 이름 저장
@@ -31,7 +32,8 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--font-primary-color);
+    border-bottom: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
 `;
 const ArrowStyle = styled.div`
@@ -45,6 +47,6 @@ const IconImg = styled.img`
     cursor: pointer;
 `;
 const UserName = styled.p`
-    font-size: 14px;
+    font-size: ${FONT_SIZE.large};
     font-weight: 500;
 `;

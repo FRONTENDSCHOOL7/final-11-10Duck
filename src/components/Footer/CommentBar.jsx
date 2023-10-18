@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import basicProfile from '../../images/basic-profile.png';
+import basicProfile from '../../assets/basic-profile-img.png';
+import { COLOR, FONT_SIZE } from '../../utils';
 
 export default function CommentBar({ mode }) {
     //유저 정보 state에서 프로필 이미지 경로 저장
@@ -35,8 +36,8 @@ const FormContainer = styled.form`
     justify-content: space-between;
     align-items: center;
     padding: 13px 16px;
-
-    border-top: 1px solid var(--font-primary-color);
+    border-top: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
 
     .a11y-hidden {
         clip: rect(1px, 1px, 1px, 1px);
@@ -67,8 +68,8 @@ const CommentInput = styled.input`
 const CommentBtn = styled.button`
     border: none;
     background: none;
-    color: ${(props) => (props.inputLength === 0 ? `var(--C4C4C4, #c4c4c4)` : `var( --font-orange-color)`)};
-    font-size: 14px;
+    color: ${(props) => (props.inputLength === 0 ? `var(--C4C4C4, #c4c4c4)` : `${COLOR.fontOrangeColor}`)};
+    font-size: ${FONT_SIZE.large};
     font-weight: 500;
     cursor: pointer;
 `;
