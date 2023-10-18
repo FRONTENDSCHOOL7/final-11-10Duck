@@ -1,6 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
 import Buttons from "./Buttons";
+import { COLOR } from "../../utils";
+import { FONT_SIZE } from "../../utils";
 
 export default function Content(props) {
   const { post } = props;
@@ -46,6 +48,6 @@ const ContentImageStyle = styled.img`
 `;
 
 const DateStyle = styled.div`
-  color: var(--font-primary-color);
-  font-size: 10px;
+  color: ${COLOR.fontPrimaryColor};
+  font-size: ${FONT_SIZE.small};
 `;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-import Heart from "../../imgs/icon-heart.png";
-import ActiveHeart from "../../imgs/icon-heart-active.png";
-import Comment from "../../imgs/icon-message-circle.png";
+import Heart from "../../assets/icon/icon-heart.png";
+import ActiveHeart from "../../assets/icon/icon-heart-active.png";
+import Comment from "../../assets/icon/icon-message-circle.png";
+import { COLOR } from "../../utils";
 
 export default function Buttons(props) {
   const { hearted, heartCount, commentCount } = props;
@@ -62,7 +63,7 @@ const ButtonIconStyle = styled.img`
 `;
 
 const CommentCountStyle = styled.div`
-  color: var(--font-primary-color);
+  color: ${COLOR.fontPrimaryColor};
   font-size: 12px;
   margin-left: 6px;
 `;
