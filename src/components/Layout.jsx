@@ -1,24 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import NavBar from './Footer/NavBar';
-import CommentBar from './Footer/CommentBar';
-import BasicHeader from './Header/BasicHeader';
-import SearchHeader from './Header/SearchHeader';
-import UploadHeader from './Header/UploadHeader';
-import MainHeader from './Header/MainHeader';
 
-export default function Layout() {
-    return (
-        <LayoutContainer>
-            {/* header 컴포넌트 */}
-            <MainHeader></MainHeader>
-            Layout
-            {/* footer 컴포넌트 */}
-            {/* TabBar.jsx 또는 CommentBar.jsx */}
-            {/* <CommentBar mode={'post'}></CommentBar> */}
-            <NavBar></NavBar>
-        </LayoutContainer>
-    );
+export default function Layout({ children }) {
+    return <LayoutContainer>{children}</LayoutContainer>;
 }
 
 const LayoutContainer = styled.div`

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -20,6 +20,11 @@ const GlobalStyles = createGlobalStyle`
 
 
 }
-${reset}`;
+${reset};
 
+#root {    
+    display: flex;
+    justify-content: center;
+}
+`;
 export default GlobalStyles;
