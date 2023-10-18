@@ -1,10 +1,10 @@
 import React from 'react';
 import { styled } from 'styled-components';
-
-import { ReactComponent as HomeIcon } from '../../images/icon-home.svg';
-import { ReactComponent as ChatIcon } from '../../images/icon-message-circle.svg';
-import { ReactComponent as PostIcon } from '../../images/icon-edit.svg';
-import { ReactComponent as ProfileIcon } from '../../images/icon-user.svg';
+import { ReactComponent as HomeIcon } from '../../assets/icon/icon-home.svg';
+import { ReactComponent as ChatIcon } from '../../assets/icon/icon-message-circle.svg';
+import { ReactComponent as PostIcon } from '../../assets/icon/icon-edit.svg';
+import { ReactComponent as ProfileIcon } from '../../assets/icon/icon-user.svg';
+import { COLOR, FONT_SIZE } from '../../utils';
 
 export default function NavBar() {
     const menus = [
@@ -34,7 +34,8 @@ const NavBarContainer = styled.footer`
     justify-content: center;
     align-items: center;
     gap: 14px;
-    border-top: 1px solid var(--font-primary-color);
+    border-top: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
 `;
 
 const NavStyle = styled.button`
@@ -45,7 +46,7 @@ const NavStyle = styled.button`
 `;
 
 const NavText = styled.p`
-    color: var(--font-primary-color);
-    font-size: 10px;
+    color: ${COLOR.fontPrimaryColor};
+    font-size: ${FONT_SIZE.small};
     margin-top: 4px;
 `;
