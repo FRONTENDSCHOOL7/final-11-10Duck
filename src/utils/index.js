@@ -1,5 +1,9 @@
 export const COLOR = {
+  borderPrimaryColor: "#DBDBDB",
+  borderSecondaryColor: "#F26E22",
+
   bgPrimaryColor: "#FFFFFF",
+  bgSecondaryColor: "#F2F2F2",
 
   btnPrimaryColor: "#F26E22",
   btnSecondaryColor: "FFFFFF",
