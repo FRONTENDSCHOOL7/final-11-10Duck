@@ -1,7 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import ArrowIcon from '../../images/icon-arrow-left.png';
+import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
 import Button from '../Button';
+import { COLOR } from '../../utils';
 
 export default function UploadHeader() {
     return (
@@ -16,7 +17,8 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--font-primary-color);
+    border-bottom: 1px solid ${COLOR.bgBorderColor};
+    background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
 `;
 const IconImg = styled.img`
