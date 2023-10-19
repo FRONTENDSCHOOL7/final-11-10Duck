@@ -14,9 +14,11 @@ export default function ImageButton() {
 }
 const ButtonContainerStyle = styled.span`
   display: inline-block;
-  /* position: absolute;
-  right: 16px;
-  bottom: 16px; */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 12px;
+  margin-bottom: 12px;
 `;
 
 const ButtonImageStyle = styled.img`
