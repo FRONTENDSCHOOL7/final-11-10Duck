@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
-import Layout from "../../../components/Layout";
+import Layout from "../../../components/Layout/Layout";
 import MainHeader from "../../../components/Header/MainHeader";
 import NavBar from "../../../components/Footer/NavBar";
 import Input from "../../../components/Input/Input";
+import LayoutContent from "../../../components/Layout/LayoutContent";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -15,8 +16,7 @@ export default function Home() {
   return (
     <Layout>
       <MainHeader />
-
-      <div>
+      <LayoutContent>
         <div>씁덕학개론</div>
         <Link to="/signin">로그인</Link>
         <Link to="signup">회원가입</Link>
@@ -27,7 +27,7 @@ export default function Home() {
           onChangeHandler={onChangeHandler}
         />
         <Input type="password" labelText="비밀번호" />
-      </div>
+      </LayoutContent>
 
       <NavBar />
     </Layout>

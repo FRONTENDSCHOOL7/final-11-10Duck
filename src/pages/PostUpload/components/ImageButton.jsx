@@ -1,20 +1,37 @@
 import React from "react";
 import { styled } from "styled-components";
 import ImageIcon from "../../../assets/upload-file.png";
-import { COLOR } from "../../../utils";
 
 export default function ImageButton() {
   return (
-    <ButtonStyle>
-      <ButtonImageStyle src={ImageIcon} alt="이미지 업로드 버튼 아이콘" />
-    </ButtonStyle>
+    <ButtonContainerStyle>
+      <label htmlFor="img-btn">
+        <ButtonImageStyle src={ImageIcon} alt="이미지 업로드 버튼 아이콘" />
+      </label>
+      <ButtonStyle type="file" id="img-btn" />
+    </ButtonContainerStyle>
   );
 }
-
-const ButtonStyle = styled.button``;
+const ButtonContainerStyle = styled.span`
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+`;
 
 const ButtonImageStyle = styled.img`
   width: 50px;
   height: 50px;
-  object-fit: cover;
+  cursor: pointer;
+`;
+
+const ButtonStyle = styled.input`
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;
