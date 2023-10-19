@@ -5,7 +5,7 @@ import Content from "./Content";
 import PostImage from "../../assets/post-img-example.png";
 import { COLOR } from "../../utils";
 
-export default function Post(props) {
+export default function PostItem(props) {
   const { post } = props;
 
   const testPost = {
@@ -32,4 +32,6 @@ export default function Post(props) {
 const PostStyle = styled.article`
   width: 358px;
   background-color: ${COLOR.bgPrimaryColor};
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
