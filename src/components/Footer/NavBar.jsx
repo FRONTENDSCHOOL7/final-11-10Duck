@@ -36,6 +36,7 @@ const NavBarContainer = styled.footer`
     gap: 14px;
     border-top: 1px solid ${COLOR.bgBorderColor};
     background-color: ${COLOR.bgPrimaryColor};
+    box-sizing: border-box;
 `;
 
 const NavStyle = styled.button`

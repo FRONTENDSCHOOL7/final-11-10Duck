@@ -5,6 +5,7 @@ export const COLOR = {
 
   bgPrimaryColor: "#FFFFFF",
   bgSecondaryColor: "#F2F2F2",
+  bgBorderColor: `#DBDBDB`,
 
   btnPrimaryColor: "#F26E22",
   btnSecondaryColor: "FFFFFF",

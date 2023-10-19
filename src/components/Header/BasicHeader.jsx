@@ -35,6 +35,7 @@ const HeaderContainer = styled.header`
     border-bottom: 1px solid ${COLOR.bgBorderColor};
     background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
+    box-sizing: border-box;
 `;
 const ArrowStyle = styled.div`
     display: flex;
