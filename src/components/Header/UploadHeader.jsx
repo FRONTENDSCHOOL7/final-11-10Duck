@@ -4,11 +4,11 @@ import ArrowIcon from '../../assets/icon/icon-arrow-left.png';
 import Button from '../Button';
 import { COLOR } from '../../utils';
 
-export default function UploadHeader() {
+export default function UploadHeader({ buttonText, disable, onClickHandler }) {
     return (
         <HeaderContainer>
             <IconImg src={ArrowIcon} alt="뒤로가기 아이콘" />
-            <Button buttonText={'저장'} disabled={false} size={'M'} reversed={false} />
+            <Button buttonText={buttonText} disable={disable} size={'MS'} onClickHandler={onClickHandler} />
         </HeaderContainer>
     );
 }
@@ -20,6 +20,7 @@ const HeaderContainer = styled.header`
     border-bottom: 1px solid ${COLOR.bgBorderColor};
     background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
+    box-sizing: border-box;
 `;
 const IconImg = styled.img`
     width: 22px;
