@@ -1,20 +1,22 @@
 import React from 'react';
 import { styled } from 'styled-components';
+import { COLOR } from '../utils';
 
 export default function Layout({ children }) {
-    return <LayoutContainer>{children}</LayoutContainer>;
+    return <LayoutStyle>{children}</LayoutStyle>;
 }
 
-const LayoutContainer = styled.div`
+const LayoutStyle = styled.section`
+    background-color: ${COLOR.bgLayoutColor};
     max-width: 390px;
-    min-height: 850px;
-    border: 1px solid black;
+    min-height: 820px;
+
+    box-sizing: content-box;
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-`;
 
-const HomeHeader = styled.header`
-    border: 1px solid black;
-    height: 48px;
+    /* 임시 border */
+    border: 1px solid ${COLOR.bgBorderColor};
 `;

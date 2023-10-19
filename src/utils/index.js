@@ -3,12 +3,12 @@ export const COLOR = {
   borderSecondaryColor: "#F26E22",
   borderOrangeColor: "#F26E22",
 
-  bgPrimaryColor: "#FFFFFF",
-  bgSecondaryColor: "#F2F2F2",
+    bgPrimaryColor: '#FFFFFF',
+    bgSecondaryColor: '#F2F2F2',
 
-  btnPrimaryColor: "#F26E22",
-  btnSecondaryColor: "FFFFFF",
-  btnDisabledColor: "#FFC7A7",
+    btnPrimaryColor: '#F26E22',
+    btnSecondaryColor: 'FFFFFF',
+    btnDisabledColor: '#FFC7A7',
 
   fontPrimaryColor: "#767676",
   fontSecondaryColor: "#FFFFFF",
@@ -18,7 +18,7 @@ export const COLOR = {
 };
 
 export const FONT_SIZE = {
-  small: "10px",
-  medium: "12px",
-  large: "14px",
+    small: '10px',
+    medium: '12px',
+    large: '14px',
 };
