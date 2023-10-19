@@ -28,6 +28,7 @@ const HeaderContainer = styled.header`
     border-bottom: 1px solid ${COLOR.bgBorderColor};
     background-color: ${COLOR.bgPrimaryColor};
     padding: 13px 16px;
+    box-sizing: border-box;
 
     .a11y-hidden {
         clip: rect(1px, 1px, 1px, 1px);
