@@ -1,6 +1,7 @@
 export const COLOR = {
   borderPrimaryColor: "#DBDBDB",
   borderSecondaryColor: "#F26E22",
+  borderOrangeColor: "#F26E22",
 
   bgPrimaryColor: "#FFFFFF",
   bgSecondaryColor: "#F2F2F2",
@@ -14,6 +15,7 @@ export const COLOR = {
   fontDarkColor: "#000000",
   fontOrangeColor: "#F26E22",
   fontDarkGrayColor: "#333333",
+  fontRedColor: "#EB5757",
 };
 
 export const FONT_SIZE = {
