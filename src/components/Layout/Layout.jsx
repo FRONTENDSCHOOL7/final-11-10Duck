@@ -2,12 +2,12 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { COLOR } from '../../utils';
 
-export default function Layout({ children, bgColor }) {
-    return <LayoutStyle bgColor={bgColor}>{children}</LayoutStyle>;
+export default function Layout({ children }) {
+    return <LayoutStyle>{children}</LayoutStyle>;
 }
 
 const LayoutStyle = styled.section`
-    background-color: ${(props) => (props.bgColor === 'white' ? COLOR.bgPrimaryColor : COLOR.bgSecondaryColor)};
+    background-color: ${COLOR.bgPrimaryColor};
 
     max-width: 390px;
     min-height: 820px;
