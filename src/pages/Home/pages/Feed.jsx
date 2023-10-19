@@ -6,7 +6,7 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import SearchIcon from "../../../assets/icon/icon-symbol-logo-gray.png";
 import Button from "../../../components/Button";
 
-export default function FeedPage() {
+export default function Feed() {
   return (
     <Layout>
       <MainHeader />
