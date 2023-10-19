@@ -24,7 +24,9 @@ export default function Comment(props) {
   );
 }
 
-const CommentContainerStyle = styled.div``;
+const CommentContainerStyle = styled.div`
+  margin-bottom: 16px;
+`;
 
 const CommentHeaderStyle = styled.div`
   display: flex;

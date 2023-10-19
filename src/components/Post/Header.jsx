@@ -47,8 +47,8 @@ const ProfileContainerStyle = styled.div`
 `;
 
 const ProfileImageStyle = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   object-fit: cover;
 `;
 

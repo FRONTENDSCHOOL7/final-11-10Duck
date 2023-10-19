@@ -32,4 +32,6 @@ export default function PostItem(props) {
 const PostStyle = styled.article`
   width: 358px;
   background-color: ${COLOR.bgPrimaryColor};
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
