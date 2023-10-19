@@ -7,6 +7,7 @@ import MainHeader from '../../../components/Header/MainHeader';
 import NavBar from '../../../components/Footer/NavBar';
 import Input from '../../../components/Input/Input';
 
+
 export default function Home() {
     const [email, setEmail] = useState('');
     const onChangeHandler = (email) => {
