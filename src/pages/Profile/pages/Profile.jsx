@@ -10,7 +10,7 @@ export default function Profile() {
     const [whosProfile, setWhosProfile] = useState('');
     useEffect(() => {
         // 본인 프로필인지 아니면 타인의 프로필,팔로우 여부 파악해서
-        // myProfile, isFollow, notFollow로
+        // setWhosProfile( myProfile || isFollow || notFollow )
         // whosProfile 변경
     }, []);
     return (
@@ -18,7 +18,7 @@ export default function Profile() {
             <BasicHeader />
             <LayoutContent isWhite={false}>
                 {/* 프로필 정보 */}
-                <ProfileInfo whosProfile={'isFollow'} />
+                <ProfileInfo whosProfile={'notFollow'} />
                 {/* 판매 중인 상품 */}
                 {/* 포스트한 게시물 */}
                 <PostItem />

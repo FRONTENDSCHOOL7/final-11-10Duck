@@ -32,10 +32,10 @@ export default function ProfileInfo({ whosProfile }) {
                 {
                     {
                         myProfile: (
-                            <>
+                            <MyProfileBtns>
                                 <Button buttonText={'프로필 수정'} reversed size={'M'} onClickHandler />
                                 <Button buttonText={'상품 등록'} reversed size={'M'} onClickHandler />
-                            </>
+                            </MyProfileBtns>
                         ),
                         isFollow: (
                             <>
@@ -151,4 +151,8 @@ const ShareIcon = styled.img`
     margin-left: 10px;
     border: 1px solid ${COLOR.bgBorderColor};
     border-radius: 50%;
+`;
+const MyProfileBtns = styled.div`
+    display: flex;
+    gap: 12px;
 `;
