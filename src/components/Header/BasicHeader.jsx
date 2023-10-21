@@ -4,11 +4,11 @@ import ArrowIcon from "../../assets/icon/icon-arrow-left.png";
 import moreIcon from "../../assets/icon/icon-more-vertical.png";
 import { COLOR, FONT_SIZE } from "../../utils";
 import useBackPage from "../../hooks/useBackPage";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil/atom";
 
 export default function BasicHeader({ mode }) {
-  ////유저 정보 state에서 사용자 이름 저장
-  const userName = "기본 헤더";
-
+  const user = useRecoilValue(userState);
   const { backPage } = useBackPage();
 
   const moreIconHandle = () => {
@@ -20,7 +20,7 @@ export default function BasicHeader({ mode }) {
       <ArrowStyle>
         <IconImg src={ArrowIcon} alt="뒤로가기 아이콘" onClick={backPage} />
         {/* props.mode === 'chat'일때 유저명 표시 */}
-        <UserName>{mode === "post" ? "" : userName}</UserName>
+        <UserName>{mode === "post" ? "" : user.username}</UserName>
       </ArrowStyle>
       <IconImg src={moreIcon} alt="더보기 아이콘" onClick={moreIconHandle} />
     </HeaderContainer>
