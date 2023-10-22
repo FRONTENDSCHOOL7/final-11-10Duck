@@ -3,6 +3,7 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input/Input";
 import Layout from "../../../components/Layout/Layout";
 import styled from "styled-components";
+import { COLOR, FONT_SIZE } from "../../../utils";
 
 export default function Signin() {
   return (
@@ -12,7 +13,7 @@ export default function Signin() {
         <Input labelText="이메일" />
         <Input type="password" labelText="비밀번호" />
         <Button buttonText="로그인" disabled />
-        <StyledLink to="/signup">이메일로 회원가입</StyledLink>
+        <LinkStyle to="/signup">이메일로 회원가입</LinkStyle>
       </SigninPage>
     </Layout>
   );
@@ -34,7 +35,10 @@ const Title = styled.div`
   margin-bottom: 30px;
 `;
 
-const StyledLink = styled(Link)`
+const LinkStyle = styled(Link)`
+  text-decoration: none;
   text-align: center;
-  margin-left: 80px;
+  margin-left: 100px;
+  color: ${COLOR.fontPrimaryColor};
+  font-size: ${FONT_SIZE.medium};
 `;
