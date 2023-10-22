@@ -5,6 +5,7 @@ import PostUpload from "../pages/PostUpload/pages/PostUpload";
 import AddProduct from "../pages/AddProduct/pages/AddProduct";
 import Feed from "../pages/Home/pages/Feed";
 import Signup from "../pages/Signup/pages/Signup";
+import Signin from "../pages/Signup/pages/Signin";
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Route path="/post/upload" element={<PostUpload />} />
       <Route path="/add-product" element={<AddProduct />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/signin" element={<Signin />} />
     </Routes>
   );
 }
