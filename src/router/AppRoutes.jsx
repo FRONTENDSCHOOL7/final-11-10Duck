@@ -7,6 +7,7 @@ import Feed from "../pages/Home/pages/Feed";
 import Signup from "../pages/Signup/pages/Signup";
 import Signin from "../pages/Signup/pages/Signin";
 import EditProfile from "../pages/Profile/pages/EditProfile";
+import SigninSelect from "../pages/Signup/pages/SigninSelect";
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup/edit-profile" element={<EditProfile />} />
+      <Route path="/signin-select" element={<SigninSelect />} />
     </Routes>
   );
 }
