@@ -4,7 +4,7 @@ import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
 
 export default function Input(props) {
-  const { labelText, type, alert, onChangeHandler } = props;
+  const { labelText, type, alert, onChangeHandler, placeholder } = props;
   return (
     <InputContainerStyle>
       <LabelStyle>{labelText}</LabelStyle>
@@ -13,6 +13,7 @@ export default function Input(props) {
         onChange={(event) => {
           onChangeHandler(event.target.value);
         }}
+        placeholder={placeholder}
       />
       {alert && <AlertStyle>{alert}</AlertStyle>}
     </InputContainerStyle>
