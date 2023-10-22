@@ -37,6 +37,7 @@ const SignupPage = styled.div`
   margin: 10%;
   & > Button {
     margin: 0 auto;
+    margin-top: 30px;
   }
 `;
 
