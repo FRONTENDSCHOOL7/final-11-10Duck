@@ -4,10 +4,13 @@ import ArrowIcon from "../../assets/icon/icon-arrow-left.png";
 import Button from "../Button";
 import { COLOR } from "../../utils";
 
+import useBackPage from "../../hooks/useBackPage";
+
 export default function UploadHeader({ buttonText, disabled, onClickHandler }) {
+  const { backPage } = useBackPage();
   return (
     <HeaderContainer>
-      <IconImg src={ArrowIcon} alt="뒤로가기 아이콘" />
+      <IconImg src={ArrowIcon} alt="뒤로가기 아이콘" onClick={backPage} />
       <Button
         buttonText={buttonText}
         disabled={disabled}
