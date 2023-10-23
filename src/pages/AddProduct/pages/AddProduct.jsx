@@ -9,6 +9,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import { inputPriceFormat } from "../../../utils/function";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
   const [product, setProduct] = useState({
@@ -18,20 +19,54 @@ export default function AddProduct() {
     itemImage: "",
   });
 
+  const navigate = useNavigate();
+
   const user = useRecoilValue(userState);
 
-  // 상품 이미지, 상품명, 가격, 판매링크 다 입력되어야 저장버튼 활성화
-  const isButtonActive = Object.values(product).every((item) => item.length);
+  const onImageUploadHandler = (value) => {
+    setProduct({ ...product, itemImage: value });
+  };
+
+  const isButtonActive = Object.values(product).every((item) => !!item);
+
+  /**
+   * 이미지 변환 함수
+   * @returns
+   */
+  const changeImageToURL = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}image/uploadfile`,
+        {
+          image: product.itemImage,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return res.data.filename;
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   /**
    * 판매 등록 함수
    */
   const uploadProduct = async () => {
     try {
-      const res = axios.post(
+      const imageURL = await changeImageToURL();
+      const tempProduct = product;
+      tempProduct.itemImage = imageURL;
+      tempProduct.price = parseInt(tempProduct.price.replaceAll(",", ""), 10);
+
+      const res = await axios.post(
         `${process.env.REACT_APP_API_URL}product`,
         {
-          product,
+          product: tempProduct,
         },
         {
           headers: {
@@ -41,9 +76,12 @@ export default function AddProduct() {
         }
       );
 
+      console.log("상품등록 성공");
       console.log(res.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      navigate("/profile");
     }
   };
 
@@ -56,7 +94,7 @@ export default function AddProduct() {
       />
       <LayoutContent>
         <MarginContainer>
-          <InputImage />
+          <InputImage onImageUploadHandler={onImageUploadHandler} />
           <Input
             labelText="상품명"
             maxLength={15}
