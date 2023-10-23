@@ -2,9 +2,9 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { COLOR } from '../../utils';
 
-export default function LayoutContent({ children, isWhite, paddingOn }) {
+export default function LayoutContent({ children, isWhite, paddingOff }) {
     return (
-        <ContentStyle isWhite={isWhite} paddingOn={paddingOn}>
+        <ContentStyle isWhite={isWhite} paddingOff={paddingOff}>
             {children}
         </ContentStyle>
     );
@@ -12,7 +12,7 @@ export default function LayoutContent({ children, isWhite, paddingOn }) {
 
 const ContentStyle = styled.main`
     flex-grow: 1;
-    padding: 0 ${(props) => (props.paddingOn ? `16px` : `0`)};
+    padding: 0 ${(props) => (!props.paddingOff ? `16px` : `0`)};
     background-color: ${(props) => (props.isWhite === undefined ? COLOR.bgPrimaryColor : props.isWhite ? COLOR.bgPrimaryColor : COLOR.bgSecondaryColor)};
     position: relative;
     overflow: scroll;

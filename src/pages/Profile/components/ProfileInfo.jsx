@@ -1,26 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
 import useimg from '../../../assets/basic-profile-img.png';
 import chatIcon from '../../../assets/icon/icon-message-circle.svg';
 import shareIcon from '../../../assets/icon/icon-share.png';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../recoil/atom';
 
 export default function ProfileInfo({ whosProfile }) {
-    // 프로필 수정
-    // 상품 등록
-    // 팔로우하기
-    // 언팔로우 하기
+    const navigate = useNavigate();
+    const params = useParams();
+    const [accountName, setAccountName] = useState('');
+    const [isMyProfile, setIsMyProfile] = useState(false);
+
+    const loginUser = useRecoilValue(userState);
+
+    useEffect(() => {
+        params.accountName ? setAccountName(params.accountName) : setIsMyProfile(true);
+    }, [params]);
+    const handleFollowingsClick = () => {
+        isMyProfile && navigate(`/profile/${loginUser.username}/followings`);
+        !isMyProfile && navigate(`/profile/${accountName}/followings`);
+    };
+    const handleFollowersClick = () => {
+        isMyProfile && navigate(`/profile/${loginUser.username}/followers`);
+        !isMyProfile && navigate(`/profile/${accountName}/followers`);
+    };
     return (
         <ProfileInfoContainer>
             <h2 className="a11y-hidden">프로필 정보</h2>
             <ProfileImgStyle>
-                <FollowInfoStyle>
+                <FollowInfoStyle onClick={handleFollowersClick}>
                     <FollowInfoNumbers isFollowing={true}>5900</FollowInfoNumbers>
                     <FollowInfoText>followers</FollowInfoText>
                 </FollowInfoStyle>
                 <ProfileImage src={useimg} alt="유저 프로필 이미지" />
-                <FollowInfoStyle>
+                <FollowInfoStyle onClick={handleFollowingsClick}>
                     <FollowInfoNumbers>590</FollowInfoNumbers>
                     <FollowInfoText>followings</FollowInfoText>
                 </FollowInfoStyle>

@@ -16,7 +16,7 @@ export default function Profile() {
     return (
         <Layout>
             <BasicHeader />
-            <LayoutContent isWhite={false} paddingOn={false}>
+            <LayoutContent isWhite={false} paddingOff={true}>
                 {/* 프로필 정보 */}
                 <ProfileInfo whosProfile={'notFollow'} />
                 {/* 판매 중인 상품 */}
