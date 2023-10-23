@@ -10,9 +10,7 @@ export default function Input(props) {
       <LabelStyle>{labelText}</LabelStyle>
       <InputStyle
         type={type}
-        onChange={(event) => {
-          onChangeHandler(event.target.value);
-        }}
+        onChange={onChangeHandler}
         placeholder={placeholder}
       />
       {alert && <AlertStyle>{alert}</AlertStyle>}

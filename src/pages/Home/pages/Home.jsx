@@ -9,9 +9,6 @@ import Input from "../../../components/Input/Input";
 
 export default function Home() {
   const [email, setEmail] = useState("");
-  const onChangeHandler = (email) => {
-    setEmail(email);
-  };
 
   return (
     <Layout bgColor={"white"}>
@@ -25,7 +22,9 @@ export default function Home() {
         <Input
           type="text"
           labelText="이메일"
-          onChangeHandler={onChangeHandler}
+          onChangeHandler={(event) => {
+            setEmail(event.target.value);
+          }}
         />
         <Input type="password" labelText="비밀번호" />
       </LayoutContent>
