@@ -4,12 +4,22 @@ import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
 
 export default function Input(props) {
-  const { labelText, type, alert, onChangeHandler, placeholder } = props;
+  const {
+    labelText,
+    type,
+    alert,
+    onChangeHandler,
+    placeholder,
+    value,
+    maxLength,
+  } = props;
   return (
     <InputContainerStyle>
       <LabelStyle>{labelText}</LabelStyle>
       <InputStyle
+        maxLength={maxLength}
         type={type}
+        value={value}
         onChange={onChangeHandler}
         placeholder={placeholder}
       />
