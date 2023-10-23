@@ -8,7 +8,7 @@ export const userState = atom({
     email: "10duck@test.com",
     accountname: "10duck",
     intro: "",
-    image: "http://146.56.183.55:5050/Ellipse.png",
+    image: "Ellipse.png",
     token:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY4YmQ1YjJjYjIwNTY2MzdjNDZmNiIsImV4cCI6MTcwMjc5OTAzMSwiaWF0IjoxNjk3NjE1MDMxfQ.osT2yHu_EcI0sjl8wLqbGJ08zfnaL0aArmHcU_PnfCA",
     refreshToken:
