@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import ArrowIcon from "../../assets/icon/icon-arrow-left.png";
 import Button from "../Button";
 import { COLOR } from "../../utils";
+
 import useBackPage from "../../hooks/useBackPage";
 
 export default function UploadHeader({ buttonText, disabled, onClickHandler }) {
