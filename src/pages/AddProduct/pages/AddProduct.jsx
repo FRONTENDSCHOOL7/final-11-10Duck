@@ -8,6 +8,7 @@ import { styled } from "styled-components";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
+import { inputPriceFormat } from "../../../utils/function";
 
 export default function AddProduct() {
   const [product, setProduct] = useState({
@@ -22,12 +23,8 @@ export default function AddProduct() {
   // 상품 이미지, 상품명, 가격, 판매링크 다 입력되어야 저장버튼 활성화
   const isButtonActive = Object.values(product).every((item) => item.length);
 
-  // 상품명은 2~15자 이내로 입력
-
-  // 가격은 숫자로 입력하면 자동으로 원단위 변환
-
   /**
-   * 판매 등록 페이지
+   * 판매 등록 함수
    */
   const uploadProduct = async () => {
     try {
@@ -62,21 +59,30 @@ export default function AddProduct() {
           <InputImage />
           <Input
             labelText="상품명"
-            onChangeHandler={(itemName) => {
-              setProduct({ ...product, itemName });
+            maxLength={15}
+            onChangeHandler={(event) => {
+              if (
+                event.target.value.length > 1 &&
+                event.target.value.length < 16
+              ) {
+                setProduct({ ...product, itemName: event.target.value });
+              }
             }}
           />
           <Input
             labelText="가격"
             value={product.price}
-            onChangeHandler={(price) => {
-              setProduct({ ...product, price });
+            onChangeHandler={(event) => {
+              setProduct({
+                ...product,
+                price: inputPriceFormat(event.target.value),
+              });
             }}
           />
           <Input
             labelText="판매 링크"
-            onChangeHandler={(link) => {
-              setProduct({ ...product, link });
+            onChangeHandler={(event) => {
+              setProduct({ ...product, link: event.target.value });
             }}
           />
         </MarginContainer>
