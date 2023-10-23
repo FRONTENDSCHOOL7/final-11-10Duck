@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../../../components/Layout/Layout";
 import UploadHeader from "../../../components/Header/UploadHeader";
-import ProfileImage from "../../../assets/basic-profile-img.png";
 import { styled } from "styled-components";
 import ImageButton from "../components/ImageButton";
 import LayoutContent from "../../../components/Layout/LayoutContent";
@@ -18,9 +17,24 @@ export default function PostUpload() {
 
   const user = useRecoilValue(userState);
 
+  const textareaRef = useRef();
+
+  /**
+   * textarea 텍스트 높이에 맞게 높이 자동조절 해주는 함수
+   */
+  const handleResizeHeight = () => {
+    textareaRef.current.style.height = "auto";
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+  };
+
   const navigate = useNavigate();
 
   const isButtonActive = Object.entries(content).every((item) => !!item);
+
+  const deleteImage = () => {
+    setPreviewImage("");
+    setContent({ ...content, image: "" });
+  };
 
   const onImageUploadHandler = (value) => {
     setContent({ ...content, image: value });
@@ -64,18 +78,27 @@ export default function PostUpload() {
       />
       <LayoutContent>
         <ContainerStyle>
-          <ProfileImageStyle src={ProfileImage} alt="프로필 이미지" />
-          <div>
+          <ProfileImageStyle
+            src={`${process.env.REACT_APP_API_URL + user.image}`}
+            alt="프로필 이미지"
+          />
+          <ContentContainrStyle>
             <TextAreaContainerStyle
+              ref={textareaRef}
               placeholder="게시물 입력하기"
               onChange={(event) => {
+                handleResizeHeight();
                 setContent({ ...content, text: event.target.value });
               }}
             ></TextAreaContainerStyle>
-            {previewImage && <PreviewImage previewImage={previewImage} />}
-          </div>
+            {previewImage && (
+              <PreviewImage
+                previewImage={previewImage}
+                deleteImageHandelr={deleteImage}
+              />
+            )}
+          </ContentContainrStyle>
         </ContainerStyle>
-
         <ImageButton
           onChangeHandler={setPreviewImage}
           onImageUploadHandler={onImageUploadHandler}
@@ -89,8 +112,13 @@ const ContainerStyle = styled.div`
   display: flex;
   margin-top: 20px;
 `;
+
+const ContentContainrStyle = styled.div`
+  flex-grow: 1;
+`;
+
 const TextAreaContainerStyle = styled.textarea`
-  /* flex-grow: 1; */
+  width: 100%;
   border: none;
   resize: none;
   &:focus {
