@@ -10,6 +10,7 @@ import EditProfile from "../pages/Profile/pages/EditProfile";
 import SigninSelect from "../pages/Signup/pages/SigninSelect";
 import Profile from "../pages/Profile/pages/Profile";
 import Search from "../pages/Home/pages/Search";
+import Chat from "../pages/Chat/pages/ChatList";
 
 export default function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ export default function AppRoutes() {
       <Route path="/signin-select" element={<SigninSelect />} />
       <Route path="/search" element={<Search />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/chat" element={<Chat />} />
     </Routes>
   );
 }
