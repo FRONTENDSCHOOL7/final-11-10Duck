@@ -5,7 +5,7 @@ import KakaoIcon from "../../../assets/message-circle.png";
 import GoogleIcon from "../../../assets/google.png";
 import FacebookIcon from "../../../assets/facebook.png";
 import { COLOR, FONT_SIZE } from "../../../utils";
-import ImgButton from "../components/ImgButton";
+import SelectButton from "../components/SelectButton";
 import { Link } from "react-router-dom";
 
 export default function SigninSelect() {
@@ -14,18 +14,18 @@ export default function SigninSelect() {
       <SelectPage>
         <LogoImg src={LogoIcon}></LogoImg>
         <SelectSignin>
-          <ImgButtonContent>
-            <ImgButton
+          <SelectButtonContent>
+            <SelectButton
               borderColor="#F2C94C"
               img={KakaoIcon}
               text="카카오 계정으로 로그인"
             />
-            <ImgButton
+            <SelectButton
               borderColor="#767676"
               img={GoogleIcon}
               text="구글 계정으로 로그인"
             />
-            <ImgButton
+            <SelectButton
               borderColor="#2D9CDB"
               img={FacebookIcon}
               text="페이스북 계정으로 로그인"
@@ -35,7 +35,7 @@ export default function SigninSelect() {
               <Divider>|</Divider>
               <LinkStyle to="/signup">회원가입</LinkStyle>
             </LinkButton>
-          </ImgButtonContent>
+          </SelectButtonContent>
         </SelectSignin>
       </SelectPage>
     </Layout>
@@ -63,10 +63,10 @@ const SelectSignin = styled.div`
   background-color: ${COLOR.bgPrimaryColor};
   position: absolute;
   bottom: 0px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 20px 20px 0 0;
 `;
 
-const ImgButtonContent = styled.div`
+const SelectButtonContent = styled.div`
   margin-top: 50px;
   & > Button {
     margin: 0 auto;
@@ -82,11 +82,11 @@ const LinkButton = styled.div`
 const LinkStyle = styled(Link)`
   text-decoration: none;
   color: ${COLOR.fontPrimaryColor};
-  font-size: ${FONT_SIZE.small};
+  font-size: ${FONT_SIZE.medium};
 `;
 
 const Divider = styled.span`
-  margin: 0 10px;
+  margin: 0 12px;
   color: #c4c4c4;
-  font-size: ${FONT_SIZE.small};
+  font-size: ${FONT_SIZE.medium};
 `;
