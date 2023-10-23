@@ -22,6 +22,7 @@ export default function Signin() {
 const SigninPage = styled.div`
   margin: 10%;
   & > Button {
+    font-size: ${FONT_SIZE.large};
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -32,7 +33,7 @@ const Title = styled.div`
   font-size: 24px;
   color: #000000;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 `;
 
 const LinkStyle = styled(Link)`

@@ -10,6 +10,7 @@ export default function Input(props) {
     alert,
     onChangeHandler,
     placeholder,
+    placeholderColor,
     value,
     maxLength,
   } = props;
@@ -22,6 +23,7 @@ export default function Input(props) {
         value={value}
         onChange={onChangeHandler}
         placeholder={placeholder}
+        placeholderColor={placeholderColor}
       />
       {alert && <AlertStyle>{alert}</AlertStyle>}
     </InputContainerStyle>
@@ -46,6 +48,9 @@ const InputStyle = styled.input`
   &:focus {
     outline: none;
     border-bottom: 1px solid ${COLOR.borderOrangeColor};
+  }
+  &::placeholder {
+    color: ${(props) => props.placeholderColor};
   }
 `;
 
