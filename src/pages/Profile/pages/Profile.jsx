@@ -3,8 +3,8 @@ import Layout from '../../../components/Layout/Layout';
 import BasicHeader from '../../../components/Header/BasicHeader';
 import LayoutContent from '../../../components/Layout/LayoutContent';
 import NavBar from '../../../components/Footer/NavBar';
-import PostItem from '../../../components/Post';
 import ProfileInfo from '../components/ProfileInfo';
+import PostList from '../components/PostList';
 
 export default function Profile() {
     const [whosProfile, setWhosProfile] = useState('');
@@ -16,12 +16,12 @@ export default function Profile() {
     return (
         <Layout>
             <BasicHeader />
-            <LayoutContent isWhite={false}>
+            <LayoutContent isWhite={false} paddingOn={false}>
                 {/* 프로필 정보 */}
                 <ProfileInfo whosProfile={'notFollow'} />
                 {/* 판매 중인 상품 */}
                 {/* 포스트한 게시물 */}
-                <PostItem />
+                <PostList />
             </LayoutContent>
             <NavBar />
         </Layout>
