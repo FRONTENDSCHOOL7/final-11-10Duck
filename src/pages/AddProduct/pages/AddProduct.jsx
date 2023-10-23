@@ -8,7 +8,7 @@ import { styled } from "styled-components";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
-import { inputPriceFormat } from "../../../utils/function";
+import { changeImageToURL, inputPriceFormat } from "../../../utils/function";
 import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
@@ -30,35 +30,11 @@ export default function AddProduct() {
   const isButtonActive = Object.values(product).every((item) => !!item);
 
   /**
-   * 이미지 변환 함수
-   * @returns
-   */
-  const changeImageToURL = async () => {
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}image/uploadfile`,
-        {
-          image: product.itemImage,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      return res.data.filename;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  /**
    * 판매 등록 함수
    */
   const uploadProduct = async () => {
     try {
-      const imageURL = await changeImageToURL();
+      const imageURL = await changeImageToURL(product.itemImage);
       const tempProduct = product;
       tempProduct.itemImage = imageURL;
       tempProduct.price = parseInt(tempProduct.price.replaceAll(",", ""), 10);
