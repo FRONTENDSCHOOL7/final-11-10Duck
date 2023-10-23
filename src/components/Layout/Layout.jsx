@@ -10,7 +10,7 @@ const LayoutStyle = styled.section`
     background-color: ${COLOR.bgPrimaryColor};
 
     max-width: 390px;
-    min-height: 820px;
+    max-height: 820px;
 
     box-sizing: content-box;
     width: 100%;
