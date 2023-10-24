@@ -43,4 +43,8 @@ const ProductContainerStyle = styled.ul`
   & :last-child {
     padding-right: 8px;
   }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
