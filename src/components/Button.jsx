@@ -21,8 +21,7 @@ const ButtonStyle = styled.button`
   display: block;
   color: ${(props) =>
     props.reversed ? COLOR.fontPrimaryColor : COLOR.fontSecondaryColor};
-  width: 100%;
-  max-width: ${(props) =>
+  width: ${(props) =>
     props.size.toUpperCase() === "L"
       ? "322px"
       : props.size.toUpperCase() === "M"

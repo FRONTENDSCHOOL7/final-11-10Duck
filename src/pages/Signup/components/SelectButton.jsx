@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import { COLOR } from "../../../utils";
+import { COLOR, FONT_SIZE } from "../../../utils";
 
-export default function ImgButton(props) {
+export default function SelectButton(props) {
   const { borderColor, img, text } = props;
   return (
-    <ImgButtonStyle borderColor={borderColor}>
-      <ButtonImg src={img}></ButtonImg>
-      <ButtonText>{text}</ButtonText>
-    </ImgButtonStyle>
+    <SelectButtonStyle borderColor={borderColor}>
+      <SelectButtonImg src={img}></SelectButtonImg>
+      <SelectButtonText>{text}</SelectButtonText>
+    </SelectButtonStyle>
   );
 }
 
-const ImgButtonStyle = styled.button`
+const SelectButtonStyle = styled.button`
   width: 322px;
   height: 44px;
   padding: 10px 20px;
@@ -23,13 +23,14 @@ const ImgButtonStyle = styled.button`
   align-items: center;
 `;
 
-const ButtonImg = styled.img`
+const SelectButtonImg = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 20px;
 `;
 
-const ButtonText = styled.span`
+const SelectButtonText = styled.span`
+  font-size: ${FONT_SIZE.large};
   margin-left: 30px;
   color: ${COLOR.fontPrimaryColor};
 `;

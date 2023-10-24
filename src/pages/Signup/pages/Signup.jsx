@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Layout from "../../../components/Layout/Layout";
-import LayoutContent from "../../../components/Layout/LayoutContent";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button";
 import { useState } from "react";
+import { COLOR, FONT_SIZE } from "../../../utils";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -18,16 +18,18 @@ export default function Signup() {
         <Input
           labelText="이메일"
           placeholder="이메일 주소를 입력해 주세요."
+          placeholderColor={COLOR.fontLightGrayColor}
           onChangeHandler={onChangeHandler}
         />
         <Input
           type="password"
           labelText="비밀번호"
           placeholder="비밀번호를 설정해 주세요."
+          placeholderColor={COLOR.fontLightGrayColor}
           onChangeHandler={onChangeHandler}
           alert
         />
-        <Button buttonText={"다음"} disabled reversed={false} />
+        <Button buttonText="다음" disabled reversed={false} />
       </SignupPage>
     </Layout>
   );
@@ -36,8 +38,9 @@ export default function Signup() {
 const SignupPage = styled.div`
   margin: 10%;
   & > Button {
+    font-size: ${FONT_SIZE.large};
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 40px;
   }
 `;
 

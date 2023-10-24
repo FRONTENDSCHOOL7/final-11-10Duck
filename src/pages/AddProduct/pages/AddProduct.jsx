@@ -5,10 +5,11 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import Input from "../../../components/Input/Input";
 import InputImage from "../components/InputImage";
 import { styled } from "styled-components";
-import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
-import { inputPriceFormat } from "../../../utils/function";
+import { changeImageToURL, inputPriceFormat } from "../../../utils/function";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../../api/baseURL";
 
 export default function AddProduct() {
   const [product, setProduct] = useState({
@@ -18,20 +19,30 @@ export default function AddProduct() {
     itemImage: "",
   });
 
+  const navigate = useNavigate();
+
   const user = useRecoilValue(userState);
 
-  // 상품 이미지, 상품명, 가격, 판매링크 다 입력되어야 저장버튼 활성화
-  const isButtonActive = Object.values(product).every((item) => item.length);
+  const onImageUploadHandler = (value) => {
+    setProduct({ ...product, itemImage: value });
+  };
+
+  const isButtonActive = Object.values(product).every((item) => !!item);
 
   /**
    * 판매 등록 함수
    */
   const uploadProduct = async () => {
     try {
-      const res = axios.post(
-        `${process.env.REACT_APP_API_URL}product`,
+      const imageURL = await changeImageToURL(product.itemImage);
+      const tempProduct = product;
+      tempProduct.itemImage = imageURL;
+      tempProduct.price = parseInt(tempProduct.price.replaceAll(",", ""), 10);
+
+      const res = await api.post(
+        "/product",
         {
-          product,
+          product: tempProduct,
         },
         {
           headers: {
@@ -41,9 +52,12 @@ export default function AddProduct() {
         }
       );
 
+      console.log("상품등록 성공");
       console.log(res.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      navigate("/profile");
     }
   };
 
@@ -56,7 +70,7 @@ export default function AddProduct() {
       />
       <LayoutContent>
         <MarginContainer>
-          <InputImage />
+          <InputImage onImageUploadHandler={onImageUploadHandler} />
           <Input
             labelText="상품명"
             maxLength={15}

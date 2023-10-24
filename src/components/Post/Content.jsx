@@ -3,11 +3,12 @@ import { styled } from "styled-components";
 import Buttons from "./Buttons";
 import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
+import { AddAPIURLImage } from "../../utils/function";
 
 export default function Content(props) {
   const { post } = props;
+
   const {
-    id,
     content,
     image,
     createdAt,
@@ -16,16 +17,19 @@ export default function Content(props) {
     heartCount,
     commentCount,
   } = post;
+
   return (
     <ContentStyle>
       <ContentTextStyle>{content}</ContentTextStyle>
-      {!!image.length && <ContentImageStyle src={image} alt="포스트 이미지" />}
+      {!!image && (
+        <ContentImageStyle src={AddAPIURLImage(image)} alt="포스트 이미지" />
+      )}
       <Buttons
         hearted={hearted}
         heartCount={heartCount}
         commentCount={commentCount}
       />
-      <DateStyle>{!!updatedAt.length ? updatedAt : createdAt}</DateStyle>
+      <DateStyle>{!!updatedAt ? updatedAt : createdAt}</DateStyle>
     </ContentStyle>
   );
 }
@@ -41,7 +45,7 @@ const ContentTextStyle = styled.p`
 
 const ContentImageStyle = styled.img`
   width: 304px;
-  height: 260px;
+  height: 228px;
   object-fit: cover;
   border-radius: 10px;
   margin-top: 16px;

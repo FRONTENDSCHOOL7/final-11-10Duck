@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 
 export default function MyMsg(props) {
-  console.log("props", props);
+  //   console.log("props", props);
   const text = JSON.stringify(Object.values(props));
   const msg = text.slice(2, -2);
-  console.log("msg" + msg);
+  //   console.log("msg" + msg);
 
   return (
     <MyMsgStyle>
@@ -24,11 +24,8 @@ const MyMsgStyle = styled.li`
 
   padding: 12px;
   border: none;
-  background-color: skyblue;
+  background-color: var(--font-orange-color);
   border-radius: 10px 0 10px 10px;
-
-  & > .msg {
-    color: var(--font-dark-color);
-    font-size: 14px;
-  }
+  color: var(--font-secondary-color);
+  font-size: 14px;
 `;

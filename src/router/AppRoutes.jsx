@@ -12,6 +12,7 @@ import Profile from "../pages/Profile/pages/Profile";
 import Search from "../pages/Home/pages/Search";
 import Chat from "../pages/Chat/pages/ChatList";
 import ChatRoom from "../pages/Chat/pages/ChatRoom";
+import NotFound from "../pages/Home/pages/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -28,6 +29,7 @@ export default function AppRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/chat/chatroom" element={<ChatRoom />} />
+      <Route path="/404" element={<NotFound />} />
     </Routes>
   );
 }
