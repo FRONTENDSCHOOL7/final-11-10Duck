@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
-import basicProfile from "../../assets/basic-profile-img.png";
 import { COLOR, FONT_SIZE } from "../../utils";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil/atom";
+import { changeProfileImage } from "../../utils/function";
 
-export default function CommentBar({ mode }) {
-  //유저 정보 state에서 프로필 이미지 경로 저장
-  const profileImgSrc = basicProfile;
-
-  const [textInput, setTextInput] = useState("");
-
-  const inputHandle = (e) => {
-    setTextInput(e.target.value);
-  };
-  const submitHandle = (e) => {
-    e.preventDefault();
-  };
+export default function CommentBar({
+  mode,
+  content,
+  onChangeHandler,
+  onSubmitHandler,
+}) {
+  const user = useRecoilValue(userState);
+  const profileImgSrc = changeProfileImage(user.image);
 
   return (
-    <FormContainer onSubmit={submitHandle}>
+    <FormContainer>
       <div>
         <ProfileImg src={profileImgSrc} alt="프로필 이미지" />
         {/* 입력값 길이 늘어났을때 처리 필요 */}
@@ -27,14 +25,20 @@ export default function CommentBar({ mode }) {
         <CommentInput
           type="text"
           id="commentId"
-          value={textInput}
+          value={content}
           placeholder={
             mode === "post" ? "댓글 입력하기..." : "메시지 입력하기..."
           }
-          onChange={inputHandle}
+          onChange={onChangeHandler}
         />
       </div>
-      <CommentBtn inputLength={textInput.length}>
+      <CommentBtn
+        inputLength={content}
+        onClick={(e) => {
+          e.preventDefault();
+          onSubmitHandler();
+        }}
+      >
         {mode === "post" ? "게시" : "전송"}
       </CommentBtn>
     </FormContainer>
@@ -84,10 +88,8 @@ const CommentBtn = styled.button`
   border: none;
   background: none;
   color: ${(props) =>
-    props.inputLength === 0
-      ? `var(--C4C4C4, #c4c4c4)`
-      : `${COLOR.fontOrangeColor}`};
+    !props.inputLength ? `var(--C4C4C4, #c4c4c4)` : `${COLOR.fontOrangeColor}`};
   font-size: ${FONT_SIZE.large};
   font-weight: 500;
-  cursor: pointer;
+  cursor: ${(props) => props.inputLength && "pointer"};
 `;
