@@ -8,6 +8,7 @@ import useAPI from "../../../hooks/useAPI";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import PostItem from "../../../components/Post";
+import NavBar from "../../../components/Footer/NavBar";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -59,6 +60,7 @@ export default function FeedFollow() {
             <PostItem post={item} />
           ))}
         </LayoutContent>
+        <NavBar />
       </Layout>
     );
   }
