@@ -1,76 +1,95 @@
-import React, { useState } from 'react';
-import { styled } from 'styled-components';
-import basicProfile from '../../assets/basic-profile-img.png';
-import { COLOR, FONT_SIZE } from '../../utils';
+import React from "react";
+import { styled } from "styled-components";
+import { COLOR, FONT_SIZE } from "../../utils";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil/atom";
+import { changeProfileImage } from "../../utils/function";
 
-export default function CommentBar({ mode }) {
-    //유저 정보 state에서 프로필 이미지 경로 저장
-    const profileImgSrc = basicProfile;
+export default function CommentBar({
+  mode,
+  content,
+  onChangeHandler,
+  onSubmitHandler,
+}) {
+  const user = useRecoilValue(userState);
+  const profileImgSrc = changeProfileImage(user.image);
 
-    const [textInput, setTextInput] = useState('');
-
-    const inputHandle = (e) => {
-        setTextInput(e.target.value);
-    };
-    const submitHandle = (e) => {
-        e.preventDefault();
-    };
-
-    return (
-        <FormContainer onSubmit={submitHandle}>
-            <div>
-                <ProfileImg src={profileImgSrc} alt="프로필 이미지" />
-                {/* 입력값 길이 늘어났을때 처리 필요 */}
-                <label className="a11y-hidden" htmlFor="commentId">
-                    댓글 입력하기
-                </label>
-                <CommentInput type="text" id="commentId" value={textInput} placeholder={mode === 'post' ? '댓글 입력하기...' : '메시지 입력하기...'} onChange={inputHandle} />
-            </div>
-            <CommentBtn inputLength={textInput.length}>{mode === 'post' ? '게시' : '전송'}</CommentBtn>
-        </FormContainer>
-    );
+  return (
+    <FormContainer>
+      <div>
+        <ProfileImg src={profileImgSrc} alt="프로필 이미지" />
+        {/* 입력값 길이 늘어났을때 처리 필요 */}
+        <label className="a11y-hidden" htmlFor="commentId">
+          댓글 입력하기
+        </label>
+        <CommentInput
+          type="text"
+          id="commentId"
+          value={content}
+          placeholder={
+            mode === "post" ? "댓글 입력하기..." : "메시지 입력하기..."
+          }
+          onChange={onChangeHandler}
+        />
+      </div>
+      <CommentBtn
+        inputLength={content}
+        onClick={(e) => {
+          e.preventDefault();
+          onSubmitHandler();
+        }}
+      >
+        {mode === "post" ? "게시" : "전송"}
+      </CommentBtn>
+    </FormContainer>
+  );
 }
 const FormContainer = styled.form`
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 16px;
-    border-top: 1px solid ${COLOR.bgBorderColor};
-    background-color: ${COLOR.bgPrimaryColor};
-    box-sizing: border-box;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  border-top: 1px solid ${COLOR.bgBorderColor};
+  background-color: ${COLOR.bgPrimaryColor};
+  box-sizing: border-box;
 
-    .a11y-hidden {
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        width: 1px;
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-    }
+  .a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
 `;
 const ProfileImg = styled.img`
-    width: 36px;
-    height: 36px;
-    border-radius: 36px;
-    vertical-align: middle;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  vertical-align: middle;
 `;
 const CommentInput = styled.input`
-    border: none;
-    margin-left: 18px;
+  border: none;
+  margin-left: 18px;
 
-    &::placeholder {
-        color: var(--C4C4C4, #c4c4c4);
-        font-size: 14px;
-    }
+  &::placeholder {
+    color: var(--C4C4C4, #c4c4c4);
+    font-size: 14px;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 const CommentBtn = styled.button`
-    border: none;
-    background: none;
-    color: ${(props) => (props.inputLength === 0 ? `var(--C4C4C4, #c4c4c4)` : `${COLOR.fontOrangeColor}`)};
-    font-size: ${FONT_SIZE.large};
-    font-weight: 500;
-    cursor: pointer;
+  border: none;
+  background: none;
+  color: ${(props) =>
+    !props.inputLength ? `var(--C4C4C4, #c4c4c4)` : `${COLOR.fontOrangeColor}`};
+  font-size: ${FONT_SIZE.large};
+  font-weight: 500;
+  cursor: ${(props) => props.inputLength && "pointer"};
 `;

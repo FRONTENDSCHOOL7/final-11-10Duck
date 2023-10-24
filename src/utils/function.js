@@ -50,3 +50,7 @@ export const changeImageToURL = async (imageFile) => {
 export const changeProfileImage = (imageURL) => {
   return process.env.REACT_APP_API_URL + imageURL.split("5050/")[1];
 };
+
+export const AddAPIURLImage = (filename) => {
+  return process.env.REACT_APP_API_URL + filename;
+};
