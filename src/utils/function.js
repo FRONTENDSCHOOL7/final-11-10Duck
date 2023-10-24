@@ -41,3 +41,12 @@ export const changeImageToURL = async (imageFile) => {
     console.error(err);
   }
 };
+
+/**
+ * api에서 받아온 프로필 이미지를 보여줄 수 있는 url로 변경하는 함수
+ * @param {프로필 이미지} imageURL
+ * @returns
+ */
+export const changeProfileImage = (imageURL) => {
+  return process.env.REACT_APP_API_URL + imageURL.split("5050/")[1];
+};

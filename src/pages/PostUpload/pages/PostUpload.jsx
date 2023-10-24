@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import PreviewImage from "../components/PreviewImage";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
-import { changeImageToURL } from "../../../utils/function";
+import { changeImageToURL, changeProfileImage } from "../../../utils/function";
 
 export default function PostUpload() {
   const [content, setContent] = useState({ text: "", image: "" });
@@ -79,7 +79,7 @@ export default function PostUpload() {
       <LayoutContent>
         <ContainerStyle>
           <ProfileImageStyle
-            src={`${process.env.REACT_APP_API_URL + user.image}`}
+            src={changeProfileImage(user.image)}
             alt="프로필 이미지"
           />
           <ContentContainrStyle>
