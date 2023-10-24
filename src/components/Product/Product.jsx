@@ -1,14 +1,22 @@
 import React from "react";
 import { styled } from "styled-components";
-import TestImage from "../assets/product-img-example.png";
 import { useNavigate } from "react-router-dom";
-import { COLOR } from "../utils";
+import { COLOR } from "../../utils";
 
 export default function Product(props) {
   const { product } = props;
   // 상품 api 참고
   const { id, itemName, price, link, itemImage } = product;
   const navigate = useNavigate();
+
+  /**
+   * 이미지 url 수정하는 함수
+   * @param {api에서 받아온 이미지} imageURL
+   * @returns
+   */
+  const makeImageURL = (imageURL) => {
+    return process.env.REACT_APP_API_URL + imageURL;
+  };
 
   /**
    * 판매사이트로 이동하는 함수
@@ -18,21 +26,21 @@ export default function Product(props) {
   };
 
   return (
-    <ProductStyle onClick={moveToProductPage}>
-      <ProductImage src={TestImage} alt="상품 이미지" />
+    <ProductStyle key={id} onClick={moveToProductPage}>
+      <ProductImage src={makeImageURL(itemImage)} alt="상품 이미지" />
       <ProductName>{itemName}</ProductName>
       <ProductPrice>{`${price.toLocaleString("ko-KR")}원`}</ProductPrice>
     </ProductStyle>
   );
 }
 
-// 더 적절한 태그가 있는지 생각하기
 const ProductStyle = styled.li`
   width: 140px;
   height: 132px;
   background-color: ${COLOR.bgPrimaryColor};
   list-style: none;
   cursor: pointer;
+  margin-bottom: 21px;
 `;
 
 const ProductImage = styled.img`
