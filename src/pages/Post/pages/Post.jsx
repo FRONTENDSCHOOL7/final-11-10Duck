@@ -13,10 +13,13 @@ export default function Post() {
   const [post, setPost] = useState();
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
-  const { header } = useAPI();
   const [isbottomModalOpen, setIsBottomModalOpen] = useState(false);
+  const [modalMenuList, setModalMenuList] = useState([]);
+
+  const { header } = useAPI();
 
   const postId = "6536095db2cb205663850892";
+
   const fetchPost = async () => {
     try {
       const res = await axios.get(
@@ -88,11 +91,32 @@ export default function Post() {
       <Layout>
         <BasicHeader />
         <LayoutContent>
-          <PostItem post={post} />
+          <PostItem
+            post={post}
+            onModalHandler={() => {
+              setModalMenuList([
+                {
+                  label: "삭제",
+                  onClickHandler: () => {},
+                },
+                {
+                  label: "수정",
+                  onClickHandler: () => {},
+                },
+              ]);
+              setIsBottomModalOpen(!isbottomModalOpen);
+            }}
+          />
           {commentList.map((item) => (
             <Comment
               comment={item}
               onModalHandler={() => {
+                setModalMenuList([
+                  {
+                    label: "신고하기",
+                    onClickHandler: () => {},
+                  },
+                ]);
                 setIsBottomModalOpen(!isbottomModalOpen);
               }}
             />
@@ -107,19 +131,7 @@ export default function Post() {
             onChangeHandler(e.target.value);
           }}
         />
-        {isbottomModalOpen && (
-          <BottomModal
-            menu={[
-              {
-                label: "신고하기",
-                onClickHandler: () => {
-                  // 해당 기능은 선택과제
-                  // 유저가 일치하는 경우와 일치하지 않는 경우 구현 필요
-                },
-              },
-            ]}
-          />
-        )}
+        {isbottomModalOpen && <BottomModal menu={modalMenuList} />}
       </Layout>
     );
   }

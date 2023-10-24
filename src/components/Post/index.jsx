@@ -6,7 +6,7 @@ import { COLOR } from "../../utils";
 import PostImage from "../../assets/post-img-example.png";
 
 export default function PostItem(props) {
-  const { post } = props;
+  const { post, hasFollowButton, onModalHandler } = props;
 
   const testPost = {
     id: String,
@@ -22,7 +22,11 @@ export default function PostItem(props) {
 
   return (
     <PostStyle>
-      <Header post={post ? post.post : testPost} />
+      <Header
+        post={post ? post.post : testPost}
+        hasFollowButton={hasFollowButton}
+        onModalHandler={onModalHandler}
+      />
       <Content post={post ? post.post : testPost} />
     </PostStyle>
   );
