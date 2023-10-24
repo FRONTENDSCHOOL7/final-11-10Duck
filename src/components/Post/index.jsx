@@ -2,8 +2,8 @@ import React from "react";
 import { styled } from "styled-components";
 import Header from "./Header";
 import Content from "./Content";
-import PostImage from "../../assets/post-img-example.png";
 import { COLOR } from "../../utils";
+import PostImage from "../../assets/post-img-example.png";
 
 export default function PostItem(props) {
   const { post } = props;
@@ -20,11 +20,10 @@ export default function PostItem(props) {
     commentCount: 12,
   };
 
-  // 사용할 때는 testPost대신 post를 사용하면 된다.
   return (
     <PostStyle>
       <Header />
-      <Content post={testPost} />
+      <Content post={post ? post.post : testPost} />
     </PostStyle>
   );
 }
