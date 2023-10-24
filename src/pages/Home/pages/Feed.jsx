@@ -1,23 +1,39 @@
+import { useEffect, useState } from "react";
 import MainHeader from "../../../components/Header/MainHeader";
 import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
-import PostItem from "../../../components/Post";
 import FeedNone from "../components/FeedNone";
+import axios from "axios";
+import useAPI from "../../../hooks/useAPI";
 
-export default function FeedFollow(props) {
-  // const { profileImg, userName, userId, postImg, postContent, heartCount, commentCount } = props;
-  const { user, follow = 1 } = props;
+export default function FeedFollow() {
+  const { header } = useAPI();
+  const [followerPostList, setFollowerPostList] = useState([]);
 
-  // follow에 대한 정보를 어떻게 넘길지... 수정 필요
+  const fetchFollowerPost = async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}post/feed`, {
+        headers: header,
+      });
+      setFollowerPostList(res.data.posts);
+      console.log("🌟팔로잉 게시글 불러오기 성공");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥팔로잉 게시글 불러오기 실패");
+    }
+  };
 
-  if (follow === 0) return <FeedNone />;
-  else if (follow > 0)
+  useEffect(() => {
+    fetchFollowerPost();
+  }, []);
+
+  if (!followerPostList.length) return <FeedNone />;
+  else {
     return (
       <Layout>
         <MainHeader />
-        <LayoutContent>
-          <PostItem />
-        </LayoutContent>
+        <LayoutContent></LayoutContent>
       </Layout>
     );
+  }
 }
