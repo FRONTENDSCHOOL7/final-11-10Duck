@@ -14,8 +14,6 @@ export default function Post() {
   const [comment, setComment] = useState("");
   const { header } = useAPI();
 
-  // console.log(commentList);
-
   const postId = "6536095db2cb205663850892";
   const fetchPost = async () => {
     try {

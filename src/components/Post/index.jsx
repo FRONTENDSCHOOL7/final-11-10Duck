@@ -22,7 +22,7 @@ export default function PostItem(props) {
 
   return (
     <PostStyle>
-      <Header />
+      <Header post={post ? post.post : testPost} />
       <Content post={post ? post.post : testPost} />
     </PostStyle>
   );

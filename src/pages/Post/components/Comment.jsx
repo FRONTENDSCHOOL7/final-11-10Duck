@@ -63,7 +63,7 @@ const CommentStyle = styled.div`
   color: ${COLOR.fontDarkGrayColor};
   font-size: ${FONT_SIZE.large};
   margin-left: 48px;
-  margin-top: 16px;
+  margin-top: 4px;
 `;
 
 const MoreButtonStyle = styled.button`
