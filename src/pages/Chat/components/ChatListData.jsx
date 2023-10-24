@@ -25,6 +25,7 @@ export default function ChatListData(props) {
 const ChatListDataStyle = styled.div`
   display: flex;
   margin-top: 20px;
+  position: relative;
 `;
 
 const ContentStyle = styled.div`
@@ -66,7 +67,7 @@ const OrangeCircle = styled.div`
   width: 12px;
   height: 12px;
   border-radius: 100%;
-  background-color: red;
+  background-color: var(--font-orange-color);
   position: absolute;
   left: 0;
   top: 0;

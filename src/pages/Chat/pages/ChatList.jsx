@@ -23,7 +23,7 @@ export default function ChatList() {
   };
   return (
     <Layout>
-      <BasicHeader />
+      <BasicHeader mode="chat" />
       <LayoutContent>
         <ChatListStyle>
           <ChatListData user={testUser1} />
