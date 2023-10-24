@@ -6,7 +6,7 @@ import MoreButton from "../../../assets/icon/icon-more-vertical.png";
 import { changeProfileImage } from "../../../utils/function";
 
 export default function Comment(props) {
-  const { comment } = props;
+  const { comment, onModalHandler } = props;
   return (
     <CommentContainerStyle>
       <CommentHeaderStyle>
@@ -18,7 +18,7 @@ export default function Comment(props) {
           <UserNameStyle>{comment.author.username}</UserNameStyle>
           <TimeStampStyle>{`· ${comment.createdAt}`}</TimeStampStyle>
         </UserInfoContainerStyle>
-        <MoreButtonStyle>
+        <MoreButtonStyle onClick={onModalHandler}>
           <ButtonImage src={MoreButton} alt="더보기 버튼" />
         </MoreButtonStyle>
       </CommentHeaderStyle>
@@ -69,6 +69,7 @@ const CommentStyle = styled.div`
 const MoreButtonStyle = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
 
 const ButtonImage = styled.img`

@@ -7,12 +7,14 @@ import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
 import axios from "axios";
 import useAPI from "../../../hooks/useAPI";
+import BottomModal from "../../../components/Modal/BottomModal";
 
 export default function Post() {
   const [post, setPost] = useState();
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
   const { header } = useAPI();
+  const [isbottomModalOpen, setIsBottomModalOpen] = useState(false);
 
   const postId = "6536095db2cb205663850892";
   const fetchPost = async () => {
@@ -88,9 +90,15 @@ export default function Post() {
         <LayoutContent>
           <PostItem post={post} />
           {commentList.map((item) => (
-            <Comment comment={item} />
+            <Comment
+              comment={item}
+              onModalHandler={() => {
+                setIsBottomModalOpen(!isbottomModalOpen);
+              }}
+            />
           ))}
         </LayoutContent>
+
         <CommentBar
           mode="post"
           content={comment}
@@ -99,6 +107,19 @@ export default function Post() {
             onChangeHandler(e.target.value);
           }}
         />
+        {isbottomModalOpen && (
+          <BottomModal
+            menu={[
+              {
+                label: "신고하기",
+                onClickHandler: () => {
+                  // 해당 기능은 선택과제
+                  // 유저가 일치하는 경우와 일치하지 않는 경우 구현 필요
+                },
+              },
+            ]}
+          />
+        )}
       </Layout>
     );
   }
