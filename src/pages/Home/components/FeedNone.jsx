@@ -5,8 +5,11 @@ import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
 import SearchIcon from "../../../assets/icon/icon-symbol-logo-gray.png";
 import Button from "../../../components/Button";
+import { useNavigate } from "react-router-dom";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function FeedNone() {
+  const navigate = useNavigate();
   return (
     <Layout>
       <MainHeader />
@@ -15,13 +18,12 @@ export default function FeedNone() {
           <IconImg src={SearchIcon} alt="로고 아이콘" />
           <span className="msg">유저를 검색해 팔로우 해보세요!</span>
 
-          {/* onClick 구현 필요 */}
           <Button
             buttonText={"검색하기"}
-            disabled={false}
             size={"M"}
-            reversed={false}
-            onClick={() => {}}
+            onClickHandler={() => {
+              navigate("/search");
+            }}
           />
         </FeedPage>
       </LayoutContent>
@@ -34,6 +36,8 @@ const FeedPage = styled.div`
   margin-top: 50%;
 
   & > .msg {
+    color: ${COLOR.fontPrimaryColor};
+    font-size: ${FONT_SIZE.large};
     display: block;
     padding: 20px;
     margin: 0 auto;
@@ -48,6 +52,5 @@ const IconImg = styled.img`
   display: block;
   width: 100px;
   height: 100px;
-  /* cursor: pointer; */
   margin: 0 auto;
 `;
