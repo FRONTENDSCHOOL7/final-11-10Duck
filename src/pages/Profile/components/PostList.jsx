@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { COLOR } from '../../../utils';
 import PostItem from '../../../components/Post';
@@ -6,12 +6,40 @@ import ListOnIcon from '../../../assets/icon/icon-post-list-on.png';
 import ListOffIcon from '../../../assets/icon/icon-post-list-off.png';
 import AlbumOnIcon from '../../../assets/icon/icon-post-album-on.png';
 import AlbumOffIcon from '../../../assets/icon/icon-post-album-off.png';
+import useAPI from '../../../hooks/useAPI';
+import { api } from '../../../api/baseURL';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../recoil/atom';
 
 export default function PostList() {
+    const [post, setPost] = useState();
     const [isAlbum, setIsAlbum] = useState(false);
+    const [userPostList, setUserPostList] = useState([]);
+
+    const { header } = useAPI();
+
+    const user = useRecoilValue(userState);
+
+    const fetchMyPost = async () => {
+        try {
+            const res = await api.get(`/post/${user.accountname}/userpost`, {
+                headers: header,
+            });
+            console.log('🌟내 게시글 불러오기 성공');
+            setUserPostList(res.data.post);
+        } catch (err) {
+            console.error(err);
+            console.log('🔥내 게시글 불러오기 실패');
+        }
+    };
+
     const hadleIconClick = () => {
         setIsAlbum((prev) => !prev);
     };
+
+    useEffect(() => {
+        fetchMyPost();
+    }, []);
     return (
         <section>
             <ListNav>
@@ -33,10 +61,9 @@ export default function PostList() {
                 </AlbumStyle>
             ) : (
                 <ListStyle>
-                    {/* 클릭한 유저 아이디의 게시글[] 순회 예정 */}
-                    <PostItem />
-                    <PostItem />
-                    <PostItem />
+                    {userPostList.map((post) => {
+                        return <PostItem post={post} />;
+                    })}
                 </ListStyle>
             )}
         </section>
