@@ -92,7 +92,7 @@ export default function Post() {
         <BasicHeader />
         <LayoutContent>
           <PostItem
-            post={post}
+            post={post.post}
             onModalHandler={() => {
               setModalMenuList([
                 {
