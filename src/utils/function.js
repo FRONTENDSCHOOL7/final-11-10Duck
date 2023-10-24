@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../api/baseURL";
 
 /**
  * 숫자 입력 시 원화단위로 표기해주는 함수
@@ -24,8 +24,8 @@ export const inputPriceFormat = (str) => {
  */
 export const changeImageToURL = async (imageFile) => {
   try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}image/uploadfile`,
+    const res = await api.post(
+      "/image/uploadfile",
       {
         image: imageFile,
       },
@@ -48,9 +48,9 @@ export const changeImageToURL = async (imageFile) => {
  * @returns
  */
 export const changeProfileImage = (imageURL) => {
-  return process.env.REACT_APP_API_URL + imageURL.split("5050/")[1];
+  return process.env.REACT_APP_API_URL + "/" + imageURL.split("5050/")[1];
 };
 
 export const AddAPIURLImage = (filename) => {
-  return process.env.REACT_APP_API_URL + filename;
+  return process.env.REACT_APP_API_URL + "/" + filename;
 };

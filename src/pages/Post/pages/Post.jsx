@@ -5,9 +5,9 @@ import PostItem from "../../../components/Post/index";
 import Comment from "../components/Comment";
 import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
-import axios from "axios";
 import useAPI from "../../../hooks/useAPI";
 import BottomModal from "../../../components/Modal/BottomModal";
+import { api } from "../../../api/baseURL";
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -22,12 +22,9 @@ export default function Post() {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}post/${postId}`,
-        {
-          headers: header,
-        }
-      );
+      const res = await api.get(`/post/${postId}`, {
+        headers: header,
+      });
       console.log("🌟게시글불러오기 성공");
       setPost(res.data);
     } catch (err) {
@@ -38,12 +35,9 @@ export default function Post() {
 
   const fetchComment = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}post/${postId}/comments`,
-        {
-          headers: header,
-        }
-      );
+      const res = await api.get(`/post/${postId}/comments`, {
+        headers: header,
+      });
 
       console.log("🌟댓글불러오기 성공");
       setCommentList(res.data.comments);
@@ -55,8 +49,8 @@ export default function Post() {
 
   const uploadComment = async () => {
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}post/${postId}/comments`,
+      const res = await api.post(
+        `/post/${postId}/comments`,
         {
           comment: {
             content: comment,

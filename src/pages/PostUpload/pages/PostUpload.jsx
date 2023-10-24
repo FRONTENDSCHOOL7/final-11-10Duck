@@ -4,12 +4,12 @@ import UploadHeader from "../../../components/Header/UploadHeader";
 import { styled } from "styled-components";
 import ImageButton from "../components/ImageButton";
 import LayoutContent from "../../../components/Layout/LayoutContent";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PreviewImage from "../components/PreviewImage";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import { changeImageToURL, changeProfileImage } from "../../../utils/function";
+import { api } from "../../../api/baseURL";
 
 export default function PostUpload() {
   const [content, setContent] = useState({ text: "", image: "" });
@@ -46,8 +46,8 @@ export default function PostUpload() {
   const uploadPost = async () => {
     try {
       const imageUrl = await changeImageToURL(content.image);
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}post`,
+      const res = await api.post(
+        "/post",
         {
           post: {
             content: content.text,

@@ -5,11 +5,11 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import Input from "../../../components/Input/Input";
 import InputImage from "../components/InputImage";
 import { styled } from "styled-components";
-import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import { changeImageToURL, inputPriceFormat } from "../../../utils/function";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../../api/baseURL";
 
 export default function AddProduct() {
   const [product, setProduct] = useState({
@@ -39,8 +39,8 @@ export default function AddProduct() {
       tempProduct.itemImage = imageURL;
       tempProduct.price = parseInt(tempProduct.price.replaceAll(",", ""), 10);
 
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}product`,
+      const res = await api.post(
+        "/product",
         {
           product: tempProduct,
         },
