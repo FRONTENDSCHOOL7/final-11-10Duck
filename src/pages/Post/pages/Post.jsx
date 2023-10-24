@@ -14,6 +14,8 @@ export default function Post() {
   const [comment, setComment] = useState("");
   const { header } = useAPI();
 
+  // console.log(commentList);
+
   const postId = "6536095db2cb205663850892";
   const fetchPost = async () => {
     try {
@@ -54,7 +56,7 @@ export default function Post() {
         `${process.env.REACT_APP_API_URL}post/${postId}/comments`,
         {
           comment: {
-            content: "test",
+            content: comment,
           },
         },
         {
@@ -63,7 +65,6 @@ export default function Post() {
       );
 
       console.log("🌟댓글달기 성공");
-      console.log(res);
     } catch (err) {
       console.log("🔥댓글달기 실패");
       console.error(err);
@@ -89,7 +90,7 @@ export default function Post() {
         <LayoutContent>
           <PostItem post={post} />
           {commentList.map((item) => (
-            <Comment />
+            <Comment comment={item} />
           ))}
         </LayoutContent>
         <CommentBar

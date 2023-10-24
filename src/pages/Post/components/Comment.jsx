@@ -2,24 +2,27 @@ import React from "react";
 import { styled } from "styled-components";
 import { COLOR } from "../../../utils";
 import { FONT_SIZE } from "../../../utils";
-
 import MoreButton from "../../../assets/icon/icon-more-vertical.png";
-import ProfileImage from "../../../assets/basic-profile-img.png";
+import { changeProfileImage } from "../../../utils/function";
 
 export default function Comment(props) {
+  const { comment } = props;
   return (
     <CommentContainerStyle>
       <CommentHeaderStyle>
         <UserInfoContainerStyle>
-          <ProfileImageStyle src={ProfileImage} alt="프로필 이미지" />
-          <UserNameStyle>서귀포시 무슨 농장</UserNameStyle>
-          <TimeStampStyle>· 5분 전</TimeStampStyle>
+          <ProfileImageStyle
+            src={changeProfileImage(comment.author.image)}
+            alt="프로필 이미지"
+          />
+          <UserNameStyle>{comment.author.username}</UserNameStyle>
+          <TimeStampStyle>{`· ${comment.createdAt}`}</TimeStampStyle>
         </UserInfoContainerStyle>
         <MoreButtonStyle>
           <ButtonImage src={MoreButton} alt="더보기 버튼" />
         </MoreButtonStyle>
       </CommentHeaderStyle>
-      <CommentStyle>게시글 답글 ~~ !! 최고최고</CommentStyle>
+      <CommentStyle>{comment.content}</CommentStyle>
     </CommentContainerStyle>
   );
 }
