@@ -9,17 +9,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/atom';
 
-export default function ProfileInfo({ whosProfile }) {
-    const navigate = useNavigate();
-    const params = useParams();
+export default function ProfileInfo({ whosProfile, userProfileInfo, myFollowingList, myFollowerList }) {
+    const [profileInfo, setProfileInfo] = useState(userProfileInfo);
+    const [followingList, setFollowingList] = useState(myFollowingList);
+    const [followerList, setFollowerList] = useState(myFollowingList);
     const [accountName, setAccountName] = useState('');
     const [isMyProfile, setIsMyProfile] = useState(false);
 
+    const navigate = useNavigate();
+    const params = useParams();
     const loginUser = useRecoilValue(userState);
 
-    useEffect(() => {
-        params.accountName ? setAccountName(params.accountName) : setIsMyProfile(true);
-    }, [params]);
     const handleFollowingsClick = () => {
         isMyProfile && navigate(`/profile/${loginUser.username}/followings`);
         !isMyProfile && navigate(`/profile/${accountName}/followings`);
@@ -28,23 +28,32 @@ export default function ProfileInfo({ whosProfile }) {
         isMyProfile && navigate(`/profile/${loginUser.username}/followers`);
         !isMyProfile && navigate(`/profile/${accountName}/followers`);
     };
+
+    useEffect(() => {
+        console.log(' userProfileInfo::', profileInfo);
+        console.log(' myFollowingList::', followingList);
+        console.log(' myFollowerList::', followerList);
+    }, []);
+    useEffect(() => {
+        params.accountName ? setAccountName(params.accountName) : setIsMyProfile(true);
+    }, [params]);
     return (
         <ProfileInfoContainer>
             <h2 className="a11y-hidden">프로필 정보</h2>
             <ProfileImgStyle>
                 <FollowInfoStyle onClick={handleFollowersClick}>
-                    <FollowInfoNumbers isFollowing={true}>5900</FollowInfoNumbers>
+                    <FollowInfoNumbers isFollowing={true}>{followerList.length}</FollowInfoNumbers>
                     <FollowInfoText>followers</FollowInfoText>
                 </FollowInfoStyle>
-                <ProfileImage src={useimg} alt="유저 프로필 이미지" />
+                <ProfileImage src={userProfileInfo.image} alt="유저 프로필 이미지" />
                 <FollowInfoStyle onClick={handleFollowingsClick}>
-                    <FollowInfoNumbers>590</FollowInfoNumbers>
+                    <FollowInfoNumbers>{followingList.length}</FollowInfoNumbers>
                     <FollowInfoText>followings</FollowInfoText>
                 </FollowInfoStyle>
             </ProfileImgStyle>
-            <ProfileName>애월읍 위니브 감귤농장</ProfileName>
-            <ProfileId>@weniv_Mandarin</ProfileId>
-            <ProfileMessage>애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장</ProfileMessage>
+            <ProfileName>{userProfileInfo.username}</ProfileName>
+            <ProfileId>@{userProfileInfo.accountname}</ProfileId>
+            <ProfileMessage>{userProfileInfo.intro}</ProfileMessage>
             <ButtonsStyle>
                 {
                     {
@@ -138,6 +147,9 @@ const FollowInfoStyle = styled.div`
     text-align: center;
     font-size: 18px;
     font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 `;
 const FollowInfoNumbers = styled.button`
     font-size: 18px;
