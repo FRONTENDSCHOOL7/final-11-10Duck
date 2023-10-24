@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import ProfileImage from "../../assets/basic-profile-img.png";
 import { styled } from "styled-components";
 import Button from "../Button";
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atom";
 import { COLOR } from "../../utils";
+import { changeProfileImage } from "../../utils/function";
 
 export default function Header(props) {
   const { hasButton } = props;
@@ -23,7 +23,10 @@ export default function Header(props) {
   return (
     <HeaderStyle>
       <ProfileContainerStyle>
-        <ProfileImageStyle src={ProfileImage} alt="프로필 이미지" />
+        <ProfileImageStyle
+          src={changeProfileImage(user.image)}
+          alt="프로필 이미지"
+        />
         <UserInfoContainerStyle>
           <UserNameStyle>{user.username}</UserNameStyle>
           <UserIdStyle>{`@ ${user.accountname}`}</UserIdStyle>
