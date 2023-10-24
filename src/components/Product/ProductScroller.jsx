@@ -21,7 +21,6 @@ const Container = styled.div`
   background-color: ${COLOR.bgPrimaryColor};
   margin: 6px 0;
   padding-left: 16px;
-  overflow-x: auto;
 `;
 
 const HeaderStyle = styled.div`
@@ -33,6 +32,14 @@ const HeaderStyle = styled.div`
 
 const ProductContainerStyle = styled.ul`
   display: flex;
+  width: 100%;
+  overflow-x: auto;
+  gap: 0 10px;
+
+  & > li {
+    flex-shrink: 0;
+  }
+
   & :last-child {
     padding-right: 8px;
   }

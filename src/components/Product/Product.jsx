@@ -40,7 +40,6 @@ const ProductStyle = styled.li`
   background-color: ${COLOR.bgPrimaryColor};
   list-style: none;
   cursor: pointer;
-  margin-right: 10px;
   margin-bottom: 21px;
 `;
 
