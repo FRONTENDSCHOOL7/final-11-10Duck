@@ -53,6 +53,7 @@ const ContentDataStyle = styled.div`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-height: 0.5em;
   }
 
   & > .date {
