@@ -3,18 +3,17 @@ import { styled } from 'styled-components';
 import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
 
-export default function FollowUser() {
+export default function FollowUser({ user }) {
+    console.log('user : ', user);
     return (
         <FollowUserStyle>
-            <FollowUserImage src="http://placehold.it/50x50" alt="" />
+            <FollowUserImage src={user.image} alt="" />
             <FollowTextStyle>
-                <FollowUserName>애월읍 위니브 감귤농장</FollowUserName>
-                <FollowUserInfo>정성을 다해 귤을 땁니다.</FollowUserInfo>
+                <FollowUserName>{user.username}</FollowUserName>
+                <FollowUserInfo>{user.intro}</FollowUserInfo>
             </FollowTextStyle>
-            {/* <Button buttonText={'취소'} size="MS" reversed onClickHandler /> */}
-            <FollowButtonStyle>
-                <Button buttonText={'팔로우'} size="M" onClickHandler />
-            </FollowButtonStyle>
+
+            <FollowButtonStyle>{user.isfollow ? <Button buttonText={'취소'} size="MS" reversed onClickHandler /> : <Button buttonText={'팔로우'} size="MS" onClickHandler />}</FollowButtonStyle>
         </FollowUserStyle>
     );
 }
