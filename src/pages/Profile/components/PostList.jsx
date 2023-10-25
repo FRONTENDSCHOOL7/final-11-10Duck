@@ -8,21 +8,17 @@ import AlbumOnIcon from '../../../assets/icon/icon-post-album-on.png';
 import AlbumOffIcon from '../../../assets/icon/icon-post-album-off.png';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../../recoil/atom';
+import { AddAPIURLImage } from '../../../utils/function';
 
-export default function PostList() {
-    const [post, setPost] = useState();
+export default function PostList({ urlAccountName }) {
     const [isAlbum, setIsAlbum] = useState(false);
     const [userPostList, setUserPostList] = useState([]);
 
     const { header } = useAPI();
 
-    const user = useRecoilValue(userState);
-
     const fetchMyPost = async () => {
         try {
-            const res = await api.get(`/post/${user.accountname}/userpost`, {
+            const res = await api.get(`/post/${urlAccountName}/userpost`, {
                 headers: header,
             });
             console.log('🌟내 게시글 불러오기 성공');
@@ -48,21 +44,16 @@ export default function PostList() {
             </ListNav>
             {isAlbum ? (
                 <AlbumStyle>
-                    {/* 클릭한 유저 아이디의 게시글에서 이미지 주소[] 순회 예정 */}
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
-                    <Album src="http://placehold.it/200x200" alt="" />
+                    {userPostList.map((post) => {
+                        if (post.image) {
+                            return <Album src={AddAPIURLImage(post.image)} alt={`${post.author.username}의 게시글 이미지`} key={post.id} />;
+                        }
+                    })}
                 </AlbumStyle>
             ) : (
                 <ListStyle>
                     {userPostList.map((post) => {
-                        return <PostItem post={post} />;
+                        return <PostItem post={post} key={post.id} />;
                     })}
                 </ListStyle>
             )}
@@ -91,12 +82,12 @@ const ListStyle = styled.article`
     align-items: center;
     background-color: ${COLOR.bgPrimaryColor};
 `;
-
 const Album = styled.img`
     width: 114px;
     height: 114px;
     cursor: pointer;
 `;
+
 const AlbumStyle = styled.article`
     display: grid;
     place-content: center;
