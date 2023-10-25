@@ -62,7 +62,7 @@ const ChatCommentStyle = styled.div`
   bottom: 0;
   width: 100%;
   height: 61px;
-  background-color: var(--bg-primary-color);
+  background-color: ${COLOR.bgPrimaryColor};
 `;
 
 const ImgStyle = styled.img`
@@ -92,6 +92,10 @@ const CommentButton = styled.button`
   border: none;
   background-color: transparent;
   color: ${(active) => (active ? COLOR.fontDarkColor : COLOR.fontOrangeColor)};
+
+  &:focus {
+    border: none;
+  }
 `;
 
 const MyMsgStyle = styled.div`
@@ -103,7 +107,7 @@ const MyMsgStyle = styled.div`
     padding: 12px;
     right: 16px;
 
-    background-color: var(--font-orange-color);
+    background-color: ${COLOR.fontOrangeColor};
     border-radius: 10px 0 10px 10px;
     color: ${COLOR.fontSecondaryColor};
     font-size: ${FONT_SIZE.large};

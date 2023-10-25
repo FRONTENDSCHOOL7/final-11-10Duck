@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function ChatListData(props) {
   const { user } = props;
@@ -35,8 +36,8 @@ const ContentStyle = styled.div`
 
   & > .userName {
     display: block;
-    font-size: 14px;
-    color: var(--font-dark-color);
+    font-size: ${FONT_SIZE.large};
+    color: ${COLOR.fontDarkColor};
   }
 `;
 
@@ -47,18 +48,19 @@ const ContentDataStyle = styled.div`
   & > .msg {
     display: inline-block;
     width: 238px;
-    font-size: 12px;
-    color: var(--font-primary-color);
+    font-size: ${FONT_SIZE.medium};
+    color: ${COLOR.fontPrimaryColor};
+    /* 말줄임처리 */
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    line-height: 0.5em;
+    line-height: 1.5em;
   }
 
   & > .date {
-    font-size: 10px;
-    color: #dbdbdb;
+    font-size: ${FONT_SIZE.small};
+    color: ${COLOR.fontLightGrayColor};
     text-align: right;
     padding-left: 13px;
   }
@@ -68,7 +70,7 @@ const OrangeCircle = styled.div`
   width: 12px;
   height: 12px;
   border-radius: 100%;
-  background-color: var(--font-orange-color);
+  background-color: ${COLOR.fontOrangeColor};
   position: absolute;
   left: 0;
   top: 0;
