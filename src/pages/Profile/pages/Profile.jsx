@@ -6,7 +6,6 @@ import NavBar from '../../../components/Footer/NavBar';
 import ProfileInfo from '../components/ProfileInfo';
 import PostList from '../components/PostList';
 import ProductScroller from '../../../components/Product/ProductScroller';
-import { res } from '../../../constants/product';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/atom';
 import { useParams } from 'react-router-dom';
@@ -20,33 +19,26 @@ export default function Profile() {
 
     const [urlAccountName, setUrlAccountName] = useState(accountName ? accountName : user.accountname);
     const [isMyProfile, setIsMyProfile] = useState(null);
+    const [isFollow, setIsFollow] = useState(null);
     const [profileInfo, serProfileInfo] = useState({});
-    const [productList, setProductInfo] = useState({});
+    //const [productList, setProductInfo] = useState({});
+
+    const changeProfileInfo = (info) => {
+        serProfileInfo(info);
+    };
+    const changeIsFollow = (param) => {
+        setIsFollow(param);
+    };
 
     const fetchProfileInfo = async () => {
         try {
             const res = await api.get(`/profile/${urlAccountName}`, { headers: header });
-            console.log('🌟프로필 정보 불러오기 성공');
-            console.log('********************');
-            console.log('isMyProfile :', isMyProfile);
-            console.log('urlAccountName :', urlAccountName);
-            console.log('res.data.profile :', res.data.profile);
-            console.log('********************');
+            console.log('🌟 프로필 정보 불러오기 성공');
             serProfileInfo(res.data.profile);
+            setIsFollow(res.data.profile.isfollow);
         } catch (error) {
             console.error(error);
-            console.log('🔥프로필 정보 불러오기 실패');
-        }
-        console.log('profileInfo ==> ', profileInfo);
-    };
-    const fetchProductList = async () => {
-        try {
-            const res = await api.get(`/product/${urlAccountName}`, { headers: header });
-            console.log('🌟상품 리스트 불러오기 성공');
-            setProductInfo(res.data.product);
-        } catch (error) {
-            console.error(error);
-            console.log('🔥상품 리스트 불러오기 실패');
+            console.log('🔥 프로필 정보 불러오기 실패');
         }
     };
 
@@ -55,18 +47,13 @@ export default function Profile() {
     }, []);
     useEffect(() => {
         fetchProfileInfo();
-        // fetchProductList();
     }, [urlAccountName]);
     return (
         <Layout>
-            <BasicHeader />
+            <BasicHeader mode={'post'} />
             <LayoutContent isWhite={false} paddingOff={true}>
-                <p>urlParam : {accountName}</p>
-                <p>loginUser : {user.accountname}</p>
-                <p>isMyProfile : {isMyProfile !== null && isMyProfile.toString()}</p>
-
                 {/* 프로필 정보 */}
-                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} />
+                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} isFollow={isFollow} changeProfileInfo={changeProfileInfo} changeIsFollow={changeIsFollow} />
                 {/* 판매 중인 상품 */}
                 {/* <ProductScroller products={productList} /> */}
                 {/* 포스트한 게시물  */}

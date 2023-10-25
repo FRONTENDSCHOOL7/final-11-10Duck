@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
@@ -8,9 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
 
-export default function ProfileInfo({ isMyProfile, profileInfo }) {
+export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, changeProfileInfo, changeIsFollow }) {
     const { header } = useAPI();
     const navigate = useNavigate();
+
+    //const [userInfo, setUserInfo] = useState(profileInfo ? profileInfo : {});
+    //const [isFollow, setIsFollow] = useState();
 
     const handleFollowingsClick = () => {
         navigate(`/profile/${profileInfo.accountname}/followings`);
@@ -19,29 +22,40 @@ export default function ProfileInfo({ isMyProfile, profileInfo }) {
         navigate(`/profile/${profileInfo.accountname}/followers`);
     };
 
-    const fetchFollowingList = async () => {
+    const fetchDoFollow = async () => {
         try {
-            const res = await api.get(`/profile/${profileInfo.accountname}/following`, {
+            const res = await api.post(`/profile/${profileInfo.accountname}/follow`, {
                 headers: header,
             });
-            console.log('🌟내 팔로잉 리스트 불러오기 성공');
-            //setFollowingList(res.data);
+            console.log('🌟 팔로우하기 성공');
+            //changeProfileInfo(res.data.profile);
+            //setIsFollow(res.data.profile.isfollow);
         } catch (err) {
             console.error(err);
-            console.log('🔥내 팔로잉 리스트 불러오기 실패');
+            console.log('🔥 팔로우하기 실패');
         }
     };
-    const fetchFollowerList = async () => {
+
+    const fetchDoUnfollow = async () => {
         try {
-            const res = await api.get(`/profile/${profileInfo.accountname}/follower`, {
+            const res = await api.post(`/profile/${profileInfo.accountname}/unfollow`, {
                 headers: header,
             });
-            console.log('🌟내 팔로워 리스트 불러오기 성공');
-            //setFollowerList(res.data);
+            console.log('🌟 언팔로우하기 성공');
+            //changeProfileInfo(res.data.profile);
+            //setIsFollow(res.data.profile.isfollow);
         } catch (err) {
             console.error(err);
-            console.log('🔥내 팔로워 리스트 불러오기 실패');
+            console.log('🔥 언팔로우하기 실패');
         }
+    };
+    const handleFollowClick = () => {
+        //fetchDoFollow();
+        changeIsFollow((prev) => !prev);
+    };
+    const handleUnfollowClick = () => {
+        //fetchDoUnfollow();
+        changeIsFollow((prev) => !prev);
     };
 
     return (
@@ -72,7 +86,16 @@ export default function ProfileInfo({ isMyProfile, profileInfo }) {
                 ) : (
                     <>
                         <ChatIcon src={chatIcon} alt="채팅 아이콘" />
-                        {profileInfo.isfollow ? <Button buttonText={'언팔로우'} reversed size={'M'} onClickHandler /> : <Button buttonText={'팔로우'} size={'M'} onClickHandler />}
+                        {/* {profileInfo.isfollow ? (
+                            <Button buttonText={'언팔로우하기'} reversed size={'M'} onClickHandler={handleUnfollowClick} />
+                        ) : (
+                            <Button buttonText={'팔로우하기'} size={'M'} onClickHandler={handleFollowClick} />
+                        )} */}
+                        {isFollow ? (
+                            <Button buttonText={'언팔로우하기'} reversed size={'M'} onClickHandler={handleUnfollowClick} />
+                        ) : (
+                            <Button buttonText={'팔로우하기'} size={'M'} onClickHandler={handleFollowClick} />
+                        )}
 
                         <ShareIcon src={shareIcon} alt="공유하기 아이콘" />
                     </>
