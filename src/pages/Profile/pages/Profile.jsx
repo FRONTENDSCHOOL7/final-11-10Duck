@@ -7,90 +7,57 @@ import ProfileInfo from '../components/ProfileInfo';
 import PostList from '../components/PostList';
 import ProductScroller from '../../../components/Product/ProductScroller';
 import { res } from '../../../constants/product';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../recoil/atom';
 import { useParams } from 'react-router-dom';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../../recoil/atom';
+import useCheckUser from '../hooks/useCheckUser';
 
 export default function Profile() {
-    const [whosProfile, setWhosProfile] = useState('');
-    const [myFollowingList, setMyFollowingList] = useState([]);
-    const [myFollowerList, setMyFollowerList] = useState([]);
-    const [userProfileInfo, setUserProfileInfo] = useState({});
+    const [urlParam, setUrlParam] = useState('');
+    const [urlAccountName, setUrlAccountName] = useState('');
 
-    const { header } = useAPI();
+    const { accountName } = useParams();
     const user = useRecoilValue(userState);
-    const params = useParams();
+    const { header } = useAPI();
+    const { isMyProfile } = useCheckUser(accountName);
 
-    const fetchMyFollowingList = async () => {
+    const fetchProfileInfo = async () => {
         try {
-            const res = await api.get(`/profile/${user.accountname}/following`, {
-                headers: header,
-            });
-            console.log('🌟내 팔로잉 리스트 불러오기 성공');
-            setMyFollowingList(res.data);
-        } catch (err) {
-            console.error(err);
-            console.log('🔥내 팔로잉 리스트 불러오기 실패');
-        }
-    };
-    const fetchMyFollowerList = async () => {
-        try {
-            const res = await api.get(`/profile/${user.accountname}/follower`, {
-                headers: header,
-            });
-            console.log('🌟내 팔로워 리스트 불러오기 성공');
-            setMyFollowerList(res.data);
-        } catch (err) {
-            console.error(err);
-            console.log('🔥내 팔로워 리스트 불러오기 실패');
-        }
-    };
-    const fetchUserProfileInfo = async (whosProfile) => {
-        try {
-            console.log(whosProfile);
+            isMyProfile && setUrlAccountName(user.accountname);
+            !isMyProfile && setUrlAccountName(urlParam);
+            const res = await api.get(`/profile/${urlAccountName}`, { headers: header });
+            console.log('🌟프로필 정보 불러오기 성공');
+            console.log('********************');
+            console.log(isMyProfile);
             console.log(user.accountname);
-            const res = await api.get(`/profile/${whosProfile === 'myProfile' ? user.accountname : params.accountName}`, {
-                headers: header,
-            });
-            console.log('🌟개인 프로필 정보 불러오기 성공');
-            console.log('🌟개인 프로필 정보 불러오기 :', res);
-            setUserProfileInfo(res.data.profile);
-        } catch (err) {
-            console.error(err);
-            console.log('🔥개인 프로필 정보 불러오기 실패');
+            console.log(res.data);
+            console.log('********************');
+        } catch (error) {
+            console.error(error);
+            console.log('🔥프로필 정보 불러오기 실패');
         }
     };
-    const checkWhosProfile = () => {
-        const followedUser = myFollowingList.filter((user) => user.accountname === params.accountName);
-
-        // 본인 프로필인지 아니면 타인의 프로필인지 팔로우 여부 파악해서
-        // setWhosProfile( myProfile || isFollow || notFollow )
-        if (!params.accountName) setWhosProfile('myProfile');
-        else if (params.accountName === user.accountname) setWhosProfile('myProfile');
-        else if (params.accountName && followedUser._id) setWhosProfile('isFollow');
-        else setWhosProfile('notFollow');
-    };
 
     useEffect(() => {
-        fetchMyFollowingList();
-        fetchMyFollowerList();
-        checkWhosProfile();
+        setUrlParam(accountName);
+        fetchProfileInfo();
     }, []);
-    useEffect(() => {
-        fetchUserProfileInfo(whosProfile);
-    }, [whosProfile]);
+
     return (
         <Layout>
             <BasicHeader />
             <LayoutContent isWhite={false} paddingOff={true}>
+                <p>accountName : {accountName}</p>
+                <p>urlParam : {urlParam}</p>
+                <p>isMyProfile : {isMyProfile.toString()}</p>
                 {/* 프로필 정보 */}
-                <ProfileInfo whosProfile={whosProfile} userProfileInfo={userProfileInfo} myFollowingList={myFollowingList} myFollowerList={myFollowerList} />
+                {/* <ProfileInfo whosProfile={whosProfile} userProfileInfo={userProfileInfo} /> */}
                 {/* 판매 중인 상품 */}
-                <ProductScroller products={res.product} />
+                {/* <ProductScroller products={res.product} /> */}
                 {/* 포스트한 게시물  */}
-                <PostList />
+                {/* <PostList /> */}
             </LayoutContent>
             <NavBar />
         </Layout>

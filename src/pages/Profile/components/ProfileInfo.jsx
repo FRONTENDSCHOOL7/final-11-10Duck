@@ -2,57 +2,67 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
-import useimg from '../../../assets/basic-profile-img.png';
 import chatIcon from '../../../assets/icon/icon-message-circle.svg';
 import shareIcon from '../../../assets/icon/icon-share.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/atom';
+import useAPI from '../../../hooks/useAPI';
+import { api } from '../../../api/baseURL';
 
-export default function ProfileInfo({ whosProfile, userProfileInfo, myFollowingList, myFollowerList }) {
-    const [profileInfo, setProfileInfo] = useState(userProfileInfo);
-    const [followingList, setFollowingList] = useState(myFollowingList);
-    const [followerList, setFollowerList] = useState(myFollowingList);
-    const [accountName, setAccountName] = useState('');
-    const [isMyProfile, setIsMyProfile] = useState(false);
-
+export default function ProfileInfo({ whosProfile, userProfileInfo }) {
+    const { header } = useAPI();
     const navigate = useNavigate();
-    const params = useParams();
-    const loginUser = useRecoilValue(userState);
 
     const handleFollowingsClick = () => {
-        isMyProfile && navigate(`/profile/${loginUser.username}/followings`);
-        !isMyProfile && navigate(`/profile/${accountName}/followings`);
+        navigate(`/profile/${userProfileInfo.accountname}/followings`);
     };
     const handleFollowersClick = () => {
-        isMyProfile && navigate(`/profile/${loginUser.username}/followers`);
-        !isMyProfile && navigate(`/profile/${accountName}/followers`);
+        navigate(`/profile/${userProfileInfo.accountname}/followers`);
     };
 
-    useEffect(() => {
-        console.log(' userProfileInfo::', profileInfo);
-        console.log(' myFollowingList::', followingList);
-        console.log(' myFollowerList::', followerList);
-    }, []);
-    useEffect(() => {
-        params.accountName ? setAccountName(params.accountName) : setIsMyProfile(true);
-    }, [params]);
+    const fetchFollowingList = async () => {
+        try {
+            const res = await api.get(`/profile/${userProfileInfo.accountname}/following`, {
+                headers: header,
+            });
+            console.log('🌟내 팔로잉 리스트 불러오기 성공');
+            //setFollowingList(res.data);
+        } catch (err) {
+            console.error(err);
+            console.log('🔥내 팔로잉 리스트 불러오기 실패');
+        }
+    };
+    const fetchFollowerList = async () => {
+        try {
+            const res = await api.get(`/profile/${userProfileInfo.accountname}/follower`, {
+                headers: header,
+            });
+            console.log('🌟내 팔로워 리스트 불러오기 성공');
+            //setFollowerList(res.data);
+        } catch (err) {
+            console.error(err);
+            console.log('🔥내 팔로워 리스트 불러오기 실패');
+        }
+    };
+
     return (
         <ProfileInfoContainer>
             <h2 className="a11y-hidden">프로필 정보</h2>
             <ProfileImgStyle>
                 <FollowInfoStyle onClick={handleFollowersClick}>
-                    <FollowInfoNumbers isFollowing={true}>{followerList.length}</FollowInfoNumbers>
+                    <FollowInfoNumbers isFollowing={true}>{userProfileInfo.followerCount}</FollowInfoNumbers>
                     <FollowInfoText>followers</FollowInfoText>
                 </FollowInfoStyle>
                 <ProfileImage src={userProfileInfo.image} alt="유저 프로필 이미지" />
                 <FollowInfoStyle onClick={handleFollowingsClick}>
-                    <FollowInfoNumbers>{followingList.length}</FollowInfoNumbers>
+                    <FollowInfoNumbers>{userProfileInfo.followingCount}</FollowInfoNumbers>
                     <FollowInfoText>followings</FollowInfoText>
                 </FollowInfoStyle>
             </ProfileImgStyle>
             <ProfileName>{userProfileInfo.username}</ProfileName>
             <ProfileId>@{userProfileInfo.accountname}</ProfileId>
+            <p>{whosProfile}</p>
             <ProfileMessage>{userProfileInfo.intro}</ProfileMessage>
             <ButtonsStyle>
                 {
