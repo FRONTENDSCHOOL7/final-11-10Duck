@@ -7,7 +7,7 @@ import { AddAPIURLImage } from "../../utils/function";
 import { useNavigate } from "react-router-dom";
 
 export default function Content(props) {
-  const { post } = props;
+  const { post, isMoveToContentPage } = props;
 
   const {
     id,
@@ -23,12 +23,14 @@ export default function Content(props) {
   const navigate = useNavigate();
 
   return (
-    <ContentStyle>
+    <ContentStyle isMoveToContentPage={isMoveToContentPage}>
       <div
         onClick={() => {
-          navigate(`/post/${post.id}`, {
-            state: { authorId: post.author._id },
-          });
+          if (isMoveToContentPage) {
+            navigate(`/post/${post.id}`, {
+              state: { authorId: post.author._id },
+            });
+          }
         }}
       >
         <ContentTextStyle>{content}</ContentTextStyle>
@@ -51,7 +53,7 @@ export default function Content(props) {
 const ContentStyle = styled.section`
   font-size: 14px;
   margin-left: 54px;
-  cursor: pointer;
+  cursor: ${(props) => (props.isMoveToContentPage ? "pointer" : "")};
 `;
 
 const ContentTextStyle = styled.p`
