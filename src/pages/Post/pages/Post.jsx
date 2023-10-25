@@ -8,7 +8,8 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import useAPI from "../../../hooks/useAPI";
 import BottomModal from "../../../components/Modal/BottomModal";
 import { api } from "../../../api/baseURL";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import useCheckUser from "../../../hooks/useCheckUser";
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -19,6 +20,8 @@ export default function Post() {
 
   const { header } = useAPI();
   const { postId } = useParams();
+  const location = useLocation();
+  const { userFlag } = useCheckUser(location.state.authorId);
 
   const navigate = useNavigate();
 
@@ -94,29 +97,50 @@ export default function Post() {
           <PostItem
             post={post}
             onModalHandler={() => {
-              setModalMenuList([
-                {
-                  label: "삭제",
-                  onClickHandler: () => {},
-                },
-                {
-                  label: "수정",
-                  onClickHandler: () => {},
-                },
-              ]);
-              setIsBottomModalOpen(!isbottomModalOpen);
-            }}
-          />
-          {commentList.map((item) => (
-            <Comment
-              comment={item}
-              onModalHandler={() => {
+              if (userFlag) {
+                setModalMenuList([
+                  {
+                    label: "삭제",
+                    onClickHandler: () => {},
+                  },
+                  {
+                    label: "수정",
+                    onClickHandler: () => {},
+                  },
+                ]);
+              } else {
                 setModalMenuList([
                   {
                     label: "신고하기",
                     onClickHandler: () => {},
                   },
                 ]);
+              }
+
+              setIsBottomModalOpen(!isbottomModalOpen);
+            }}
+          />
+          {commentList.map((item) => (
+            <Comment
+              key={item.id}
+              comment={item}
+              onModalHandler={() => {
+                if (userFlag) {
+                  setModalMenuList([
+                    {
+                      label: "삭제",
+                      onClickHandler: () => {},
+                    },
+                  ]);
+                } else {
+                  setModalMenuList([
+                    {
+                      label: "신고하기",
+                      onClickHandler: () => {},
+                    },
+                  ]);
+                }
+
                 setIsBottomModalOpen(!isbottomModalOpen);
               }}
             />

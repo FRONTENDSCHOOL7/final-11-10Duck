@@ -9,11 +9,13 @@ import { userState } from "../../../recoil/atom";
 import PostItem from "../../../components/Post";
 import NavBar from "../../../components/Footer/NavBar";
 import { api } from "../../../api/baseURL";
+import BottomModal from "../../../components/Modal/BottomModal";
 
 export default function FeedFollow() {
   const { header } = useAPI();
   const [followerPostList, setFollowerPostList] = useState([]);
   const [myPostList, setMyPostList] = useState([]);
+  const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
   const user = useRecoilValue(userState);
 
   const fetchMyPost = async () => {
@@ -54,10 +56,26 @@ export default function FeedFollow() {
         <MainHeader />
         <LayoutContent>
           {myPostList.map((item) => (
-            <PostItem post={item} />
+            <PostItem
+              post={item}
+              onModalHandler={() => {
+                setIsBottomModalOpen(!isBottomModalOpen);
+              }}
+            />
           ))}
         </LayoutContent>
         <NavBar />
+        {/* 홈화면은 팔로워의 게시글이라서 무조건 일치하지 않기때문에 이와같이 구성 */}
+        {isBottomModalOpen && (
+          <BottomModal
+            menu={[
+              {
+                label: "신고하기",
+                onClickHandler: () => {},
+              },
+            ]}
+          />
+        )}
       </Layout>
     );
   }

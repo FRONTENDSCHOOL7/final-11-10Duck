@@ -27,6 +27,7 @@ export default function Content(props) {
       )}
       <Buttons
         postId={id}
+        authorId={post.author._id}
         hearted={hearted}
         heartCount={heartCount}
         commentCount={commentCount}

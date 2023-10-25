@@ -8,7 +8,7 @@ import { COLOR } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
 export default function Buttons(props) {
-  const { postId, hearted, heartCount, commentCount } = props;
+  const { postId, authorId, hearted, heartCount, commentCount } = props;
   const [heartSrc, setHeartSrc] = useState(hearted ? ActiveHeart : Heart);
 
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function Buttons(props) {
    * 댓글 버튼 클릭 시 해당 게시글로 이동하는 함수
    */
   const onClickCommentBtn = () => {
-    navigate(`/post/${postId}`);
+    navigate(`/post/${postId}`, { state: { authorId } });
   };
   return (
     <ButtonContainerStyle>
