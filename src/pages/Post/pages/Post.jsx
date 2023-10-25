@@ -8,6 +8,7 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import useAPI from "../../../hooks/useAPI";
 import BottomModal from "../../../components/Modal/BottomModal";
 import { api } from "../../../api/baseURL";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -17,8 +18,9 @@ export default function Post() {
   const [modalMenuList, setModalMenuList] = useState([]);
 
   const { header } = useAPI();
+  const { postId } = useParams();
 
-  const postId = "6536095db2cb205663850892";
+  const navigate = useNavigate();
 
   const fetchPost = async () => {
     try {
@@ -26,7 +28,7 @@ export default function Post() {
         headers: header,
       });
       console.log("🌟게시글불러오기 성공");
-      setPost(res.data);
+      setPost(res.data.post);
     } catch (err) {
       console.log("🔥게시글 불러오기 실패");
       console.error(err);
@@ -83,10 +85,14 @@ export default function Post() {
   if (!!post) {
     return (
       <Layout>
-        <BasicHeader />
+        <BasicHeader
+          onClickBackBtnHandler={() => {
+            navigate("/");
+          }}
+        />
         <LayoutContent>
           <PostItem
-            post={post.post}
+            post={post}
             onModalHandler={() => {
               setModalMenuList([
                 {

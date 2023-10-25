@@ -10,10 +10,13 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import { changeImageToURL, changeProfileImage } from "../../../utils/function";
 import { api } from "../../../api/baseURL";
+import useAPI from "../../../hooks/useAPI";
 
 export default function PostUpload() {
   const [content, setContent] = useState({ text: "", image: "" });
   const [previewImage, setPreviewImage] = useState("");
+
+  const { header } = useAPI();
 
   const user = useRecoilValue(userState);
 
@@ -55,17 +58,15 @@ export default function PostUpload() {
           },
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
+          headers: header,
         }
       );
-      console.log("게시글 올리기 성공");
-      navigate("/post", { state: { post: res.data } });
+      console.log("🌟게시글 올리기 성공");
+      const postId = res.data.post.id;
+      navigate(`/post/${postId}`);
     } catch (err) {
       console.error(err);
-      // 시간 남으면 게시글 등록 실패시 모달창 띄워주기
+      console.log("🔥게시글 올리기 실패");
     }
   };
 
