@@ -18,7 +18,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Feed />} />
-      <Route path="/post" element={<Post />} />
+      <Route path="/post/:postId" element={<Post />} />
       <Route path="/post/upload" element={<PostUpload />} />
       <Route path="/add-product" element={<AddProduct />} />
       <Route path="/signup" element={<Signup />} />

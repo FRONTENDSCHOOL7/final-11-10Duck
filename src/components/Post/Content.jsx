@@ -9,6 +9,7 @@ export default function Content(props) {
   const { post } = props;
 
   const {
+    id,
     content,
     image,
     createdAt,
@@ -25,6 +26,7 @@ export default function Content(props) {
         <ContentImageStyle src={AddAPIURLImage(image)} alt="포스트 이미지" />
       )}
       <Buttons
+        postId={id}
         hearted={hearted}
         heartCount={heartCount}
         commentCount={commentCount}
