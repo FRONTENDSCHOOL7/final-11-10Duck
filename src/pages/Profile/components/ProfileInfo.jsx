@@ -1,29 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { styled } from 'styled-components';
 import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
 import chatIcon from '../../../assets/icon/icon-message-circle.svg';
 import shareIcon from '../../../assets/icon/icon-share.png';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../../recoil/atom';
+import { useNavigate } from 'react-router-dom';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
 
-export default function ProfileInfo({ whosProfile, userProfileInfo }) {
+export default function ProfileInfo({ isMyProfile, profileInfo }) {
     const { header } = useAPI();
     const navigate = useNavigate();
 
     const handleFollowingsClick = () => {
-        navigate(`/profile/${userProfileInfo.accountname}/followings`);
+        navigate(`/profile/${profileInfo.accountname}/followings`);
     };
     const handleFollowersClick = () => {
-        navigate(`/profile/${userProfileInfo.accountname}/followers`);
+        navigate(`/profile/${profileInfo.accountname}/followers`);
     };
 
     const fetchFollowingList = async () => {
         try {
-            const res = await api.get(`/profile/${userProfileInfo.accountname}/following`, {
+            const res = await api.get(`/profile/${profileInfo.accountname}/following`, {
                 headers: header,
             });
             console.log('🌟내 팔로잉 리스트 불러오기 성공');
@@ -35,7 +33,7 @@ export default function ProfileInfo({ whosProfile, userProfileInfo }) {
     };
     const fetchFollowerList = async () => {
         try {
-            const res = await api.get(`/profile/${userProfileInfo.accountname}/follower`, {
+            const res = await api.get(`/profile/${profileInfo.accountname}/follower`, {
                 headers: header,
             });
             console.log('🌟내 팔로워 리스트 불러오기 성공');
@@ -51,44 +49,34 @@ export default function ProfileInfo({ whosProfile, userProfileInfo }) {
             <h2 className="a11y-hidden">프로필 정보</h2>
             <ProfileImgStyle>
                 <FollowInfoStyle onClick={handleFollowersClick}>
-                    <FollowInfoNumbers isFollowing={true}>{userProfileInfo.followerCount}</FollowInfoNumbers>
+                    <FollowInfoNumbers isFollowing={true}>{profileInfo.followerCount}</FollowInfoNumbers>
                     <FollowInfoText>followers</FollowInfoText>
                 </FollowInfoStyle>
-                <ProfileImage src={userProfileInfo.image} alt="유저 프로필 이미지" />
+                <ProfileImage src={profileInfo.image} alt="유저 프로필 이미지" />
                 <FollowInfoStyle onClick={handleFollowingsClick}>
-                    <FollowInfoNumbers>{userProfileInfo.followingCount}</FollowInfoNumbers>
+                    <FollowInfoNumbers>{profileInfo.followingCount}</FollowInfoNumbers>
                     <FollowInfoText>followings</FollowInfoText>
                 </FollowInfoStyle>
             </ProfileImgStyle>
-            <ProfileName>{userProfileInfo.username}</ProfileName>
-            <ProfileId>@{userProfileInfo.accountname}</ProfileId>
-            <p>{whosProfile}</p>
-            <ProfileMessage>{userProfileInfo.intro}</ProfileMessage>
+            <ProfileName>{profileInfo.username}</ProfileName>
+            <ProfileId>@{profileInfo.accountname}</ProfileId>
+            <ProfileMessage>{profileInfo.intro}</ProfileMessage>
             <ButtonsStyle>
-                {
-                    {
-                        myProfile: (
-                            <MyProfileBtns>
-                                <Button buttonText={'프로필 수정'} reversed size={'M'} onClickHandler />
-                                <Button buttonText={'상품 등록'} reversed size={'M'} onClickHandler />
-                            </MyProfileBtns>
-                        ),
-                        isFollow: (
-                            <>
-                                <ChatIcon src={chatIcon} alt="채팅 아이콘" />
-                                <Button buttonText={'언팔로우'} reversed size={'M'} onClickHandler />
-                                <ShareIcon src={shareIcon} alt="공유하기 아이콘" />
-                            </>
-                        ),
-                        notFollow: (
-                            <>
-                                <ChatIcon src={chatIcon} alt="채팅 아이콘" />
-                                <Button buttonText={'팔로우'} size={'M'} onClickHandler />
-                                <ShareIcon src={shareIcon} alt="공유하기 아이콘" />
-                            </>
-                        ),
-                    }[whosProfile]
-                }
+                {isMyProfile ? (
+                    <>
+                        <MyProfileBtns>
+                            <Button buttonText={'프로필 수정'} reversed size={'M'} onClickHandler />
+                            <Button buttonText={'상품 등록'} reversed size={'M'} onClickHandler />
+                        </MyProfileBtns>
+                    </>
+                ) : (
+                    <>
+                        <ChatIcon src={chatIcon} alt="채팅 아이콘" />
+                        {profileInfo.isfollow ? <Button buttonText={'언팔로우'} reversed size={'M'} onClickHandler /> : <Button buttonText={'팔로우'} size={'M'} onClickHandler />}
+
+                        <ShareIcon src={shareIcon} alt="공유하기 아이콘" />
+                    </>
+                )}
             </ButtonsStyle>
         </ProfileInfoContainer>
     );

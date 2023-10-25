@@ -12,52 +12,65 @@ import { userState } from '../../../recoil/atom';
 import { useParams } from 'react-router-dom';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
-import useCheckUser from '../hooks/useCheckUser';
 
 export default function Profile() {
-    const [urlParam, setUrlParam] = useState('');
-    const [urlAccountName, setUrlAccountName] = useState('');
-
+    const { header } = useAPI();
     const { accountName } = useParams();
     const user = useRecoilValue(userState);
-    const { header } = useAPI();
-    const { isMyProfile } = useCheckUser(accountName);
+
+    const [urlAccountName, setUrlAccountName] = useState(accountName ? accountName : user.accountname);
+    const [isMyProfile, setIsMyProfile] = useState(null);
+    const [profileInfo, serProfileInfo] = useState({});
+    const [productList, setProductInfo] = useState({});
 
     const fetchProfileInfo = async () => {
         try {
-            isMyProfile && setUrlAccountName(user.accountname);
-            !isMyProfile && setUrlAccountName(urlParam);
             const res = await api.get(`/profile/${urlAccountName}`, { headers: header });
             console.log('🌟프로필 정보 불러오기 성공');
             console.log('********************');
-            console.log(isMyProfile);
-            console.log(user.accountname);
-            console.log(res.data);
+            console.log('isMyProfile :', isMyProfile);
+            console.log('urlAccountName :', urlAccountName);
+            console.log('res.data.profile :', res.data.profile);
             console.log('********************');
+            serProfileInfo(res.data.profile);
         } catch (error) {
             console.error(error);
             console.log('🔥프로필 정보 불러오기 실패');
         }
+        console.log('profileInfo ==> ', profileInfo);
+    };
+    const fetchProductList = async () => {
+        try {
+            const res = await api.get(`/product/${urlAccountName}`, { headers: header });
+            console.log('🌟상품 리스트 불러오기 성공');
+            setProductInfo(res.data.product);
+        } catch (error) {
+            console.error(error);
+            console.log('🔥상품 리스트 불러오기 실패');
+        }
     };
 
     useEffect(() => {
-        setUrlParam(accountName);
-        fetchProfileInfo();
+        urlAccountName === user.accountname ? setIsMyProfile(true) : setIsMyProfile(false);
     }, []);
-
+    useEffect(() => {
+        fetchProfileInfo();
+        // fetchProductList();
+    }, [urlAccountName]);
     return (
         <Layout>
             <BasicHeader />
             <LayoutContent isWhite={false} paddingOff={true}>
-                <p>accountName : {accountName}</p>
-                <p>urlParam : {urlParam}</p>
-                <p>isMyProfile : {isMyProfile.toString()}</p>
+                <p>urlParam : {accountName}</p>
+                <p>loginUser : {user.accountname}</p>
+                <p>isMyProfile : {isMyProfile !== null && isMyProfile.toString()}</p>
+
                 {/* 프로필 정보 */}
-                {/* <ProfileInfo whosProfile={whosProfile} userProfileInfo={userProfileInfo} /> */}
+                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} />
                 {/* 판매 중인 상품 */}
-                {/* <ProductScroller products={res.product} /> */}
+                {/* <ProductScroller products={productList} /> */}
                 {/* 포스트한 게시물  */}
-                {/* <PostList /> */}
+                <PostList urlAccountName={urlAccountName} />
             </LayoutContent>
             <NavBar />
         </Layout>
