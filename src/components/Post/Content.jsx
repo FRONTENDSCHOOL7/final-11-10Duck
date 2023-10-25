@@ -27,7 +27,7 @@ export default function Content(props) {
       <div
         onClick={() => {
           if (isMoveToContentPage) {
-            navigate(`/post/${post.id}`, {
+            navigate(`/post/${id}`, {
               state: { authorId: post.author._id },
             });
           }
