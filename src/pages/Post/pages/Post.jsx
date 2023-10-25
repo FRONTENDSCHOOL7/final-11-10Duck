@@ -10,6 +10,7 @@ import BottomModal from "../../../components/Modal/BottomModal";
 import { api } from "../../../api/baseURL";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useCheckUser from "../../../hooks/useCheckUser";
+import useModal from "../../../hooks/useModal";
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -22,6 +23,7 @@ export default function Post() {
   const { postId } = useParams();
   const location = useLocation();
   const { userFlag } = useCheckUser(location.state.authorId);
+  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
 
   const navigate = useNavigate();
 
@@ -89,6 +91,7 @@ export default function Post() {
     return (
       <Layout>
         <BasicHeader
+          onClickMoreBtnHandler={onModalHandler}
           onClickBackBtnHandler={() => {
             navigate("/");
           }}
@@ -156,6 +159,7 @@ export default function Post() {
           }}
         />
         {isbottomModalOpen && <BottomModal menu={modalMenuList} />}
+        {isModalOpen && <BottomModal menu={userModalMenuList} />}
       </Layout>
     );
   }

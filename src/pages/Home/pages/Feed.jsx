@@ -58,6 +58,7 @@ export default function FeedFollow() {
           {myPostList.map((item) => (
             <PostItem
               post={item}
+              isMoveToContentPage={true}
               onModalHandler={() => {
                 setIsBottomModalOpen(!isBottomModalOpen);
               }}

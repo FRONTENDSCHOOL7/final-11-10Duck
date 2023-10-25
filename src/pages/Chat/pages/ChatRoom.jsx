@@ -4,8 +4,11 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import MsgContainer from "../components/MsgContainer";
 import ProfileImg from "../../../assets/basic-profile-img.png";
 import ChatComment from "../components/ChatComment";
+import useModal from "../../../hooks/useModal";
+import BottomModal from "../../../components/Modal/BottomModal";
 
 export default function ChatRoom() {
+  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
   const testUser = {
     image: ProfileImg,
     userName: "애월읍 위니브 감귤농장",
@@ -22,12 +25,13 @@ export default function ChatRoom() {
   return (
     <Layout>
       {/* 배경색 바꿔야 함 */}
-      <BasicHeader mode="chat" />
+      <BasicHeader mode="chat" onClickMoreBtnHandler={onModalHandler} />
       <LayoutContent>
         <MsgContainer user={testUser} />
         <MsgContainer user={testUserNew} />
         <ChatComment />
       </LayoutContent>
+      {isModalOpen && <BottomModal menu={userModalMenuList} />}
     </Layout>
   );
 }

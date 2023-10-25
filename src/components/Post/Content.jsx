@@ -4,9 +4,10 @@ import Buttons from "./Buttons";
 import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
 import { AddAPIURLImage } from "../../utils/function";
+import { useNavigate } from "react-router-dom";
 
 export default function Content(props) {
-  const { post } = props;
+  const { post, isMoveToContentPage } = props;
 
   const {
     id,
@@ -19,12 +20,24 @@ export default function Content(props) {
     commentCount,
   } = post;
 
+  const navigate = useNavigate();
+
   return (
-    <ContentStyle>
-      <ContentTextStyle>{content}</ContentTextStyle>
-      {!!image && (
-        <ContentImageStyle src={AddAPIURLImage(image)} alt="포스트 이미지" />
-      )}
+    <ContentStyle isMoveToContentPage={isMoveToContentPage}>
+      <div
+        onClick={() => {
+          if (isMoveToContentPage) {
+            navigate(`/post/${id}`, {
+              state: { authorId: post.author._id },
+            });
+          }
+        }}
+      >
+        <ContentTextStyle>{content}</ContentTextStyle>
+        {!!image && (
+          <ContentImageStyle src={AddAPIURLImage(image)} alt="포스트 이미지" />
+        )}
+      </div>
       <Buttons
         postId={id}
         authorId={post.author._id}
@@ -40,6 +53,7 @@ export default function Content(props) {
 const ContentStyle = styled.section`
   font-size: 14px;
   margin-left: 54px;
+  cursor: ${(props) => (props.isMoveToContentPage ? "pointer" : "")};
 `;
 
 const ContentTextStyle = styled.p`
