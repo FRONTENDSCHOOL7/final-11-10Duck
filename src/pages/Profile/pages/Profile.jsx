@@ -11,16 +11,18 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
 import useAPI from "../../../hooks/useAPI";
 import BottomModal from "../../../components/Modal/BottomModal";
+import useModal from "../../../hooks/useModal";
 
 export default function Profile() {
   const [whosProfile, setWhosProfile] = useState("");
   const [productList, setProductList] = useState();
-  const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
 
   const user = useRecoilValue(userState);
   const { header } = useAPI();
 
-  const modalMenuList = [
+  const productModalMenuList = [
     {
       label: "삭제",
       onClickHandler: () => {},
@@ -37,7 +39,7 @@ export default function Profile() {
 
   const onClickProductHandler = (link) => {
     // 유저가 일치할 때
-    setIsBottomModalOpen(!isBottomModalOpen);
+    setIsProductModalOpen(!isProductModalOpen);
     // 유저가 일치하지 않을 때
     // window.open(link);
   };
@@ -67,7 +69,7 @@ export default function Profile() {
 
   return (
     <Layout>
-      <BasicHeader />
+      <BasicHeader onClickMoreBtnHandler={onModalHandler} />
       <LayoutContent isWhite={false} paddingOff={true}>
         {/* 프로필 정보 */}
         <ProfileInfo whosProfile={"notFollow"} />
@@ -81,7 +83,8 @@ export default function Profile() {
         {/* 포스트한 게시물 */}
         {/* <PostList /> */}
       </LayoutContent>
-      {isBottomModalOpen && <BottomModal menu={modalMenuList} />}
+      {isProductModalOpen && <BottomModal menu={productModalMenuList} />}
+      {isModalOpen && <BottomModal menu={userModalMenuList} />}
       <NavBar />
     </Layout>
   );

@@ -12,14 +12,11 @@ export default function BasicHeader({
   isFollowersPage,
   followMode,
   onClickBackBtnHandler,
+  onClickMoreBtnHandler,
 }) {
   const user = useRecoilValue(userState);
 
   const { backPage } = useBackPage();
-
-  const moreIconHandle = () => {
-    // 더보기 모달 오픈
-  };
 
   return (
     <HeaderContainer>
@@ -37,7 +34,11 @@ export default function BasicHeader({
         )}
       </ArrowStyle>
       {!isFollowersPage && (
-        <IconImg src={moreIcon} alt="더보기 아이콘" onClick={moreIconHandle} />
+        <IconImg
+          src={moreIcon}
+          alt="더보기 아이콘"
+          onClick={onClickMoreBtnHandler}
+        />
       )}
     </HeaderContainer>
   );

@@ -5,8 +5,11 @@ import NavBar from "../../../components/Footer/NavBar";
 import Layout from "../../../components/Layout/Layout";
 import ProfileImg from "../../../assets/basic-profile-img.png";
 import ChatListData from "../components/ChatListData";
+import useModal from "../../../hooks/useModal";
+import BottomModal from "../../../components/Modal/BottomModal";
 
 export default function ChatList() {
+  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
   const testUser1 = {
     image: ProfileImg,
     userName: "애월읍 위니브 감귤농장",
@@ -23,7 +26,7 @@ export default function ChatList() {
   };
   return (
     <Layout>
-      <BasicHeader mode="chat" />
+      <BasicHeader mode="chat" onClickMoreBtnHandler={onModalHandler} />
       <LayoutContent>
         <ChatListStyle>
           <ChatListData user={testUser1} />
@@ -31,6 +34,7 @@ export default function ChatList() {
         </ChatListStyle>
       </LayoutContent>
       <NavBar />
+      {isModalOpen && <BottomModal menu={userModalMenuList} />}
     </Layout>
   );
 }
