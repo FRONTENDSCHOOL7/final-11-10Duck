@@ -29,7 +29,12 @@ export default function PostList({ urlAccountName }) {
         }
     };
 
-    const hadleIconClick = () => {
+    const handleListClick = () => {
+        if (!isAlbum) return;
+        setIsAlbum((prev) => !prev);
+    };
+    const handleAlbumClick = () => {
+        if (isAlbum) return;
         setIsAlbum((prev) => !prev);
     };
 
@@ -39,8 +44,8 @@ export default function PostList({ urlAccountName }) {
     return (
         <section>
             <ListNav>
-                <ListNavIcon src={isAlbum ? ListOffIcon : ListOnIcon} alt="게시글 리스트로 보기 아이콘" onClick={hadleIconClick} />
-                <ListNavIcon src={isAlbum ? AlbumOnIcon : AlbumOffIcon} alt="게시글 앨범식으로 보기 아이콘" onClick={hadleIconClick} />
+                <ListNavIcon src={isAlbum ? ListOffIcon : ListOnIcon} alt="게시글 리스트로 보기 아이콘" onClick={handleListClick} />
+                <ListNavIcon src={isAlbum ? AlbumOnIcon : AlbumOffIcon} alt="게시글 앨범식으로 보기 아이콘" onClick={handleAlbumClick} />
             </ListNav>
             {isAlbum ? (
                 <AlbumStyle>
