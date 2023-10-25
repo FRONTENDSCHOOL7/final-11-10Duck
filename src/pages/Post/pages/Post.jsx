@@ -8,7 +8,7 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import useAPI from "../../../hooks/useAPI";
 import BottomModal from "../../../components/Modal/BottomModal";
 import { api } from "../../../api/baseURL";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -19,6 +19,8 @@ export default function Post() {
 
   const { header } = useAPI();
   const { postId } = useParams();
+
+  const navigate = useNavigate();
 
   const fetchPost = async () => {
     try {
@@ -83,7 +85,11 @@ export default function Post() {
   if (!!post) {
     return (
       <Layout>
-        <BasicHeader />
+        <BasicHeader
+          onClickBackBtnHandler={() => {
+            navigate("/");
+          }}
+        />
         <LayoutContent>
           <PostItem
             post={post}
