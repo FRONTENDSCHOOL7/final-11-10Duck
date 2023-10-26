@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import React, { useState } from "react";
 import ImgButton from "../../../assets/img-button.png";
-import MyMsgStyle from "./MyMsg";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function ChatComment() {
   // 텍스트 입력하면 전송 버튼 활성화(글자 색 변경) 해결해야 함
@@ -16,16 +16,18 @@ export default function ChatComment() {
   //   };
   //   console.log(text);
 
-  //   메시지 전송 - input 태그 값 가져오기
-  const [inputValue, setInputValue] = useState("");
-  const inputValueChange = (e) => {
-    setInputValue(e.target.value);
+  //   전송 버튼을 누르면 input 태그 값을 가져와서 메시지로 전송
+  const [message, setMessage] = useState([]);
+  const [input, setInput] = useState("");
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
   };
-  const [myMsg, setMyMsg] = useState([]);
-  const sendMsg = () => {
-    setMyMsg(myMsg.concat(<MyMsgStyle props={inputValue} />));
-    setInputValue("");
-    console.log(myMsg);
+  const handleUpload = () => {
+    setMessage((prevState) => {
+      let temp = input;
+      setInput("");
+      return [...prevState, temp];
+    });
   };
 
   return (
@@ -36,17 +38,20 @@ export default function ChatComment() {
           id="inputText"
           type="text"
           placeholder="메시지 입력하기.."
-          // value={text[0]}
-          // onChange={handleTextChange}
-          value={inputValue}
-          onChange={inputValueChange}
+          value={input}
+          onChange={handleInputChange}
         />
-        {/* <CommentButton type="submit" active={text[1]}> */}
-        <CommentButton type="submit" onClick={() => sendMsg()}>
+        <CommentButton type="submit" onClick={handleUpload}>
           전송
         </CommentButton>
       </ChatCommentStyle>
-      {myMsg}
+      {message.map((msg, idx) => {
+        return (
+          <MyMsgStyle key={idx}>
+            <span>{msg}</span>
+          </MyMsgStyle>
+        );
+      })}
     </>
   );
 }
@@ -57,7 +62,7 @@ const ChatCommentStyle = styled.div`
   bottom: 0;
   width: 100%;
   height: 61px;
-  background-color: var(--bg-primary-color);
+  background-color: ${COLOR.bgPrimaryColor};
 `;
 
 const ImgStyle = styled.img`
@@ -86,6 +91,25 @@ const CommentButton = styled.button`
   height: 61px;
   border: none;
   background-color: transparent;
-  color: ${(active) =>
-    active ? "var(--font-dark-color)" : "var(--font-orange-color)"};
+  color: ${(active) => (active ? COLOR.fontDarkColor : COLOR.fontOrangeColor)};
+
+  &:focus {
+    border: none;
+  }
+`;
+
+const MyMsgStyle = styled.div`
+  margin-top: 0.5em;
+  text-align: right;
+
+  & > span {
+    display: inline-block;
+    padding: 12px;
+    right: 16px;
+
+    background-color: ${COLOR.fontOrangeColor};
+    border-radius: 10px 0 10px 10px;
+    color: ${COLOR.fontSecondaryColor};
+    font-size: ${FONT_SIZE.large};
+  }
 `;

@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function MsgContainer(props) {
   const { user } = props;
@@ -30,18 +31,18 @@ const ImgStyle = styled.img`
 
 const ContentStyle = styled.p`
   width: 240px;
-  background-color: var(--bg-primary-color);
+  background-color: ${COLOR.bgPrimaryColor};
   border: 1px solid #c4c4c4;
   border-radius: 0 10px 10px 10px;
   box-sizing: border-box;
   margin-left: 12px;
-  font-size: 14px;
+  font-size: ${FONT_SIZE.large};
   padding: 12px;
 `;
 
 const TimeStyle = styled.p`
-  color: var(--font-primary-color);
-  font-size: 10px;
+  color: ${COLOR.fontPrimaryColor};
+  font-size: ${FONT_SIZE.small};
   margin-left: 6px;
   position: absolute;
   left: 300px;

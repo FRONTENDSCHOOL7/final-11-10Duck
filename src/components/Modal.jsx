@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function Modal(props) {
   const { name, text1 = "", text2 = "", text3 = "" } = props;
@@ -29,7 +30,7 @@ export default function Modal(props) {
 const PostModal = styled.div`
   position: absolute;
   width: 390px;
-  background: var(--bg-primary-color);
+  background: ${COLOR.bgPrimaryColor};
   padding: 16px;
 
   &::before {
@@ -39,25 +40,25 @@ const PostModal = styled.div`
     width: 50px;
     height: 4px;
     flex-shrink: 0;
-    background: #dbdbdb;
+    background: ${COLOR.fontLightGrayColor};
     border-radius: 5px;
     margin: 16px auto;
   }
 
   & > ul > li {
     list-style: none;
-    background: var(--bg-primary-color);
-    font-size: 14px;
+    background: ${COLOR.bgPrimaryColor};
+    font-size: ${FONT_SIZE.large};
     padding: 14px;
   }
 `;
 
 const AlertModal = styled.div`
   width: 252px;
-  background: var(--bg-primary-color);
-  font-size: 16px;
+  background: ${COLOR.bgPrimaryColor};
+  font-size: ${FONT_SIZE.xlarge};
   text-align: center;
-  color: var(--font-dark-color);
+  color: ${COLOR.fontDarkColor};
   border-radius: 10px;
   overflow: hidden;
 
@@ -77,16 +78,16 @@ const AlertModal = styled.div`
     border: none;
     padding: 0;
     border-top: 0.5px solid #dbdbdb;
-    font-size: 14px;
-    background: var(--bg-primary-color);
+    font-size: ${FONT_SIZE.large};
+    background: ${COLOR.bgPrimaryColor};
   }
 
   & > .buttons > button:first-child {
-    color: var(--font-dark-color);
+    color: ${COLOR.fontDarkColor};
     border-right: 0.5px solid #dbdbdb;
   }
 
   & > .buttons > button:last-child {
-    color: var(--font-orange-color);
+    color: ${COLOR.fontOrangeColor};
   }
 `;
