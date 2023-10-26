@@ -94,13 +94,15 @@ export default function ProfileInfo({
                 buttonText={"프로필 수정"}
                 reversed
                 size={"M"}
-                onClickHandler
+                onClickHandler={() => {}}
               />
               <Button
                 buttonText={"상품 등록"}
                 reversed
                 size={"M"}
-                onClickHandler
+                onClickHandler={() => {
+                  navigate("/add-product");
+                }}
               />
             </MyProfileBtns>
           </>
