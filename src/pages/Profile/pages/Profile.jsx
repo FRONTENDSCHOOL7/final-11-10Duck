@@ -6,7 +6,7 @@ import NavBar from "../../../components/Footer/NavBar";
 import ProfileInfo from "../components/ProfileInfo";
 import PostList from "../components/PostList";
 import ProductScroller from "../../../components/Product/ProductScroller";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
 import { useParams } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
@@ -19,7 +19,7 @@ import useAlertModal from "../../../hooks/useAlertModal";
 export default function Profile() {
   const { header } = useAPI();
   const { accountName } = useParams();
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
 
   const [urlAccountName, setUrlAccountName] = useState(
     accountName ? accountName : user.accountname
@@ -199,6 +199,19 @@ export default function Profile() {
         leftBtnText={userAlertModal.leftBtnText}
         rightBtnText={userAlertModal.rightBtnText}
         onModalHandler={userAlertModalHandler}
+        onClickHandler={() => {
+          setUser({
+            _id: "",
+            username: "",
+            email: "",
+            accountname: "",
+            intro: "",
+            image: "",
+            token: "",
+            refreshToken: "",
+          });
+          localStorage.removeItem("user");
+        }}
       />
       <NavBar />
     </Layout>
