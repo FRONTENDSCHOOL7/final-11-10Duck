@@ -3,8 +3,7 @@ import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
 import SearchIcon from "../../../assets/icon/icon-404.png";
 import Button from "../../../components/Button";
-import { COLOR } from "../../../utils";
-import { FONT_SIZE } from "../../../utils";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function NotFound() {
   return (

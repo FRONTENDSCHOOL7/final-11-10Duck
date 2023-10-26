@@ -5,10 +5,13 @@ import Heart from "../../assets/icon/icon-heart.png";
 import ActiveHeart from "../../assets/icon/icon-heart-active.png";
 import Comment from "../../assets/icon/icon-message-circle.png";
 import { COLOR } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 export default function Buttons(props) {
-  const { hearted, heartCount, commentCount } = props;
+  const { postId, authorId, hearted, heartCount, commentCount } = props;
   const [heartSrc, setHeartSrc] = useState(hearted ? ActiveHeart : Heart);
+
+  const navigate = useNavigate();
 
   /**
    * 좋아요 버튼 클릭시 토글링하는 정도, 좋아요 버튼 기능은 안들어가있음
@@ -22,18 +25,19 @@ export default function Buttons(props) {
   };
 
   /**
-   * 댓글 함수
+   * 댓글 버튼 클릭 시 해당 게시글로 이동하는 함수
    */
-  const writeComment = () => {};
-
+  const onClickCommentBtn = () => {
+    navigate(`/post/${postId}`, { state: { authorId } });
+  };
   return (
     <ButtonContainerStyle>
       <ButtonStyle onClick={toggleHeartButton}>
         <ButtonIconStyle src={heartSrc} alt="좋아요 버튼의 하트 이미지" />
         <CommentCountStyle>{heartCount}</CommentCountStyle>
       </ButtonStyle>
-      <ButtonStyle>
-        <ButtonIconStyle src={Comment} alt="좋아요 버튼의 하트 이미지" />
+      <ButtonStyle onClick={onClickCommentBtn}>
+        <ButtonIconStyle src={Comment} alt="댓글 버튼의 댓글 아이콘 이미지" />
         <CommentCountStyle>{commentCount}</CommentCountStyle>
       </ButtonStyle>
     </ButtonContainerStyle>
@@ -54,6 +58,7 @@ const ButtonStyle = styled.button`
   margin: 0;
   margin-right: 16px;
   padding: 0;
+  cursor: pointer;
 `;
 
 const ButtonIconStyle = styled.img`

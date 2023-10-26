@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function SearchContent(props) {
   const { user } = props;
@@ -28,14 +29,14 @@ const DataStyle = styled.div`
   }
 
   & > .ContentStyle > span:first-child {
-    font-size: 14px;
+    font-size: ${FONT_SIZE.large};
     margin-bottom: 6px;
-    color: var(--font-dark-color);
+    color: ${COLOR.fontDarkColor};
   }
 
   & > .ContentStyle > span:last-child {
-    font-size: 12px;
-    color: var(--font-primary-color);
+    font-size: ${FONT_SIZE.medium};
+    color: ${COLOR.fontPrimaryColor};
   }
 `;
 

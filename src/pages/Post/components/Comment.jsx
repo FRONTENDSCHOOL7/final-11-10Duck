@@ -3,18 +3,17 @@ import { styled } from "styled-components";
 import { COLOR } from "../../../utils";
 import { FONT_SIZE } from "../../../utils";
 import MoreButton from "../../../assets/icon/icon-more-vertical.png";
-import { changeProfileImage } from "../../../utils/function";
 
 export default function Comment(props) {
   const { comment, onModalHandler } = props;
+
+  console.log(comment);
+
   return (
     <CommentContainerStyle>
       <CommentHeaderStyle>
         <UserInfoContainerStyle>
-          <ProfileImageStyle
-            src={changeProfileImage(comment.author.image)}
-            alt="프로필 이미지"
-          />
+          <ProfileImageStyle src={comment.author.image} alt="프로필 이미지" />
           <UserNameStyle>{comment.author.username}</UserNameStyle>
           <TimeStampStyle>{`· ${comment.createdAt}`}</TimeStampStyle>
         </UserInfoContainerStyle>

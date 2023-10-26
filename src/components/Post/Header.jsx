@@ -3,14 +3,21 @@ import { styled } from "styled-components";
 import Button from "../Button";
 import { COLOR } from "../../utils";
 import MoreButton from "../../assets/icon/icon-more-vertical.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(props) {
   const { post, hasFollowButton, onModalHandler } = props;
   const author = post.author;
 
+  const navigate = useNavigate();
+
   return (
     <HeaderStyle>
-      <ProfileContainerStyle>
+      <ProfileContainerStyle
+        onClick={() => {
+          navigate(`/profile/${author.accountname}`);
+        }}
+      >
         <ProfileImageStyle src={author.image} alt="프로필 이미지" />
         <UserInfoContainerStyle>
           <UserNameStyle>{author.username}</UserNameStyle>
@@ -38,6 +45,7 @@ const HeaderStyle = styled.section`
 const ProfileContainerStyle = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ProfileImageStyle = styled.img`
