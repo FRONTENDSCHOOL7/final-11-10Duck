@@ -2,11 +2,11 @@ import { styled } from "styled-components";
 import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function ChatListData(props) {
-  const { user } = props;
+  const { user, onClickHandler } = props;
   const { image, userName, msg, date, unread } = user;
 
   return (
-    <ChatListDataStyle>
+    <ChatListDataStyle onClick={onClickHandler}>
       <ProfileStyle>
         {unread ? <OrangeCircle /> : <></>}
         <ImgStyle src={image} alt="프로필 이미지" />
@@ -27,6 +27,7 @@ const ChatListDataStyle = styled.div`
   display: flex;
   margin-top: 20px;
   position: relative;
+  cursor: pointer;
 `;
 
 const ContentStyle = styled.div`

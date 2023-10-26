@@ -4,12 +4,14 @@ import { COLOR, FONT_SIZE } from "../../utils";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/atom";
 import { changeProfileImage } from "../../utils/function";
+import ImageBtn from "../../assets/img-button.png";
 
 export default function CommentBar({
   mode,
   content,
   onChangeHandler,
   onSubmitHandler,
+  onImageUploadHandler,
 }) {
   const user = useRecoilValue(userState);
   const profileImgSrc = changeProfileImage(user.image);
@@ -17,7 +19,12 @@ export default function CommentBar({
   return (
     <FormContainer>
       <div>
-        <ProfileImg src={profileImgSrc} alt="프로필 이미지" />
+        <ProfileImg
+          mode={mode}
+          onClick={onImageUploadHandler}
+          src={mode === "chat" ? ImageBtn : profileImgSrc}
+          alt="프로필 이미지"
+        />
         {/* 입력값 길이 늘어났을때 처리 필요 */}
         <label className="a11y-hidden" htmlFor="commentId">
           댓글 입력하기
@@ -70,6 +77,8 @@ const ProfileImg = styled.img`
   height: 36px;
   border-radius: 36px;
   vertical-align: middle;
+
+  cursor: ${(props) => (props.mode === "chat" ? "pointer" : "")};
 `;
 const CommentInput = styled.input`
   border: none;
