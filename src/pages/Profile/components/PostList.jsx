@@ -72,7 +72,9 @@ export default function PostList({ urlAccountName }) {
       ) : (
         <ListStyle>
           {userPostList.map((post) => {
-            return <PostItem post={post} key={post.id} />;
+            return (
+              <PostItem post={post} key={post.id} isMoveToContentPage={true} />
+            );
           })}
         </ListStyle>
       )}
