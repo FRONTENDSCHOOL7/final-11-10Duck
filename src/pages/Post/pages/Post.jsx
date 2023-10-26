@@ -34,7 +34,9 @@ export default function Post() {
   const { postId } = useParams();
   const location = useLocation();
 
-  const { userFlag } = useCheckUser(location.state.authorId);
+  const { userFlag } = useCheckUser(
+    location.state ? location.state.authorId : user._id
+  );
   const {
     isModalOpen,
     isUserAlertModalOpen,
