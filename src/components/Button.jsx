@@ -37,7 +37,7 @@ const ButtonStyle = styled.button`
       : props.size.toUpperCase() === "MS"
       ? "32px"
       : "28px"};
-  border: none;
+  border: ${(props) => (props.reversed ? "1px solid #DBDBDB" : "none")};
   border-radius: 44px;
 
   background-color: ${(props) =>

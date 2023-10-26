@@ -4,9 +4,14 @@ import { styled } from "styled-components";
 import { FONT_SIZE, COLOR } from "../../utils";
 
 export default function ProductScroller(props) {
-  const { products } = props;
+  const { products, onClickHandler } = props;
   const productList = products.map((item) => (
-    <Product key={item.id} product={item} itemId={item.id} />
+    <Product
+      key={item.id}
+      product={item}
+      itemId={item.id}
+      onClickHandler={onClickHandler}
+    />
   ));
 
   return (

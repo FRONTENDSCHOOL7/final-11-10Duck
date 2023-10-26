@@ -5,11 +5,10 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import Input from "../../../components/Input/Input";
 import InputImage from "../components/InputImage";
 import { styled } from "styled-components";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../recoil/atom";
 import { changeImageToURL, inputPriceFormat } from "../../../utils/function";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/baseURL";
+import useAPI from "../../../hooks/useAPI";
 
 export default function AddProduct() {
   const [product, setProduct] = useState({
@@ -19,9 +18,9 @@ export default function AddProduct() {
     itemImage: "",
   });
 
-  const navigate = useNavigate();
+  const { header } = useAPI();
 
-  const user = useRecoilValue(userState);
+  const navigate = useNavigate();
 
   const onImageUploadHandler = (value) => {
     setProduct({ ...product, itemImage: value });
@@ -45,10 +44,7 @@ export default function AddProduct() {
           product: tempProduct,
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
+          headers: header,
         }
       );
 

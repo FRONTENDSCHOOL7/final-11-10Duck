@@ -5,7 +5,7 @@ import Content from "./Content";
 import { COLOR } from "../../utils";
 
 export default function PostItem(props) {
-  const { post, hasFollowButton, onModalHandler } = props;
+  const { post, hasFollowButton, isMoveToContentPage, onModalHandler } = props;
 
   return (
     <PostStyle>
@@ -14,7 +14,7 @@ export default function PostItem(props) {
         hasFollowButton={hasFollowButton}
         onModalHandler={onModalHandler}
       />
-      <Content post={post} />
+      <Content post={post} isMoveToContentPage={isMoveToContentPage} />
     </PostStyle>
   );
 }

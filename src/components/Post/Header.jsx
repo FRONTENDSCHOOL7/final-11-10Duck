@@ -2,20 +2,23 @@ import React from "react";
 import { styled } from "styled-components";
 import Button from "../Button";
 import { COLOR } from "../../utils";
-import { changeProfileImage } from "../../utils/function";
 import MoreButton from "../../assets/icon/icon-more-vertical.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(props) {
   const { post, hasFollowButton, onModalHandler } = props;
   const author = post.author;
 
+  const navigate = useNavigate();
+
   return (
     <HeaderStyle>
-      <ProfileContainerStyle>
-        <ProfileImageStyle
-          src={changeProfileImage(author.image)}
-          alt="프로필 이미지"
-        />
+      <ProfileContainerStyle
+        onClick={() => {
+          navigate("/profile");
+        }}
+      >
+        <ProfileImageStyle src={author.image} alt="프로필 이미지" />
         <UserInfoContainerStyle>
           <UserNameStyle>{author.username}</UserNameStyle>
           <UserIdStyle>{`@ ${author.accountname}`}</UserIdStyle>
@@ -42,12 +45,14 @@ const HeaderStyle = styled.section`
 const ProfileContainerStyle = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ProfileImageStyle = styled.img`
   width: 42px;
   height: 42px;
   object-fit: cover;
+  border-radius: 100%;
 `;
 
 const UserInfoContainerStyle = styled.div`
