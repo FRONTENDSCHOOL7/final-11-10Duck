@@ -13,6 +13,8 @@ import useAPI from "../../../hooks/useAPI";
 import { api } from "../../../api/baseURL";
 import BottomModal from "../../../components/Modal/BottomModal";
 import useModal from "../../../hooks/useModal";
+import AlertModal from "../../../components/Modal/AlertModal";
+import useAlertModal from "../../../hooks/useAlertModal";
 
 export default function Profile() {
   const { header } = useAPI();
@@ -28,23 +30,40 @@ export default function Profile() {
   const [productList, setProductList] = useState([]);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+  const [alertModal, setAlertModal] = useState({
+    alertTitle: "",
+    leftBtnText: "취소",
+    rightBtnText: "",
+  });
 
   const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const { isAlertModalOpen, alertModalHandler } = useAlertModal();
 
   const productModalMenuList = [
     {
       label: "삭제",
-      onClickHandler: () => {},
+      onClickHandler: () => {
+        onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+      },
     },
     {
       label: "수정",
-      onClickHandler: () => {},
+      onClickHandler: () => {
+        onClickBottomModalMenu("게시글을 수정할까요?", "수정");
+      },
     },
     {
       label: "웹사이트에서 상품보기",
       onClickHandler: () => {},
     },
   ];
+
+  const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
+    setAlertModal({ ...alertModal, alertTitle, rightBtnText });
+    alertModalHandler.openModal();
+    setIsPostModalOpen(false);
+    setIsProductModalOpen(false);
+  };
 
   const onClickProductHandler = (link) => {
     if (isMyProfile) {
@@ -137,23 +156,36 @@ export default function Profile() {
               ? [
                   {
                     label: "삭제",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                    },
                   },
                   {
                     label: "수정",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 수정할까요?", "수정");
+                    },
                   },
                 ]
               : [
                   {
                     label: "신고하기",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                    },
                   },
                 ]
           }
         />
       )}
       {isModalOpen && <BottomModal menu={userModalMenuList} />}
+      <AlertModal
+        isModalOpen={isAlertModalOpen}
+        alertTitle={alertModal.alertTitle}
+        leftBtnText={alertModal.leftBtnText}
+        rightBtnText={alertModal.rightBtnText}
+        onModalHandler={alertModalHandler}
+      />
       <NavBar />
     </Layout>
   );

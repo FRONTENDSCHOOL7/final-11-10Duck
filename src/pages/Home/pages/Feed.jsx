@@ -8,9 +8,12 @@ import PostItem from "../../../components/Post";
 import NavBar from "../../../components/Footer/NavBar";
 import { api } from "../../../api/baseURL";
 import BottomModal from "../../../components/Modal/BottomModal";
+import AlertModal from "../../../components/Modal/AlertModal";
+import useAlertModal from "../../../hooks/useAlertModal";
 
 export default function FeedFollow() {
   const { header } = useAPI();
+  const { isAlertModalOpen, alertModalHandler } = useAlertModal();
   const [followerPostList, setFollowerPostList] = useState([]);
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
 
@@ -49,17 +52,25 @@ export default function FeedFollow() {
           ))}
         </LayoutContent>
         <NavBar />
-        {/* 홈화면은 팔로워의 게시글이라서 무조건 일치하지 않기때문에 이와같이 구성 */}
         {isBottomModalOpen && (
           <BottomModal
             menu={[
               {
                 label: "신고하기",
-                onClickHandler: () => {},
+                onClickHandler: () => {
+                  alertModalHandler.openModal();
+                },
               },
             ]}
           />
         )}
+        <AlertModal
+          isModalOpen={isAlertModalOpen}
+          onModalHandler={alertModalHandler}
+          alertTitle={"게시글을 신고할까요?"}
+          leftBtnText={"취소"}
+          rightBtnText={"삭제"}
+        />
       </Layout>
     );
   }

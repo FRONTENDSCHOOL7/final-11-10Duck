@@ -3,22 +3,21 @@ import { styled } from "styled-components";
 import { FONT_SIZE, COLOR } from "../../utils";
 
 export default function AlertModal(props) {
-  const {
-    alertTitle,
-    leftBtnText,
-    rightBtnText,
-    onClickLeftBtnHandler,
-    onClickRightBtnHandler,
-  } = props;
-  return (
-    <AlertModalStyle>
-      <div className="alertText">{alertTitle}</div>
-      <div className="buttons">
-        <button onClick={onClickLeftBtnHandler}>{leftBtnText}</button>
-        <button onClick={onClickRightBtnHandler}>{rightBtnText}</button>
-      </div>
-    </AlertModalStyle>
-  );
+  const { isModalOpen, onModalHandler, alertTitle, leftBtnText, rightBtnText } =
+    props;
+  if (isModalOpen) {
+    return (
+      <AlertModalStyle>
+        <div className="alertText">{alertTitle}</div>
+        <div className="buttons">
+          <button onClick={onModalHandler.closeModal}>{leftBtnText}</button>
+          <button>{rightBtnText}</button>
+        </div>
+      </AlertModalStyle>
+    );
+  }
+
+  return null;
 }
 
 const AlertModalStyle = styled.div`
