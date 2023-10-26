@@ -13,6 +13,7 @@ import Search from "../pages/Home/pages/Search";
 import Chat from "../pages/Chat/pages/ChatList";
 import ChatRoom from "../pages/Chat/pages/ChatRoom";
 import NotFound from "../pages/Home/pages/NotFound";
+import Follow from "../pages/Profile/pages/Follow";
 
 export default function AppRoutes() {
   return (
@@ -27,6 +28,8 @@ export default function AppRoutes() {
       <Route path="/signin-select" element={<SigninSelect />} />
       <Route path="/search" element={<Search />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/:accountName" element={<Profile />} />
+      <Route path="/profile/:accountName/:followMode" element={<Follow />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/chat/chatroom" element={<ChatRoom />} />
       <Route path="/404" element={<NotFound />} />
