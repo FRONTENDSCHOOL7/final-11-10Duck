@@ -8,9 +8,17 @@ import ChatListData from "../components/ChatListData";
 import useModal from "../../../hooks/useModal";
 import BottomModal from "../../../components/Modal/BottomModal";
 import { useNavigate } from "react-router-dom";
+import AlertModal from "../../../components/Modal/AlertModal";
 
 export default function ChatList() {
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const {
+    isModalOpen,
+    isUserAlertModalOpen,
+    userAlertModal,
+    userModalMenuList,
+    onModalHandler,
+    userAlertModalHandler,
+  } = useModal();
 
   const navigate = useNavigate();
 
@@ -48,6 +56,13 @@ export default function ChatList() {
           ))}
         </ChatListStyle>
       </LayoutContent>
+      <AlertModal
+        isModalOpen={isUserAlertModalOpen}
+        alertTitle={userAlertModal.alertTitle}
+        leftBtnText={userAlertModal.leftBtnText}
+        rightBtnText={userAlertModal.rightBtnText}
+        onModalHandler={userAlertModalHandler}
+      />
       <NavBar />
       {isModalOpen && <BottomModal menu={userModalMenuList} />}
     </Layout>

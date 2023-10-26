@@ -36,7 +36,14 @@ export default function Profile() {
     rightBtnText: "",
   });
 
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const {
+    isModalOpen,
+    isUserAlertModalOpen,
+    userAlertModal,
+    userModalMenuList,
+    onModalHandler,
+    userAlertModalHandler,
+  } = useModal();
   const { isAlertModalOpen, alertModalHandler } = useAlertModal();
 
   const productModalMenuList = [
@@ -185,6 +192,13 @@ export default function Profile() {
         leftBtnText={alertModal.leftBtnText}
         rightBtnText={alertModal.rightBtnText}
         onModalHandler={alertModalHandler}
+      />
+      <AlertModal
+        isModalOpen={isUserAlertModalOpen}
+        alertTitle={userAlertModal.alertTitle}
+        leftBtnText={userAlertModal.leftBtnText}
+        rightBtnText={userAlertModal.rightBtnText}
+        onModalHandler={userAlertModalHandler}
       />
       <NavBar />
     </Layout>

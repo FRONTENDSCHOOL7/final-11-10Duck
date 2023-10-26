@@ -35,7 +35,14 @@ export default function Post() {
   const location = useLocation();
 
   const { userFlag } = useCheckUser(location.state.authorId);
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const {
+    isModalOpen,
+    isUserAlertModalOpen,
+    userAlertModal,
+    userModalMenuList,
+    onModalHandler,
+    userAlertModalHandler,
+  } = useModal();
   const { isAlertModalOpen, alertModalHandler } = useAlertModal();
 
   const navigate = useNavigate();
@@ -194,6 +201,13 @@ export default function Post() {
           leftBtnText={alertModal.leftBtnText}
           rightBtnText={alertModal.rightBtnText}
           onModalHandler={alertModalHandler}
+        />
+        <AlertModal
+          isModalOpen={isUserAlertModalOpen}
+          alertTitle={userAlertModal.alertTitle}
+          leftBtnText={userAlertModal.leftBtnText}
+          rightBtnText={userAlertModal.rightBtnText}
+          onModalHandler={userAlertModalHandler}
         />
       </Layout>
     );
