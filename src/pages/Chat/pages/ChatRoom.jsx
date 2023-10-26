@@ -10,7 +10,7 @@ import { useState } from "react";
 import ChatBalloon from "../components/ChatBalloon";
 
 export default function ChatRoom() {
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const { isModalOpen, onModalHandler } = useModal();
   const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
 
@@ -24,6 +24,13 @@ export default function ChatRoom() {
     setMessageList(tempMessageList);
     setInput("");
   };
+
+  const modalMenuList = [
+    {
+      label: "채팅방 나가기",
+      onClickHandler: () => {},
+    },
+  ];
 
   const basicMessageList = [
     {
@@ -51,7 +58,7 @@ export default function ChatRoom() {
           <ChatBalloon message={item} />
         ))}
       </LayoutContent>
-      {isModalOpen && <BottomModal menu={userModalMenuList} />}
+      {isModalOpen && <BottomModal menu={modalMenuList} />}
       <CommentBar
         onImageUploadHandler={() => {}}
         mode="chat"
