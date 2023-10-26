@@ -12,18 +12,17 @@ export default function Signup() {
     email: "",
     password: "",
   });
+
   const [errorMsg, setErrorMsg] = useState("");
   const [disabledBtn, setDisabledBtn] = useState(false);
+
+  const navigate = useNavigate();
 
   const userHandler = (name, value) => {
     setUser({ ...user, [name]: value });
     console.log(user);
     setErrorMsg("");
   };
-  useEffect(() => {
-    setDisabledBtn(!(user.email && user.password));
-  }, [user]);
-  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (!disabledBtn && user.password.length < 6) {
@@ -52,7 +51,10 @@ export default function Signup() {
       console.error("회원가입 오류:", error);
     }
   };
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    setDisabledBtn(!(user.email && user.password));
+  }, [user]);
 
   return (
     <Layout>
@@ -63,7 +65,9 @@ export default function Signup() {
           labelText="이메일"
           placeholder="이메일 주소를 입력해 주세요."
           placeholderColor={COLOR.fontLightGrayColor}
-          onChangeHandler={(value) => userHandler("email", value)}
+          onChangeHandler={(event) => {
+            setUser({ ...user, email: event.target.value });
+          }}
         />
         <Input
           name="password"
@@ -71,13 +75,17 @@ export default function Signup() {
           labelText="비밀번호"
           placeholder="비밀번호를 설정해 주세요."
           placeholderColor={COLOR.fontLightGrayColor}
-          onChangeHandler={(value) => userHandler("password", value)}
+          onChangeHandler={(event) => {
+            setUser({ ...user, password: event.target.value });
+          }}
           alert={errorMsg}
         />
         <Button
           buttonText="다음"
           disabled={disabledBtn}
-          onClick={signupuser}
+          onClickHandler={() => {
+            navigate("/signup/edit-profile", { state: { user } });
+          }}
           reversed={false}
         />
       </SignupPage>

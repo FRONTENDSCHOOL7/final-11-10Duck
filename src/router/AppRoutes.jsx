@@ -6,7 +6,7 @@ import AddProduct from "../pages/AddProduct/pages/AddProduct";
 import Feed from "../pages/Home/pages/Feed";
 import Signup from "../pages/Signup/pages/Signup";
 import Signin from "../pages/Signup/pages/Signin";
-import EditProfile from "../pages/Profile/pages/EditProfile";
+import EditProfile from "../pages/Signup/pages/EditProfile";
 import SigninSelect from "../pages/Signup/pages/SigninSelect";
 import Profile from "../pages/Profile/pages/Profile";
 import Search from "../pages/Home/pages/Search";
