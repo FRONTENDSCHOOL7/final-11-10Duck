@@ -27,6 +27,7 @@ export default function Profile() {
   const [profileInfo, serProfileInfo] = useState({});
   const [productList, setProductList] = useState([]);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
 
@@ -120,9 +121,37 @@ export default function Profile() {
           />
         )}
         {/* 포스트한 게시물  */}
-        <PostList urlAccountName={urlAccountName} />
+        <PostList
+          urlAccountName={urlAccountName}
+          onModalHandler={() => {
+            setIsPostModalOpen(!isPostModalOpen);
+          }}
+        />
       </LayoutContent>
       {isProductModalOpen && <BottomModal menu={productModalMenuList} />}
+      {isPostModalOpen && (
+        <BottomModal
+          menu={
+            isMyProfile
+              ? [
+                  {
+                    label: "삭제",
+                    onClickHandler: () => {},
+                  },
+                  {
+                    label: "수정",
+                    onClickHandler: () => {},
+                  },
+                ]
+              : [
+                  {
+                    label: "신고하기",
+                    onClickHandler: () => {},
+                  },
+                ]
+          }
+        />
+      )}
       {isModalOpen && <BottomModal menu={userModalMenuList} />}
       <NavBar />
     </Layout>

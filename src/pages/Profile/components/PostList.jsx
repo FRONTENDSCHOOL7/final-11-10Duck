@@ -10,7 +10,7 @@ import useAPI from "../../../hooks/useAPI";
 import { api } from "../../../api/baseURL";
 import { AddAPIURLImage } from "../../../utils/function";
 
-export default function PostList({ urlAccountName }) {
+export default function PostList({ urlAccountName, onModalHandler }) {
   const [isAlbum, setIsAlbum] = useState(false);
   const [userPostList, setUserPostList] = useState([]);
 
@@ -73,7 +73,12 @@ export default function PostList({ urlAccountName }) {
         <ListStyle>
           {userPostList.map((post) => {
             return (
-              <PostItem post={post} key={post.id} isMoveToContentPage={true} />
+              <PostItem
+                post={post}
+                key={post.id}
+                isMoveToContentPage={true}
+                onModalHandler={onModalHandler}
+              />
             );
           })}
         </ListStyle>
