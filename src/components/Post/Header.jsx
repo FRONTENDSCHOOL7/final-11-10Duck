@@ -15,7 +15,7 @@ export default function Header(props) {
     <HeaderStyle>
       <ProfileContainerStyle
         onClick={() => {
-          navigate("/profile");
+          navigate(`/profile/${author.accountname}`);
         }}
       >
         <ProfileImageStyle src={author.image} alt="프로필 이미지" />
