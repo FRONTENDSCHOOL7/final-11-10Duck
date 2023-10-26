@@ -47,10 +47,11 @@ export default function Profile() {
   ];
 
   const onClickProductHandler = (link) => {
-    // 유저가 일치할 때
-    setIsProductModalOpen(!isProductModalOpen);
-    // 유저가 일치하지 않을 때
-    // window.open(link);
+    if (isMyProfile) {
+      setIsProductModalOpen(!isProductModalOpen);
+    } else {
+      window.open(link);
+    }
   };
 
   const changeProfileInfo = (info) => {
