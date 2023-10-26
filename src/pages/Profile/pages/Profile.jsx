@@ -25,7 +25,7 @@ export default function Profile() {
   const [isMyProfile, setIsMyProfile] = useState(null);
   const [isFollow, setIsFollow] = useState(null);
   const [profileInfo, serProfileInfo] = useState({});
-  const [productList, setProductList] = useState();
+  const [productList, setProductList] = useState([]);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
 
   const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
@@ -78,7 +78,7 @@ export default function Profile() {
    */
   const fetchProduct = async () => {
     try {
-      const res = await api.get(`/product/${user.accountname}`, {
+      const res = await api.get(`/product/${urlAccountName}`, {
         headers: header,
       });
 
@@ -96,6 +96,7 @@ export default function Profile() {
       : setIsMyProfile(false);
     fetchProduct();
   }, []);
+
   useEffect(() => {
     fetchProfileInfo();
   }, [urlAccountName]);
@@ -112,7 +113,7 @@ export default function Profile() {
           changeIsFollow={changeIsFollow}
         />
         {/* 판매 중인 상품 */}
-        {!!productList && (
+        {!!productList.length && (
           <ProductScroller
             products={productList}
             onClickHandler={onClickProductHandler}
