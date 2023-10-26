@@ -11,8 +11,12 @@ import { api } from "../../../api/baseURL";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useCheckUser from "../../../hooks/useCheckUser";
 import useModal from "../../../hooks/useModal";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../recoil/atom";
 
 export default function Post() {
+  const user = useRecoilValue(userState);
+
   const [post, setPost] = useState();
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
@@ -128,7 +132,7 @@ export default function Post() {
               key={item.id}
               comment={item}
               onModalHandler={() => {
-                if (userFlag) {
+                if (item.author._id === user._id) {
                   setModalMenuList([
                     {
                       label: "삭제",

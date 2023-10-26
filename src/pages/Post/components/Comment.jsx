@@ -7,6 +7,8 @@ import MoreButton from "../../../assets/icon/icon-more-vertical.png";
 export default function Comment(props) {
   const { comment, onModalHandler } = props;
 
+  console.log(comment);
+
   return (
     <CommentContainerStyle>
       <CommentHeaderStyle>
