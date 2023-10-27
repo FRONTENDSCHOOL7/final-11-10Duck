@@ -6,7 +6,7 @@ import AddProduct from '../pages/AddProduct/pages/AddProduct';
 import Feed from '../pages/Home/pages/Feed';
 import Signup from '../pages/Signup/pages/Signup';
 import Signin from '../pages/Signup/pages/Signin';
-import EditProfile from '../pages/Profile/pages/EditProfile';
+import EditProfile from '../pages/Signup/pages/EditProfile';
 import SigninSelect from '../pages/Signup/pages/SigninSelect';
 import Profile from '../pages/Profile/pages/Profile';
 import Search from '../pages/Home/pages/Search';
@@ -14,7 +14,7 @@ import Chat from '../pages/Chat/pages/ChatList';
 import ChatRoom from '../pages/Chat/pages/ChatRoom';
 import NotFound from '../pages/Home/pages/NotFound';
 import Follow from '../pages/Profile/pages/Follow';
-//import { EditProfile as EditProfileInfo } from '../pages/Profile/pages/EditProfile';
+import EditProfileInfo from '../pages/Profile/pages/EditProfileInfo';
 
 export default function AppRoutes() {
     return (
@@ -31,7 +31,7 @@ export default function AppRoutes() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/:accountName" element={<Profile />} />
             <Route path="/profile/:accountName/:followMode" element={<Follow />} />
-            <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/profile/edit" element={<EditProfileInfo />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/chatroom" element={<ChatRoom />} />
             <Route path="/404" element={<NotFound />} />
