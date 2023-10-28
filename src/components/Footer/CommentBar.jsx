@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import { COLOR, FONT_SIZE } from "../../utils";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/atom";
-import { changeProfileImage } from "../../utils/function";
 import ImageBtn from "../../assets/img-button.png";
 
 export default function CommentBar({
@@ -14,7 +13,6 @@ export default function CommentBar({
   onImageUploadHandler,
 }) {
   const user = useRecoilValue(userState);
-  const profileImgSrc = changeProfileImage(user.image);
 
   return (
     <FormContainer>
@@ -22,7 +20,7 @@ export default function CommentBar({
         <ProfileImg
           mode={mode}
           onClick={onImageUploadHandler}
-          src={mode === "chat" ? ImageBtn : profileImgSrc}
+          src={mode === "chat" ? ImageBtn : user.image}
           alt="프로필 이미지"
         />
         {/* 입력값 길이 늘어났을때 처리 필요 */}
