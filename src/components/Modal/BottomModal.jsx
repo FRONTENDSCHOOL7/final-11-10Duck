@@ -5,7 +5,7 @@ import { FONT_SIZE, COLOR } from "../../utils";
 export default function BottomModal(props) {
   const { menu } = props;
   const menuList = menu.map((item) => (
-    <ModalItemStyle>{item.label}</ModalItemStyle>
+    <ModalItemStyle onClick={item.onClickHandler}>{item.label}</ModalItemStyle>
   ));
   return <ModalStyle>{menuList}</ModalStyle>;
 }
@@ -29,6 +29,7 @@ const ModalStyle = styled.ul`
   background-color: ${COLOR.bgPrimaryColor};
   bottom: 0;
   z-index: 10;
+  cursor: pointer;
 
   &::before {
     content: "";

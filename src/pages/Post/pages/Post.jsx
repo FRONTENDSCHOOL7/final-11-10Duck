@@ -13,6 +13,8 @@ import useCheckUser from "../../../hooks/useCheckUser";
 import useModal from "../../../hooks/useModal";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
+import useAlertModal from "../../../hooks/useAlertModal";
+import AlertModal from "../../../components/Modal/AlertModal";
 
 export default function Post() {
   const user = useRecoilValue(userState);
@@ -22,14 +24,36 @@ export default function Post() {
   const [comment, setComment] = useState("");
   const [isbottomModalOpen, setIsBottomModalOpen] = useState(false);
   const [modalMenuList, setModalMenuList] = useState([]);
+  const [alertModal, setAlertModal] = useState({
+    alertTitle: "",
+    leftBtnText: "취소",
+    rightBtnText: "",
+  });
 
   const { header } = useAPI();
   const { postId } = useParams();
   const location = useLocation();
-  const { userFlag } = useCheckUser(location.state.authorId);
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+
+  const { userFlag } = useCheckUser(
+    location.state ? location.state.authorId : user._id
+  );
+  const {
+    isModalOpen,
+    isUserAlertModalOpen,
+    userAlertModal,
+    userModalMenuList,
+    onModalHandler,
+    userAlertModalHandler,
+  } = useModal();
+  const { isAlertModalOpen, alertModalHandler } = useAlertModal();
 
   const navigate = useNavigate();
+
+  const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
+    setAlertModal({ ...alertModal, alertTitle, rightBtnText });
+    alertModalHandler.openModal();
+    setIsBottomModalOpen(false);
+  };
 
   const fetchPost = async () => {
     try {
@@ -108,18 +132,24 @@ export default function Post() {
                 setModalMenuList([
                   {
                     label: "삭제",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                    },
                   },
                   {
                     label: "수정",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 수정할까요?", "수정");
+                    },
                   },
                 ]);
               } else {
                 setModalMenuList([
                   {
                     label: "신고하기",
-                    onClickHandler: () => {},
+                    onClickHandler: () => {
+                      onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                    },
                   },
                 ]);
               }
@@ -136,14 +166,18 @@ export default function Post() {
                   setModalMenuList([
                     {
                       label: "삭제",
-                      onClickHandler: () => {},
+                      onClickHandler: () => {
+                        onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                      },
                     },
                   ]);
                 } else {
                   setModalMenuList([
                     {
                       label: "신고하기",
-                      onClickHandler: () => {},
+                      onClickHandler: () => {
+                        onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                      },
                     },
                   ]);
                 }
@@ -153,7 +187,6 @@ export default function Post() {
             />
           ))}
         </LayoutContent>
-
         <CommentBar
           mode="post"
           content={comment}
@@ -164,6 +197,20 @@ export default function Post() {
         />
         {isbottomModalOpen && <BottomModal menu={modalMenuList} />}
         {isModalOpen && <BottomModal menu={userModalMenuList} />}
+        <AlertModal
+          isModalOpen={isAlertModalOpen}
+          alertTitle={alertModal.alertTitle}
+          leftBtnText={alertModal.leftBtnText}
+          rightBtnText={alertModal.rightBtnText}
+          onModalHandler={alertModalHandler}
+        />
+        <AlertModal
+          isModalOpen={isUserAlertModalOpen}
+          alertTitle={userAlertModal.alertTitle}
+          leftBtnText={userAlertModal.leftBtnText}
+          rightBtnText={userAlertModal.rightBtnText}
+          onModalHandler={userAlertModalHandler}
+        />
       </Layout>
     );
   }

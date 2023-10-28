@@ -8,11 +8,13 @@ import BottomModal from "../../../components/Modal/BottomModal";
 import CommentBar from "../../../components/Footer/CommentBar";
 import { useState } from "react";
 import ChatBalloon from "../components/ChatBalloon";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatRoom() {
-  const { isModalOpen, userModalMenuList, onModalHandler } = useModal();
+  const { isModalOpen, onModalHandler } = useModal();
   const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
   const onChangeHandler = (value) => {
     setInput(value);
@@ -24,6 +26,15 @@ export default function ChatRoom() {
     setMessageList(tempMessageList);
     setInput("");
   };
+
+  const modalMenuList = [
+    {
+      label: "채팅방 나가기",
+      onClickHandler: () => {
+        navigate("/chat");
+      },
+    },
+  ];
 
   const basicMessageList = [
     {
@@ -51,7 +62,7 @@ export default function ChatRoom() {
           <ChatBalloon message={item} />
         ))}
       </LayoutContent>
-      {isModalOpen && <BottomModal menu={userModalMenuList} />}
+      {isModalOpen && <BottomModal menu={modalMenuList} />}
       <CommentBar
         onImageUploadHandler={() => {}}
         mode="chat"
