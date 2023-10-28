@@ -1,10 +1,101 @@
+// import styled from "styled-components";
+// import Layout from "../../../components/Layout/Layout";
+// import Input from "../../../components/Input/Input";
+// import Button from "../../../components/Button";
+// import { useEffect, useState } from "react";
+// import { COLOR, FONT_SIZE } from "../../../utils";
+// import { api } from "../../../api/baseURL";
+// import { useNavigate } from "react-router-dom";
+
+// export default function Signup() {
+//   const [user, setUser] = useState({
+//     email: "",
+//     password: "",
+//   });
+//   console.log(user);
+//   const [errorMsg, setErrorMsg] = useState("");
+//   const [disabledBtn, setDisabledBtn] = useState(false);
+
+//   const navigate = useNavigate();
+
+//   function validationCheck() {
+//     const checkemail = localStorage.getItem("user");
+//     console.log(checkemail);
+//     if (user.password.length < 6) {
+//       setDisabledBtn(true);
+//       setErrorMsg("비밀번호를 6자이상 입력해주세요.");
+//     } else if (user.email === checkemail.email) {
+//       setDisabledBtn(true);
+//       setErrorMsg("중복된 이메일입니다.");
+//     } else {
+//       setDisabledBtn(false);
+//       setErrorMsg("");
+//     }
+//   }
+
+//   useEffect(() => {
+//     setDisabledBtn(!(user.email && user.password));
+//   }, [user]);
+
+//   return (
+//     <Layout>
+//       <SignupPage>
+//         <Title>이메일로 회원가입</Title>
+//         <Input
+//           name="email"
+//           labelText="이메일"
+//           placeholder="이메일 주소를 입력해 주세요."
+//           placeholderColor={COLOR.fontLightGrayColor}
+//           onChangeHandler={(event) => {
+//             setUser({ ...user, email: event.target.value });
+//           }}
+//         />
+//         <Input
+//           name="password"
+//           type="password"
+//           labelText="비밀번호"
+//           placeholder="비밀번호를 설정해 주세요."
+//           placeholderColor={COLOR.fontLightGrayColor}
+//           onChangeHandler={(event) => {
+//             setUser({ ...user, password: event.target.value });
+//             validationCheck();
+//           }}
+//           alert={errorMsg}
+//         />
+//         <Button
+//           buttonText="다음"
+//           disabled={disabledBtn}
+//           onClickHandler={() => {
+//             navigate("/signup/edit-profile", { state: { user } });
+//           }}
+//           reversed={false}
+//         />
+//       </SignupPage>
+//     </Layout>
+//   );
+// }
+
+// const SignupPage = styled.div`
+//   margin: 10%;
+//   & > Button {
+//     font-size: ${FONT_SIZE.large};
+//     margin: 0 auto;
+//     margin-top: 30px;
+//   }
+// `;
+
+// const Title = styled.div`
+//   font-size: 24px;
+//   color: #000000;
+//   text-align: center;
+//   margin-bottom: 40px;
+// `;
 import styled from "styled-components";
 import Layout from "../../../components/Layout/Layout";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
 import { COLOR, FONT_SIZE } from "../../../utils";
-import { api } from "../../../api/baseURL";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -12,49 +103,27 @@ export default function Signup() {
     email: "",
     password: "",
   });
-
   const [errorMsg, setErrorMsg] = useState("");
   const [disabledBtn, setDisabledBtn] = useState(false);
 
   const navigate = useNavigate();
 
-  const userHandler = (name, value) => {
-    setUser({ ...user, [name]: value });
-    console.log(user);
-    setErrorMsg("");
-  };
-
-  const handleButtonClick = () => {
-    if (!disabledBtn && user.password.length < 6) {
+  function validateForm() {
+    if (user.password && user.password.length < 6) {
+      setDisabledBtn(true);
       setErrorMsg("비밀번호는 6자 이상이어야 합니다.");
+    } else if (user.email && user.password && user.password.length >= 6) {
+      setDisabledBtn(false);
+      setErrorMsg("");
     } else {
+      setDisabledBtn(true);
       setErrorMsg("");
     }
-  };
-
-  const signupuser = async () => {
-    try {
-      if (handleButtonClick) {
-        const userInfo = user;
-        console.log("회원가입 요청 데이터:", userInfo);
-
-        const res = await api.post(`/user`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        alert("회원가입 성공");
-        console.log("회원가입 성공:", res);
-        navigate("/signin");
-      }
-    } catch (error) {
-      console.error("회원가입 오류:", error);
-    }
-  };
+  }
 
   useEffect(() => {
-    setDisabledBtn(!(user.email && user.password));
-  }, [user]);
+    validateForm();
+  });
 
   return (
     <Layout>
@@ -84,7 +153,9 @@ export default function Signup() {
           buttonText="다음"
           disabled={disabledBtn}
           onClickHandler={() => {
-            navigate("/signup/edit-profile", { state: { user } });
+            if (!disabledBtn) {
+              navigate("/signup/edit-profile", { state: { user } });
+            }
           }}
           reversed={false}
         />
@@ -103,8 +174,9 @@ const SignupPage = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 24px;
-  color: #000000;
-  text-align: center;
-  margin-bottom: 40px;
-`;
+    font-size: 24px;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 40px;
+  };
+  `;
