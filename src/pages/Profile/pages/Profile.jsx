@@ -26,7 +26,7 @@ export default function Profile() {
   );
   const [isMyProfile, setIsMyProfile] = useState(null);
   const [isFollow, setIsFollow] = useState(null);
-  const [profileInfo, serProfileInfo] = useState({});
+  const [profileInfo, setProfileInfo] = useState({});
   const [productList, setProductList] = useState([]);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
@@ -81,7 +81,7 @@ export default function Profile() {
   };
 
   const changeProfileInfo = (info) => {
-    serProfileInfo(info);
+    setProfileInfo(info);
   };
   const changeIsFollow = (param) => {
     setIsFollow(param);
@@ -93,7 +93,7 @@ export default function Profile() {
         headers: header,
       });
       console.log("🌟 프로필 정보 불러오기 성공");
-      serProfileInfo(res.data.profile);
+      setProfileInfo(res.data.profile);
       setIsFollow(res.data.profile.isfollow);
     } catch (error) {
       console.error(error);
