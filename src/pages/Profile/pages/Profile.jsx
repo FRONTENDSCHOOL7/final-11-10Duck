@@ -17,24 +17,26 @@ import AlertModal from "../../../components/Modal/AlertModal";
 import useAlertModal from "../../../hooks/useAlertModal";
 
 export default function Profile() {
-    const { header } = useAPI();
-    const { accountName } = useParams();
-    const user = useRecoilValue(userState);
+  const { header } = useAPI();
+  const { accountName } = useParams();
+  const user = useRecoilValue(userState);
 
-    const [urlAccountName, setUrlAccountName] = useState(accountName ? accountName : user.accountname);
-    const [isMyProfile, setIsMyProfile] = useState(null);
-    const [isFollow, setIsFollow] = useState(null);
-    const [profileInfo, serProfileInfo] = useState({});
-    const [productList, setProductList] = useState([]);
-    const [isProductModalOpen, setIsProductModalOpen] = useState(false);
-    const [isPostModalOpen, setIsPostModalOpen] = useState(false);
-      const [alertModal, setAlertModal] = useState({
+  const [urlAccountName, setUrlAccountName] = useState(
+    accountName ? accountName : user.accountname
+  );
+  const [isMyProfile, setIsMyProfile] = useState(null);
+  const [isFollow, setIsFollow] = useState(null);
+  const [profileInfo, serProfileInfo] = useState({});
+  const [productList, setProductList] = useState([]);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+  const [alertModal, setAlertModal] = useState({
     alertTitle: "",
     leftBtnText: "취소",
     rightBtnText: "",
   });
 
-      const {
+  const {
     isModalOpen,
     isUserAlertModalOpen,
     userAlertModal,
@@ -43,11 +45,8 @@ export default function Profile() {
     userAlertModalHandler,
   } = useModal();
   const { isAlertModalOpen, alertModalHandler } = useAlertModal();
-  
-  
 
-
-    const productModalMenuList = [
+  const productModalMenuList = [
     {
       label: "삭제",
       onClickHandler: () => {
@@ -65,15 +64,15 @@ export default function Profile() {
       onClickHandler: () => {},
     },
   ];
-  
-   const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
+
+  const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
     setAlertModal({ ...alertModal, alertTitle, rightBtnText });
     alertModalHandler.openModal();
     setIsPostModalOpen(false);
     setIsProductModalOpen(false);
   };
 
-    const onClickProductHandler = (link) => {
+  const onClickProductHandler = (link) => {
     if (isMyProfile) {
       setIsProductModalOpen(!isProductModalOpen);
     } else {
@@ -81,73 +80,85 @@ export default function Profile() {
     }
   };
 
-    const changeProfileInfo = (info) => {
-        serProfileInfo(info);
-    };
-    const changeIsFollow = (param) => {
-        setIsFollow(param);
-    };
+  const changeProfileInfo = (info) => {
+    serProfileInfo(info);
+  };
+  const changeIsFollow = (param) => {
+    setIsFollow(param);
+  };
 
-    const fetchProfileInfo = async () => {
-        try {
-            const res = await api.get(`/profile/${urlAccountName}`, {
-                headers: header,
-            });
-            console.log('🌟 프로필 정보 불러오기 성공');
-            serProfileInfo(res.data.profile);
-            setIsFollow(res.data.profile.isfollow);
-        } catch (error) {
-            console.error(error);
-            console.log('🔥 프로필 정보 불러오기 실패');
-        }
-    };
+  const fetchProfileInfo = async () => {
+    try {
+      const res = await api.get(`/profile/${urlAccountName}`, {
+        headers: header,
+      });
+      console.log("🌟 프로필 정보 불러오기 성공");
+      serProfileInfo(res.data.profile);
+      setIsFollow(res.data.profile.isfollow);
+    } catch (error) {
+      console.error(error);
+      console.log("🔥 프로필 정보 불러오기 실패");
+    }
+  };
 
-    /**
-     * 상품 목록을 가져오는 fetch 함수
-     */
-    const fetchProduct = async () => {
-        try {
-            const res = await api.get(`/product/${urlAccountName}`, {
-                headers: header,
-            });
+  /**
+   * 상품 목록을 가져오는 fetch 함수
+   */
+  const fetchProduct = async () => {
+    try {
+      const res = await api.get(`/product/${urlAccountName}`, {
+        headers: header,
+      });
 
-            console.log('🌟상품 목록 불러오기 성공');
-            setProductList(res.data.product);
-        } catch (err) {
-            console.log('🔥상품 목록 불러오기 실패');
-            console.error(err);
-        }
-    };
+      console.log("🌟상품 목록 불러오기 성공");
+      setProductList(res.data.product);
+    } catch (err) {
+      console.log("🔥상품 목록 불러오기 실패");
+      console.error(err);
+    }
+  };
 
-    useEffect(() => {
-        console.log('new recoil ::', user);
-        urlAccountName === user.accountname ? setIsMyProfile(true) : setIsMyProfile(false);
-        fetchProduct();
-    }, []);
+  useEffect(() => {
+    console.log("new recoil ::", user);
+    urlAccountName === user.accountname
+      ? setIsMyProfile(true)
+      : setIsMyProfile(false);
+    fetchProduct();
+  }, []);
 
-    useEffect(() => {
-        fetchProfileInfo();
-    }, [urlAccountName]);
-  
-  
-    return (
-        <Layout>
-            <BasicHeader mode={'post'} onClickMoreBtnHandler={onModalHandler} />
-            <LayoutContent isWhite={false} paddingOff={true}>
-                {/* 프로필 정보 */}
-                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} isFollow={isFollow} changeProfileInfo={changeProfileInfo} changeIsFollow={changeIsFollow} />
-                {/* 판매 중인 상품 */}
-                {!!productList.length && <ProductScroller products={productList} onClickHandler={onClickProductHandler} />}
-                {/* 포스트한 게시물  */}
-                <PostList
-                    urlAccountName={urlAccountName}
-                    onModalHandler={() => {
-                        setIsPostModalOpen(!isPostModalOpen);
-                    }}
-                />
-            </LayoutContent>
-            {isProductModalOpen && <BottomModal menu={productModalMenuList} />}
-          {isPostModalOpen && (
+  useEffect(() => {
+    fetchProfileInfo();
+  }, [urlAccountName]);
+
+  return (
+    <Layout>
+      <BasicHeader mode={"post"} onClickMoreBtnHandler={onModalHandler} />
+      <LayoutContent isWhite={false} paddingOff={true}>
+        {/* 프로필 정보 */}
+        <ProfileInfo
+          isMyProfile={isMyProfile}
+          profileInfo={profileInfo}
+          isFollow={isFollow}
+          changeProfileInfo={changeProfileInfo}
+          changeIsFollow={changeIsFollow}
+        />
+        {/* 판매 중인 상품 */}
+        {!!productList.length && (
+          <ProductScroller
+            products={productList}
+            onClickHandler={onClickProductHandler}
+          />
+        )}
+        {/* 포스트한 게시물  */}
+        <PostList
+          urlAccountName={urlAccountName}
+          onModalHandler={() => {
+            setIsPostModalOpen(!isPostModalOpen);
+          }}
+        />
+      </LayoutContent>
+      {isProductModalOpen && <BottomModal menu={productModalMenuList} />}
+      {isPostModalOpen && (
         <BottomModal
           menu={
             isMyProfile
@@ -176,8 +187,8 @@ export default function Profile() {
           }
         />
       )}
-            {isModalOpen && <BottomModal menu={userModalMenuList} />}
-               
+      {isModalOpen && <BottomModal menu={userModalMenuList} />}
+
       <AlertModal
         isModalOpen={isAlertModalOpen}
         alertTitle={alertModal.alertTitle}
@@ -192,6 +203,7 @@ export default function Profile() {
         rightBtnText={userAlertModal.rightBtnText}
         onModalHandler={userAlertModalHandler}
       />
-            <NavBar />
-        </Layout>
-    );
+      <NavBar />
+    </Layout>
+  );
+}
