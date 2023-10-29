@@ -49,7 +49,7 @@ export default function EditProfileInfo() {
                         username: userData.username,
                         accountname: userData.accountname,
                         intro: userData.intro,
-                        image: imageUrl,
+                        image: newImage ? imageUrl : userData.image,
                     },
                 },
                 {
@@ -58,6 +58,9 @@ export default function EditProfileInfo() {
             );
             console.log('🌟프로필 수정 성공');
             const resUserData = res.data.user;
+            console.log('imageFileName :: ', imageFileName);
+            console.log('imageUrl :: ', imageUrl);
+            console.log('resUserData :: ', resUserData);
             setUser({ ...user, username: resUserData.username, accountname: resUserData.accountname, intro: resUserData.intro, image: resUserData.image });
             navigate(`/profile`);
         } catch (err) {
