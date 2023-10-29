@@ -5,10 +5,13 @@ import Button from '../../../components/Button';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../recoil/atom';
 
 export default function FollowUser({ user, setIsButtonClick }) {
     const { header } = useAPI();
     const navigate = useNavigate();
+    const recoilUser = useRecoilValue(userState);
 
     const fetchDoFollow = async () => {
         try {
@@ -63,7 +66,15 @@ export default function FollowUser({ user, setIsButtonClick }) {
             </FollowUserContainer>
 
             <FollowButtonStyle>
-                {user.isfollow ? <Button buttonText={'취소'} size="MS" reversed onClickHandler={handleUnfollowClick} /> : <Button buttonText={'팔로우'} size="MS" onClickHandler={handleFollowClick} />}
+                {user.accountname !== recoilUser.accountname ? (
+                    user.isfollow ? (
+                        <Button buttonText={'취소'} size="MS" reversed onClickHandler={handleUnfollowClick} />
+                    ) : (
+                        <Button buttonText={'팔로우'} size="MS" onClickHandler={handleFollowClick} />
+                    )
+                ) : (
+                    <></>
+                )}
             </FollowButtonStyle>
         </FollowUserStyle>
     );
