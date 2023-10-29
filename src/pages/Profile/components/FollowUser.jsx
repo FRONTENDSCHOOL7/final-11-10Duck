@@ -4,9 +4,11 @@ import { COLOR, FONT_SIZE } from '../../../utils';
 import Button from '../../../components/Button';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
+import { useNavigate } from 'react-router-dom';
 
 export default function FollowUser({ user, setIsButtonClick }) {
     const { header } = useAPI();
+    const navigate = useNavigate();
 
     const fetchDoFollow = async () => {
         try {
@@ -46,14 +48,19 @@ export default function FollowUser({ user, setIsButtonClick }) {
     const handleUnfollowClick = () => {
         fetchDoUnfollow();
     };
+    const handleUserClick = () => {
+        navigate(`/profile/${user.accountname}`);
+    };
 
     return (
         <FollowUserStyle>
-            <FollowUserImage src={user.image} alt="" />
-            <FollowTextStyle>
-                <FollowUserName>{user.username}</FollowUserName>
-                <FollowUserInfo>{user.intro}</FollowUserInfo>
-            </FollowTextStyle>
+            <FollowUserContainer onClick={handleUserClick}>
+                <FollowUserImage src={user.image} alt="" />
+                <FollowTextStyle>
+                    <FollowUserName>{user.username}</FollowUserName>
+                    <FollowUserInfo>{user.intro}</FollowUserInfo>
+                </FollowTextStyle>
+            </FollowUserContainer>
 
             <FollowButtonStyle>
                 {user.isfollow ? <Button buttonText={'취소'} size="MS" reversed onClickHandler={handleUnfollowClick} /> : <Button buttonText={'팔로우'} size="MS" onClickHandler={handleFollowClick} />}
@@ -61,10 +68,15 @@ export default function FollowUser({ user, setIsButtonClick }) {
         </FollowUserStyle>
     );
 }
+
 const FollowUserStyle = styled.article`
     display: flex;
     align-items: center;
     margin: 16px 0;
+`;
+const FollowUserContainer = styled.div`
+    display: flex;
+    cursor: pointer;
 `;
 const FollowUserImage = styled.img`
     width: 50px;
