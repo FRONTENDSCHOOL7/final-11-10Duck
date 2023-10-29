@@ -71,9 +71,6 @@ export default function Profile() {
         }
     };
 
-    const changeProfileInfo = (info) => {
-        setProfileInfo(info);
-    };
     const changeIsFollow = (param) => {
         setIsFollow(param);
     };
@@ -110,7 +107,6 @@ export default function Profile() {
     };
 
     useEffect(() => {
-        console.log('new recoil ::', user);
         urlAccountName === user.accountname ? setIsMyProfile(true) : setIsMyProfile(false);
         fetchProduct();
     }, []);
