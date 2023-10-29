@@ -49,7 +49,7 @@ export default function EditProfileInfo() {
                         username: userData.username,
                         accountname: userData.accountname,
                         intro: userData.intro,
-                        image: imageUrl,
+                        image: newImage ? imageUrl : userData.image,
                     },
                 },
                 {
