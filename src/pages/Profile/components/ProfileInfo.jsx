@@ -8,12 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
 
-export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, changeProfileInfo, changeIsFollow }) {
+export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, changeIsFollow }) {
     const { header } = useAPI();
     const navigate = useNavigate();
 
-    //const [userInfo, setUserInfo] = useState(profileInfo ? profileInfo : {});
-    //const [isFollow, setIsFollow] = useState();
+    console.log('header :: ', header);
 
     const handleFollowingsClick = () => {
         navigate(`/profile/${profileInfo.accountname}/followings`);
@@ -24,12 +23,17 @@ export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, change
 
     const fetchDoFollow = async () => {
         try {
-            const res = await api.post(`/profile/${profileInfo.accountname}/follow`, {
-                headers: header,
-            });
+            const res = await api.post(
+                `/profile/${profileInfo.accountname}/follow`,
+                {
+                    body: JSON.stringify(null),
+                },
+                {
+                    headers: header,
+                }
+            );
             console.log('🌟 팔로우하기 성공');
-            //changeProfileInfo(res.data.profile);
-            //setIsFollow(res.data.profile.isfollow);
+            changeIsFollow(res.data.profile.isfollow);
         } catch (err) {
             console.error(err);
             console.log('🔥 팔로우하기 실패');
@@ -38,24 +42,22 @@ export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, change
 
     const fetchDoUnfollow = async () => {
         try {
-            const res = await api.post(`/profile/${profileInfo.accountname}/unfollow`, {
+            const res = await api.delete(`/profile/${profileInfo.accountname}/unfollow`, {
+                body: '',
                 headers: header,
             });
             console.log('🌟 언팔로우하기 성공');
-            //changeProfileInfo(res.data.profile);
-            //setIsFollow(res.data.profile.isfollow);
+            changeIsFollow(res.data.profile.isfollow);
         } catch (err) {
             console.error(err);
             console.log('🔥 언팔로우하기 실패');
         }
     };
     const handleFollowClick = () => {
-        //fetchDoFollow();
-        changeIsFollow((prev) => !prev);
+        fetchDoFollow();
     };
     const handleUnfollowClick = () => {
-        //fetchDoUnfollow();
-        changeIsFollow((prev) => !prev);
+        fetchDoUnfollow();
     };
 
     return (
