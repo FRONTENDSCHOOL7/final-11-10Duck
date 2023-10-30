@@ -15,7 +15,7 @@ export default function EditProfile() {
   const location = useLocation();
   const { user } = location.state;
   const setUser = useSetRecoilState(userState);
-
+  const [errorMsg, setErrorMsg] = useState("");
   const [userData, setUserData] = useState({
     username: "",
     email: user.email,
@@ -32,7 +32,7 @@ export default function EditProfile() {
     userData.email,
     userData.password,
     userData.accountname,
-  ].every((item) => !!item.length);
+  ].every((item) => !!item.length && errorMsg === "");
 
   const signUp = async () => {
     try {
@@ -76,11 +76,46 @@ export default function EditProfile() {
           },
         }
       );
-
       setUser(res.data.user);
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const checkAccountname = async (accountname) => {
+    try {
+      const res = await api.post(
+        "/user/accountnamevalid",
+        {
+          user: {
+            accountname,
+          },
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      if (res.data.message === "이미 가입된 계정ID 입니다.") {
+        setErrorMsg("*이미 사용 중인 ID입니다.");
+      } else {
+        setErrorMsg("");
+      }
+    } catch (error) {}
+  };
+
+  const handleAccountnameChange = (event) => {
+    const accountname = event.target.value;
+    const AccountnameValid = /^[a-zA-Z0-9_.]*$/.test(accountname);
+    if (!AccountnameValid) {
+      setErrorMsg("영문, 숫자, 밑줄, 또는 마침표만 사용 가능합니다.");
+    } else {
+      setErrorMsg("");
+      checkAccountname(accountname);
+    }
+
+    setUserData({ ...userData, accountname });
   };
 
   return (
@@ -105,9 +140,8 @@ export default function EditProfile() {
           labelText="계정 ID"
           placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
           placeholderColor={COLOR.fontLightGrayColor}
-          onChangeHandler={(event) => {
-            setUserData({ ...userData, accountname: event.target.value });
-          }}
+          onChangeHandler={handleAccountnameChange}
+          alert={errorMsg}
         />
         <Input
           type="text"
