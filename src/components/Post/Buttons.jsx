@@ -10,7 +10,8 @@ import { api } from "../../api/baseURL";
 import useAPI from "../../hooks/useAPI";
 
 export default function Buttons(props) {
-  const { postId, authorId, hearted, heartCount, commentCount } = props;
+  const { postId, authorId, hearted, heartCount, commentCount, fetchFun } =
+    props;
   const [heartSrc, setHeartSrc] = useState(hearted ? ActiveHeart : Heart);
 
   const { header } = useAPI();
@@ -29,6 +30,7 @@ export default function Buttons(props) {
       console.log(res);
       console.log("🌟좋아요를 성공");
       setHeartSrc(ActiveHeart);
+      fetchFun();
     } catch (err) {
       console.error(err);
       console.log("🔥좋아요를 실패");
@@ -44,6 +46,7 @@ export default function Buttons(props) {
       console.log(res);
       console.log("🌟좋아요 취소를 성공");
       setHeartSrc(Heart);
+      fetchFun();
     } catch (err) {
       console.error(err);
       console.log("🔥좋아요 취소를 실패");

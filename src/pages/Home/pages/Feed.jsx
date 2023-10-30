@@ -43,6 +43,7 @@ export default function FeedFollow() {
           {followerPostList.map((item) => (
             <PostItem
               key={item.id}
+              fetchFun={fetchFollowerPost}
               post={item}
               isMoveToContentPage={true}
               onModalHandler={() => {
