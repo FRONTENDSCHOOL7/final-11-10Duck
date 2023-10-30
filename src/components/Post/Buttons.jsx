@@ -6,21 +6,47 @@ import ActiveHeart from "../../assets/icon/icon-heart-active.png";
 import Comment from "../../assets/icon/icon-message-circle.png";
 import { COLOR } from "../../utils";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api/baseURL";
+import useAPI from "../../hooks/useAPI";
 
 export default function Buttons(props) {
   const { postId, authorId, hearted, heartCount, commentCount } = props;
   const [heartSrc, setHeartSrc] = useState(hearted ? ActiveHeart : Heart);
 
+  const { header } = useAPI();
+
   const navigate = useNavigate();
 
-  /**
-   * 좋아요 버튼 클릭시 토글링하는 정도, 좋아요 버튼 기능은 안들어가있음
-   */
-  const toggleHeartButton = () => {
-    if (heartSrc === Heart) {
+  const likePost = async () => {
+    try {
+      const res = await api.post(
+        `/post/${postId}/heart`,
+        {},
+        {
+          headers: header,
+        }
+      );
+      console.log(res);
+      console.log("🌟좋아요를 성공");
       setHeartSrc(ActiveHeart);
-    } else {
+    } catch (err) {
+      console.error(err);
+      console.log("🔥좋아요를 실패");
+    }
+  };
+
+  const cancelLikePost = async () => {
+    try {
+      const res = await api.delete(`/post/${postId}/unheart`, {
+        headers: header,
+      });
+
+      console.log(res);
+      console.log("🌟좋아요 취소를 성공");
       setHeartSrc(Heart);
+    } catch (err) {
+      console.error(err);
+      console.log("🔥좋아요 취소를 실패");
     }
   };
 
@@ -30,9 +56,18 @@ export default function Buttons(props) {
   const onClickCommentBtn = () => {
     navigate(`/post/${postId}`, { state: { authorId } });
   };
+
   return (
     <ButtonContainerStyle>
-      <ButtonStyle onClick={toggleHeartButton}>
+      <ButtonStyle
+        onClick={() => {
+          if (hearted) {
+            cancelLikePost();
+          } else {
+            likePost();
+          }
+        }}
+      >
         <ButtonIconStyle src={heartSrc} alt="좋아요 버튼의 하트 이미지" />
         <CommentCountStyle>{heartCount}</CommentCountStyle>
       </ButtonStyle>

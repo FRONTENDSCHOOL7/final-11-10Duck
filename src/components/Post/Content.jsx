@@ -21,7 +21,6 @@ export default function Content(props) {
   } = post;
 
   const navigate = useNavigate();
-  console.log(formatDate(new Date(post.updatedAt)));
 
   return (
     <ContentStyle isMoveToContentPage={isMoveToContentPage}>
