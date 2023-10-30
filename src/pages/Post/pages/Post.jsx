@@ -121,7 +121,7 @@ export default function Post() {
         <BasicHeader
           onClickMoreBtnHandler={onModalHandler}
           onClickBackBtnHandler={() => {
-            navigate("/");
+            navigate("/feed");
           }}
         />
         <LayoutContent>
