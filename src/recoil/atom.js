@@ -1,4 +1,4 @@
-const { atom } = require("recoil");
+const { atom } = require('recoil');
 
 export const userState = atom({
   key: "userState",

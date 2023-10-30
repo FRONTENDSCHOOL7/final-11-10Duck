@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import PreviewImage from "../components/PreviewImage";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil/atom";
-import { changeImageToURL, changeProfileImage } from "../../../utils/function";
+import { changeImageToURL } from "../../../utils/function";
 import { api } from "../../../api/baseURL";
 import useAPI from "../../../hooks/useAPI";
 
@@ -79,10 +79,7 @@ export default function PostUpload() {
       />
       <LayoutContent>
         <ContainerStyle>
-          <ProfileImageStyle
-            src={changeProfileImage(user.image)}
-            alt="프로필 이미지"
-          />
+          <ProfileImageStyle src={user.image} alt="프로필 이미지" />
           <ContentContainrStyle>
             <TextAreaContainerStyle
               ref={textareaRef}
@@ -132,4 +129,5 @@ const ProfileImageStyle = styled.img`
   height: 42px;
   object-fit: cover;
   margin-right: 12px;
+  border-radius: 100%;
 `;
