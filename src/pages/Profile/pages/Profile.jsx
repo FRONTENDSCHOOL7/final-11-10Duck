@@ -71,6 +71,9 @@ export default function Profile() {
         }
     };
 
+    const changeProfileInfo = (info) => {
+        setProfileInfo(info);
+    };
     const changeIsFollow = (param) => {
         setIsFollow(param);
     };
