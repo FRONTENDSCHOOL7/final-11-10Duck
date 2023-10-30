@@ -139,6 +139,28 @@ export default function Post() {
     }
   };
 
+  const reportComment = async (commentId) => {
+    try {
+      const res = await api.post(
+        `/post/${postId}/comments/${commentId}/report`,
+        {
+          report: {
+            comment: commentId,
+          },
+        },
+        {
+          headers: header,
+        }
+      );
+
+      console.log(res);
+      console.log("🌟 댓글 신고 성공");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥 댓글 신고 실패");
+    }
+  };
+
   const onChangeHandler = (content) => {
     setComment(content);
   };
@@ -227,7 +249,13 @@ export default function Post() {
                     {
                       label: "신고하기",
                       onClickHandler: () => {
-                        onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                        onClickBottomModalMenu(
+                          "게시글을 신고할까요?",
+                          "신고",
+                          () => {
+                            reportComment(item.id);
+                          }
+                        );
                       },
                     },
                   ]);
