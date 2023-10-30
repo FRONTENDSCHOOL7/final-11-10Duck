@@ -50,13 +50,13 @@ export default function Profile() {
     {
       label: "삭제",
       onClickHandler: () => {
-        onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+        onClickBottomModalMenu("상품을 삭제할까요?", "삭제");
       },
     },
     {
       label: "수정",
       onClickHandler: () => {
-        onClickBottomModalMenu("게시글을 수정할까요?", "수정");
+        onClickBottomModalMenu("상품을 수정할까요?", "수정");
       },
     },
     {
@@ -169,7 +169,11 @@ export default function Profile() {
                   {
                     label: "삭제",
                     onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                      onClickBottomModalMenu(
+                        "게시글을 삭제할까요?",
+                        "삭제",
+                        () => {}
+                      );
                     },
                   },
                   {

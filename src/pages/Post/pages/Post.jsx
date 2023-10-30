@@ -78,6 +78,24 @@ export default function Post() {
     }
   };
 
+  /**
+   * 게시글 삭제 함수
+   */
+  const deletePost = async () => {
+    try {
+      const res = await api.delete(`/post/${postId}`, {
+        headers: header,
+      });
+
+      console.log(res);
+      console.log("🌟게시글 삭제를 성공");
+      navigate("/profile");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥게시글 삭제를 실패");
+    }
+  };
+
   const fetchComment = async () => {
     try {
       const res = await api.get(`/post/${postId}/comments`, {
@@ -139,6 +157,10 @@ export default function Post() {
     }
   };
 
+  /**
+   * 댓글 신고하는 함수
+   * @param {댓글 아이디} commentId
+   */
   const reportComment = async (commentId) => {
     try {
       const res = await api.post(
@@ -192,7 +214,9 @@ export default function Post() {
                       onClickBottomModalMenu(
                         "게시글을 삭제할까요?",
                         "삭제",
-                        () => {}
+                        () => {
+                          deletePost();
+                        }
                       );
                     },
                   },
