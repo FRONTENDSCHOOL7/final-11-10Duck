@@ -54,3 +54,12 @@ export const changeProfileImage = (imageURL) => {
 export const AddAPIURLImage = (filename) => {
   return process.env.REACT_APP_API_URL + "/" + filename;
 };
+
+/**
+ * xxxx년 xx월 xx일로 변환하는 함수
+ * @param {date 객체} date
+ * @returns
+ */
+export const formatDate = (date) => {
+  return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+};

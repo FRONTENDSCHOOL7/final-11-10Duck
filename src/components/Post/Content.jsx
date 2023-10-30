@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import Buttons from "./Buttons";
 import { COLOR } from "../../utils";
 import { FONT_SIZE } from "../../utils";
-import { AddAPIURLImage } from "../../utils/function";
+import { AddAPIURLImage, formatDate } from "../../utils/function";
 import { useNavigate } from "react-router-dom";
 
 export default function Content(props) {
@@ -21,6 +21,7 @@ export default function Content(props) {
   } = post;
 
   const navigate = useNavigate();
+  console.log(formatDate(new Date(post.updatedAt)));
 
   return (
     <ContentStyle isMoveToContentPage={isMoveToContentPage}>
@@ -45,7 +46,11 @@ export default function Content(props) {
         heartCount={heartCount}
         commentCount={commentCount}
       />
-      <DateStyle>{!!updatedAt ? updatedAt : createdAt}</DateStyle>
+      <DateStyle>
+        {!!updatedAt
+          ? formatDate(new Date(post.updatedAt))
+          : formatDate(new Date(post.createdAt))}
+      </DateStyle>
     </ContentStyle>
   );
 }
