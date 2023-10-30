@@ -71,9 +71,6 @@ export default function Profile() {
         }
     };
 
-    const changeProfileInfo = (info) => {
-        setProfileInfo(info);
-    };
     const changeIsFollow = (param) => {
         setIsFollow(param);
     };
@@ -116,7 +113,15 @@ export default function Profile() {
 
     useEffect(() => {
         fetchProfileInfo();
+        fetchProduct();
     }, [urlAccountName, isFollow]);
+
+    useEffect(() => {
+        if (!accountName) {
+            setUrlAccountName(user.accountname);
+            setIsMyProfile(true);
+        }
+    }, [accountName]);
 
     return (
         <Layout>

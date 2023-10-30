@@ -12,8 +12,6 @@ export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, change
     const { header } = useAPI();
     const navigate = useNavigate();
 
-    console.log('header :: ', header);
-
     const handleFollowingsClick = () => {
         navigate(`/profile/${profileInfo.accountname}/followings`);
     };
@@ -102,17 +100,11 @@ export default function ProfileInfo({ isMyProfile, profileInfo, isFollow, change
                 ) : (
                     <>
                         <ChatIcon src={chatIcon} alt="채팅 아이콘" />
-                        {/* {profileInfo.isfollow ? (
-                            <Button buttonText={'언팔로우하기'} reversed size={'M'} onClickHandler={handleUnfollowClick} />
-                        ) : (
-                            <Button buttonText={'팔로우하기'} size={'M'} onClickHandler={handleFollowClick} />
-                        )} */}
                         {isFollow ? (
                             <Button buttonText={'언팔로우하기'} reversed size={'M'} onClickHandler={handleUnfollowClick} />
                         ) : (
                             <Button buttonText={'팔로우하기'} size={'M'} onClickHandler={handleFollowClick} />
                         )}
-
                         <ShareIcon src={shareIcon} alt="공유하기 아이콘" />
                     </>
                 )}
