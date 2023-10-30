@@ -116,14 +116,14 @@ export default function Profile() {
 
     useEffect(() => {
         fetchProfileInfo();
-    }, [urlAccountName]);
+    }, [urlAccountName, isFollow]);
 
     return (
         <Layout>
             <BasicHeader mode={'post'} onClickMoreBtnHandler={onModalHandler} />
             <LayoutContent isWhite={false} paddingOff={true}>
                 {/* 프로필 정보 */}
-                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} isFollow={isFollow} changeProfileInfo={changeProfileInfo} changeIsFollow={changeIsFollow} />
+                <ProfileInfo isMyProfile={isMyProfile} profileInfo={profileInfo} isFollow={isFollow} changeIsFollow={changeIsFollow} />
                 {/* 판매 중인 상품 */}
                 {!!productList.length && <ProductScroller products={productList} onClickHandler={onClickProductHandler} />}
                 {/* 포스트한 게시물  */}
