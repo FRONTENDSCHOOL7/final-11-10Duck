@@ -5,7 +5,13 @@ import Content from "./Content";
 import { COLOR } from "../../utils";
 
 export default function PostItem(props) {
-  const { post, hasFollowButton, isMoveToContentPage, onModalHandler } = props;
+  const {
+    post,
+    hasFollowButton,
+    isMoveToContentPage,
+    onModalHandler,
+    fetchFun,
+  } = props;
 
   return (
     <PostStyle>
@@ -14,7 +20,11 @@ export default function PostItem(props) {
         hasFollowButton={hasFollowButton}
         onModalHandler={onModalHandler}
       />
-      <Content post={post} isMoveToContentPage={isMoveToContentPage} />
+      <Content
+        post={post}
+        isMoveToContentPage={isMoveToContentPage}
+        fetchFun={fetchFun}
+      />
     </PostStyle>
   );
 }

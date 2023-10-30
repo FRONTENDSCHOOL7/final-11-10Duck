@@ -182,6 +182,7 @@ export default function Post() {
         <LayoutContent>
           <PostItem
             post={post}
+            fetchFun={fetchPost}
             onModalHandler={() => {
               if (userFlag) {
                 setModalMenuList([

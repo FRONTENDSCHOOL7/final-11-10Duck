@@ -7,7 +7,7 @@ import { AddAPIURLImage, formatDate } from "../../utils/function";
 import { useNavigate } from "react-router-dom";
 
 export default function Content(props) {
-  const { post, isMoveToContentPage } = props;
+  const { post, isMoveToContentPage, fetchFun } = props;
 
   const {
     id,
@@ -21,7 +21,6 @@ export default function Content(props) {
   } = post;
 
   const navigate = useNavigate();
-  console.log(formatDate(new Date(post.updatedAt)));
 
   return (
     <ContentStyle isMoveToContentPage={isMoveToContentPage}>
@@ -45,6 +44,7 @@ export default function Content(props) {
         hearted={hearted}
         heartCount={heartCount}
         commentCount={commentCount}
+        fetchFun={fetchFun}
       />
       <DateStyle>
         {!!updatedAt
