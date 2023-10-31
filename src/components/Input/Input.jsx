@@ -11,6 +11,7 @@ export default function Input(props) {
     onChangeHandler,
     placeholder,
     placeholderColor,
+    onBlurHandler,
     value,
     maxLength,
   } = props;
@@ -24,6 +25,7 @@ export default function Input(props) {
         onChange={onChangeHandler}
         placeholder={placeholder}
         placeholderColor={placeholderColor}
+        onBlur={onBlurHandler}
       />
       {alert && <AlertStyle>{alert}</AlertStyle>}
     </InputContainerStyle>
