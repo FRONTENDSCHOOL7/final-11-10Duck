@@ -11,21 +11,43 @@ import BottomModal from "../../../components/Modal/BottomModal";
 import AlertModal from "../../../components/Modal/AlertModal";
 import useAlertModal from "../../../hooks/useAlertModal";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../recoil/atom";
 
 export default function FeedFollow() {
   const { header } = useAPI();
   const { isAlertModalOpen, alertModalHandler } = useAlertModal();
   const [followerPostList, setFollowerPostList] = useState([]);
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
+  const [user, setUser] = useRecoilState(userState);
 
   const navigate = useNavigate();
 
   const isLogin = localStorage.getItem("token");
 
+  const fetchUserData = async () => {
+    try {
+      const res = await api.get("/user/myinfo", {
+        headers: {
+          Authorization: `Bearer ${isLogin}`,
+        },
+      });
+
+      const userData = res.data.user;
+
+      console.log("🌟유저 정보 가져오기 성공");
+      setUser({ ...user, token: isLogin, ...userData });
+    } catch (err) {
+      console.error(err);
+      console.log("🔥유저 정보 가져오기 실패");
+    }
+  };
+
   useEffect(() => {
     if (!isLogin) {
       navigate("/signin-select");
     }
+    fetchUserData();
   }, [isLogin]);
 
   const fetchFollowerPost = async () => {
@@ -43,7 +65,7 @@ export default function FeedFollow() {
 
   useEffect(() => {
     fetchFollowerPost();
-  }, []);
+  }, [user]);
 
   if (!followerPostList.length) return <FeedNone />;
   else {
