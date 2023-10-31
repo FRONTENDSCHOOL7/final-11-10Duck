@@ -10,12 +10,21 @@ import { api } from "../../../api/baseURL";
 import BottomModal from "../../../components/Modal/BottomModal";
 import AlertModal from "../../../components/Modal/AlertModal";
 import useAlertModal from "../../../hooks/useAlertModal";
+import { useNavigate } from "react-router-dom";
 
 export default function FeedFollow() {
   const { header } = useAPI();
   const { isAlertModalOpen, alertModalHandler } = useAlertModal();
   const [followerPostList, setFollowerPostList] = useState([]);
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const isLogin = localStorage.getItem("user");
+
+  if (!isLogin) {
+    navigate("/signin-select");
+  }
 
   const fetchFollowerPost = async () => {
     try {
