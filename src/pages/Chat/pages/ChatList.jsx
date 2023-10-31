@@ -64,7 +64,11 @@ export default function ChatList() {
         onModalHandler={userAlertModalHandler}
       />
       <NavBar />
-      {isModalOpen && <BottomModal menu={userModalMenuList} />}
+      <BottomModal
+        isModalOpen={isModalOpen}
+        menu={userModalMenuList}
+        onModalHandler={onModalHandler}
+      />
     </Layout>
   );
 }

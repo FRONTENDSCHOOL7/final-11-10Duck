@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { FONT_SIZE, COLOR } from "../../utils";
 
 export default function BottomModal(props) {
-  const { menu } = props;
+  const { menu, isModalOpen, onModalHandler } = props;
+  const modalRef = useRef();
   const menuList = menu.map((item) => (
     <ModalItemStyle onClick={item.onClickHandler}>{item.label}</ModalItemStyle>
   ));
-  return <ModalStyle>{menuList}</ModalStyle>;
+  if (isModalOpen) {
+    return (
+      <ModalBackgroundStyle
+        onClick={(e) => {
+          if (modalRef.current !== e.target) {
+            onModalHandler();
+          }
+        }}
+      >
+        <ModalStyle ref={modalRef}>{menuList}</ModalStyle>
+      </ModalBackgroundStyle>
+    );
+  } else {
+    return null;
+  }
 }
 
 const fadeIn = keyframes`
@@ -19,6 +34,15 @@ to {
     opacity: 1;
     transform: none;
 }`;
+
+const ModalBackgroundStyle = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+`;
 
 const ModalStyle = styled.ul`
   position: absolute;

@@ -62,7 +62,11 @@ export default function ChatRoom() {
           <ChatBalloon message={item} />
         ))}
       </LayoutContent>
-      {isModalOpen && <BottomModal menu={modalMenuList} />}
+      <BottomModal
+        isModalOpen={isModalOpen}
+        menu={modalMenuList}
+        onModalHandler={onModalHandler}
+      />
       <CommentBar
         onImageUploadHandler={() => {}}
         mode="chat"
