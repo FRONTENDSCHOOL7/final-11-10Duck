@@ -14,8 +14,6 @@ export default function PostList({ urlAccountName, onModalHandler }) {
   const [isAlbum, setIsAlbum] = useState(false);
   const [userPostList, setUserPostList] = useState([]);
 
-  console.log("urlAccountName: ", urlAccountName);
-
   const { header } = useAPI();
 
   const fetchMyPost = async () => {
@@ -43,6 +41,7 @@ export default function PostList({ urlAccountName, onModalHandler }) {
   useEffect(() => {
     fetchMyPost();
   }, [urlAccountName]);
+
   return (
     <section>
       <ListNav>
