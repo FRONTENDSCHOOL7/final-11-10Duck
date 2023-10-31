@@ -74,14 +74,18 @@ const NavStyle = styled.button`
         height: 24px;
     }
     &.isClick {
-        path {
+        path,
+        rect {
             fill: ${COLOR.bgPrimaryColor};
             stroke: ${COLOR.borderOrangeColor};
         }
     }
     &:hover {
-        path {
-            stroke: ${COLOR.borderOrangeColor};
+        &:hover {
+            path,
+            rect {
+                stroke: ${COLOR.borderOrangeColor};
+            }
         }
     }
 `;
