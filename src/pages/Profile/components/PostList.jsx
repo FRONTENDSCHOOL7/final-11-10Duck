@@ -9,10 +9,12 @@ import AlbumOffIcon from "../../../assets/icon/icon-post-album-off.png";
 import useAPI from "../../../hooks/useAPI";
 import { api } from "../../../api/baseURL";
 import { AddAPIURLImage } from "../../../utils/function";
+import { useNavigate } from "react-router-dom";
 
 export default function PostList({ urlAccountName, onModalHandler }) {
   const [isAlbum, setIsAlbum] = useState(false);
   const [userPostList, setUserPostList] = useState([]);
+  const navigate = useNavigate();
 
   const { header } = useAPI();
 
@@ -62,6 +64,9 @@ export default function PostList({ urlAccountName, onModalHandler }) {
             if (post.image) {
               return (
                 <Album
+                  onClick={() => {
+                    navigate(`/post/${post.id}`);
+                  }}
                   src={AddAPIURLImage(post.image)}
                   alt={`${post.author.username}의 게시글 이미지`}
                   key={post.id}
