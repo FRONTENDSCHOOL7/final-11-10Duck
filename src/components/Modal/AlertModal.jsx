@@ -9,7 +9,8 @@ export default function AlertModal(props) {
     alertTitle,
     leftBtnText,
     rightBtnText,
-    onClickHandler,
+    onClickRightBtnHandler,
+
   } = props;
   if (isModalOpen) {
     return (
@@ -17,7 +18,7 @@ export default function AlertModal(props) {
         <div className="alertText">{alertTitle}</div>
         <div className="buttons">
           <button onClick={onModalHandler.closeModal}>{leftBtnText}</button>
-          <button onClick={onClickHandler}>{rightBtnText}</button>
+          <button onClick={onClickRightBtnHandler}>{rightBtnText}</button>
         </div>
       </AlertModalStyle>
     );

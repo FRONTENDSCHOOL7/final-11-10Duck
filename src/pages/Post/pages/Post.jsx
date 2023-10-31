@@ -28,6 +28,7 @@ export default function Post() {
     alertTitle: "",
     leftBtnText: "취소",
     rightBtnText: "",
+    onClickRightBtnHandler: () => {},
   });
 
   const { header } = useAPI();
@@ -49,8 +50,17 @@ export default function Post() {
 
   const navigate = useNavigate();
 
-  const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
-    setAlertModal({ ...alertModal, alertTitle, rightBtnText });
+  const onClickBottomModalMenu = (
+    alertTitle,
+    rightBtnText,
+    onClickRightBtnHandler
+  ) => {
+    setAlertModal({
+      ...alertModal,
+      alertTitle,
+      rightBtnText,
+      onClickRightBtnHandler,
+    });
     alertModalHandler.openModal();
     setIsBottomModalOpen(false);
   };
@@ -68,6 +78,24 @@ export default function Post() {
     }
   };
 
+  /**
+   * 게시글 삭제 함수
+   */
+  const deletePost = async () => {
+    try {
+      const res = await api.delete(`/post/${postId}`, {
+        headers: header,
+      });
+
+      console.log(res);
+      console.log("🌟게시글 삭제를 성공");
+      navigate("/profile");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥게시글 삭제를 실패");
+    }
+  };
+
   const fetchComment = async () => {
     try {
       const res = await api.get(`/post/${postId}/comments`, {
@@ -82,6 +110,9 @@ export default function Post() {
     }
   };
 
+  /**
+   * 댓글 입력 함수
+   */
   const uploadComment = async () => {
     try {
       const res = await api.post(
@@ -106,6 +137,52 @@ export default function Post() {
     }
   };
 
+  /**
+   * 댓글 삭제 함수
+   * @param {댓글 아이디} commentId
+   */
+  const deleteComment = async (commentId) => {
+    try {
+      const res = await api.delete(`/post/${postId}/comments/${commentId}`, {
+        headers: header,
+      });
+      console.log(res);
+      console.log("🌟게시글 삭제 성공");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥게시글 삭제 실패");
+    } finally {
+      fetchComment();
+      alertModalHandler.closeModal();
+    }
+  };
+
+  /**
+   * 댓글 신고하는 함수
+   * @param {댓글 아이디} commentId
+   */
+  const reportComment = async (commentId) => {
+    try {
+      const res = await api.post(
+        `/post/${postId}/comments/${commentId}/report`,
+        {
+          report: {
+            comment: commentId,
+          },
+        },
+        {
+          headers: header,
+        }
+      );
+
+      console.log(res);
+      console.log("🌟 댓글 신고 성공");
+    } catch (err) {
+      console.error(err);
+      console.log("🔥 댓글 신고 실패");
+    }
+  };
+
   const onChangeHandler = (content) => {
     setComment(content);
   };
@@ -127,19 +204,30 @@ export default function Post() {
         <LayoutContent>
           <PostItem
             post={post}
+            fetchFun={fetchPost}
             onModalHandler={() => {
               if (userFlag) {
                 setModalMenuList([
                   {
                     label: "삭제",
                     onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                      onClickBottomModalMenu(
+                        "게시글을 삭제할까요?",
+                        "삭제",
+                        () => {
+                          deletePost();
+                        }
+                      );
                     },
                   },
                   {
                     label: "수정",
                     onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 수정할까요?", "수정");
+                      onClickBottomModalMenu(
+                        "게시글을 수정할까요?",
+                        "수정",
+                        () => {}
+                      );
                     },
                   },
                 ]);
@@ -148,7 +236,11 @@ export default function Post() {
                   {
                     label: "신고하기",
                     onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                      onClickBottomModalMenu(
+                        "게시글을 신고할까요?",
+                        "신고",
+                        () => {}
+                      );
                     },
                   },
                 ]);
@@ -167,7 +259,13 @@ export default function Post() {
                     {
                       label: "삭제",
                       onClickHandler: () => {
-                        onClickBottomModalMenu("게시글을 삭제할까요?", "삭제");
+                        onClickBottomModalMenu(
+                          "댓글을 삭제할까요?",
+                          "삭제",
+                          () => {
+                            deleteComment(item.id);
+                          }
+                        );
                       },
                     },
                   ]);
@@ -176,7 +274,13 @@ export default function Post() {
                     {
                       label: "신고하기",
                       onClickHandler: () => {
-                        onClickBottomModalMenu("게시글을 신고할까요?", "신고");
+                        onClickBottomModalMenu(
+                          "게시글을 신고할까요?",
+                          "신고",
+                          () => {
+                            reportComment(item.id);
+                          }
+                        );
                       },
                     },
                   ]);
@@ -203,6 +307,7 @@ export default function Post() {
           leftBtnText={alertModal.leftBtnText}
           rightBtnText={alertModal.rightBtnText}
           onModalHandler={alertModalHandler}
+          onClickRightBtnHandler={alertModal.onClickRightBtnHandler}
         />
         <AlertModal
           isModalOpen={isUserAlertModalOpen}

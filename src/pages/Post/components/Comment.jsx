@@ -7,7 +7,24 @@ import MoreButton from "../../../assets/icon/icon-more-vertical.png";
 export default function Comment(props) {
   const { comment, onModalHandler } = props;
 
-  console.log(comment);
+  const elapsedTime = (date) => {
+    const start = new Date(date);
+    const end = new Date();
+
+    const seconds = Math.floor((end.getTime() - start.getTime()) / 1000);
+    if (seconds < 60) return "방금 전";
+
+    const minutes = seconds / 60;
+    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+
+    const hours = minutes / 60;
+    if (hours < 24) return `${Math.floor(hours)}시간 전`;
+
+    const days = hours / 24;
+    if (days < 7) return `${Math.floor(days)}일 전`;
+
+    return `${start.toLocaleDateString()}`;
+  };
 
   return (
     <CommentContainerStyle>
@@ -15,7 +32,9 @@ export default function Comment(props) {
         <UserInfoContainerStyle>
           <ProfileImageStyle src={comment.author.image} alt="프로필 이미지" />
           <UserNameStyle>{comment.author.username}</UserNameStyle>
-          <TimeStampStyle>{`· ${comment.createdAt}`}</TimeStampStyle>
+          <TimeStampStyle>{`· ${elapsedTime(
+            new Date(comment.createdAt)
+          )}`}</TimeStampStyle>
         </UserInfoContainerStyle>
         <MoreButtonStyle onClick={onModalHandler}>
           <ButtonImage src={MoreButton} alt="더보기 버튼" />
