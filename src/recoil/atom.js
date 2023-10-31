@@ -1,4 +1,4 @@
-const { atom } = require('recoil');
+const { atom } = require("recoil");
 
 export const userState = atom({
   key: "userState",
@@ -12,4 +12,9 @@ export const userState = atom({
     token: "",
     refreshToken: "",
   },
+});
+
+export const loadState = atom({
+  key: "loadState",
+  default: true,
 });

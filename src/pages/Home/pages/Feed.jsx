@@ -13,6 +13,7 @@ import useAlertModal from "../../../hooks/useAlertModal";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
+import Loading from "../../../components/Loading/Loading";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -107,6 +108,7 @@ export default function FeedFollow() {
           leftBtnText={"취소"}
           rightBtnText={"삭제"}
         />
+        <Loading />
       </Layout>
     );
   }
