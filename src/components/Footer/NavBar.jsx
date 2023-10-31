@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { ReactComponent as HomeIcon } from '../../assets/icon/icon-home.svg';
 import { ReactComponent as ChatIcon } from '../../assets/icon/icon-message-circle.svg';
@@ -9,23 +9,40 @@ import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
     const navigate = useNavigate();
+
+    const [currentPath, setCurrentPath] = useState('');
+    const [currentNav, setCurrentNav] = useState({});
+
     const menus = [
-        { label: '홈', icon: HomeIcon, url: '/' },
-        { label: '채팅', icon: ChatIcon, url: '/chat' },
-        { label: '게시물 작성', icon: PostIcon, url: '/post/upload' },
-        { label: '프로필', icon: ProfileIcon, url: '/profile' },
+        { id: 0, label: '홈', icon: <HomeIcon />, url: '/', isOn: false },
+        { id: 1, label: '채팅', icon: <ChatIcon />, url: '/chat', isOn: false },
+        { id: 2, label: '게시물 작성', icon: <PostIcon />, url: '/post/upload', isOn: false },
+        { id: 3, label: '프로필', icon: <ProfileIcon />, url: '/profile', isOn: false },
     ];
-    // 아이콘 클릭시 svg fill stroke 변경 기능 필요
+
+    useEffect(() => {
+        setCurrentPath(!window.location.pathname ? '/' : window.location.pathname.includes('/profile') ? '/profile' : window.location.pathname);
+    }, []);
+    useEffect(() => {
+        const menu = menus.filter((item) => {
+            return currentPath === item.url;
+        });
+
+        setCurrentNav({ ...menu[0], isOn: true });
+    }, [currentPath]);
+    useEffect(() => {}, [currentNav]);
+
     return (
         <NavBarContainer>
-            {menus.map((nav) => {
+            {menus.map((nav, idx) => {
                 return (
                     <NavStyle
-                        key={nav.label}
+                        className={currentNav.id === idx && !!currentNav.isOn ? 'isClick' : ''}
                         onClick={() => {
                             navigate(nav.url);
-                        }}>
-                        <nav.icon width={24} height={24} />
+                        }}
+                    >
+                        {nav.icon}
                         <NavText>{nav.label}</NavText>
                     </NavStyle>
                 );
@@ -51,6 +68,22 @@ const NavStyle = styled.button`
     background: none;
     cursor: pointer;
     padding: 12px 0 6px 0;
+
+    & svg {
+        width: 24px;
+        height: 24px;
+    }
+    &.isClick {
+        path {
+            fill: ${COLOR.bgPrimaryColor};
+            stroke: ${COLOR.borderOrangeColor};
+        }
+    }
+    &:hover {
+        path {
+            stroke: ${COLOR.borderOrangeColor};
+        }
+    }
 `;
 
 const NavText = styled.p`
