@@ -65,13 +65,6 @@ export default function FeedFollow() {
             ]}
           />
         )}
-        <AlertModal
-          isModalOpen={isAlertModalOpen}
-          onModalHandler={alertModalHandler}
-          alertTitle={"게시글을 신고할까요?"}
-          leftBtnText={"취소"}
-          rightBtnText={"삭제"}
-        />
       </Layout>
     );
   }
