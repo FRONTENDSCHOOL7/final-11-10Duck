@@ -86,18 +86,20 @@ export default function FeedFollow() {
           ))}
         </LayoutContent>
         <NavBar />
-        {isBottomModalOpen && (
-          <BottomModal
-            menu={[
-              {
-                label: "신고하기",
-                onClickHandler: () => {
-                  alertModalHandler.openModal();
-                },
+        <BottomModal
+          isModalOpen={isBottomModalOpen}
+          onModalHandler={() => {
+            setIsBottomModalOpen(!isBottomModalOpen);
+          }}
+          menu={[
+            {
+              label: "신고하기",
+              onClickHandler: () => {
+                alertModalHandler.openModal();
               },
-            ]}
-          />
-        )}
+            },
+          ]}
+        />
         <AlertModal
           isModalOpen={isAlertModalOpen}
           onModalHandler={alertModalHandler}

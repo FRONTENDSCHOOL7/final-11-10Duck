@@ -162,41 +162,53 @@ export default function Profile() {
           }}
         />
       </LayoutContent>
-      {isProductModalOpen && <BottomModal menu={productModalMenuList} />}
-      {isPostModalOpen && (
-        <BottomModal
-          menu={
-            isMyProfile
-              ? [
-                  {
-                    label: "삭제",
-                    onClickHandler: () => {
-                      onClickBottomModalMenu(
-                        "게시글을 삭제할까요?",
-                        "삭제",
-                        () => {}
-                      );
-                    },
+      <BottomModal
+        isModalOpen={isProductModalOpen}
+        menu={productModalMenuList}
+        onModalHandler={() => {
+          setIsProductModalOpen(!isProductModalOpen);
+        }}
+      />
+      <BottomModal
+        isModalOpen={isPostModalOpen}
+        onModalHandler={() => {
+          setIsPostModalOpen(!isPostModalOpen);
+        }}
+        menu={
+          isMyProfile
+            ? [
+                {
+                  label: "삭제",
+                  onClickHandler: () => {
+                    onClickBottomModalMenu(
+                      "게시글을 삭제할까요?",
+                      "삭제",
+                      () => {}
+                    );
                   },
-                  {
-                    label: "수정",
-                    onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 수정할까요?", "수정");
-                    },
+                },
+                {
+                  label: "수정",
+                  onClickHandler: () => {
+                    onClickBottomModalMenu("게시글을 수정할까요?", "수정");
                   },
-                ]
-              : [
-                  {
-                    label: "신고하기",
-                    onClickHandler: () => {
-                      onClickBottomModalMenu("게시글을 신고할까요?", "신고");
-                    },
+                },
+              ]
+            : [
+                {
+                  label: "신고하기",
+                  onClickHandler: () => {
+                    onClickBottomModalMenu("게시글을 신고할까요?", "신고");
                   },
-                ]
-          }
-        />
-      )}
-      {isModalOpen && <BottomModal menu={userModalMenuList} />}
+                },
+              ]
+        }
+      />
+      <BottomModal
+        isModalOpen={isModalOpen}
+        menu={userModalMenuList}
+        onModalHandler={onModalHandler}
+      />
 
       <AlertModal
         isModalOpen={isAlertModalOpen}

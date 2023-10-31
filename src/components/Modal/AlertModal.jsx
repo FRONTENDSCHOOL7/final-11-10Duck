@@ -10,23 +10,31 @@ export default function AlertModal(props) {
     leftBtnText,
     rightBtnText,
     onClickRightBtnHandler,
-
   } = props;
   if (isModalOpen) {
     return (
-      <AlertModalStyle>
-        <div className="alertText">{alertTitle}</div>
-        <div className="buttons">
-          <button onClick={onModalHandler.closeModal}>{leftBtnText}</button>
-          <button onClick={onClickRightBtnHandler}>{rightBtnText}</button>
-        </div>
-      </AlertModalStyle>
+      <AlertModalBackgroundStyle>
+        <AlertModalStyle>
+          <div className="alertText">{alertTitle}</div>
+          <div className="buttons">
+            <button onClick={onModalHandler.closeModal}>{leftBtnText}</button>
+            <button onClick={onClickRightBtnHandler}>{rightBtnText}</button>
+          </div>
+        </AlertModalStyle>
+      </AlertModalBackgroundStyle>
     );
   }
 
   return null;
 }
-
+const AlertModalBackgroundStyle = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+`;
 const AlertModalStyle = styled.div`
   position: absolute;
   top: 50%;

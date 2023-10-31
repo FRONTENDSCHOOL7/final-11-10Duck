@@ -299,8 +299,18 @@ export default function Post() {
             onChangeHandler(e.target.value);
           }}
         />
-        {isbottomModalOpen && <BottomModal menu={modalMenuList} />}
-        {isModalOpen && <BottomModal menu={userModalMenuList} />}
+        <BottomModal
+          isModalOpen={isbottomModalOpen}
+          menu={modalMenuList}
+          onModalHandler={() => {
+            setIsBottomModalOpen(!isbottomModalOpen);
+          }}
+        />
+        <BottomModal
+          isModalOpen={isModalOpen}
+          menu={userModalMenuList}
+          onModalHandler={onModalHandler}
+        />
         <AlertModal
           isModalOpen={isAlertModalOpen}
           alertTitle={alertModal.alertTitle}
