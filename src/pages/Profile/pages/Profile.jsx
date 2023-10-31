@@ -21,6 +21,8 @@ export default function Profile() {
   const { accountName } = useParams();
   const [user, setUser] = useRecoilState(userState);
 
+  console.log("user", user);
+
   const [urlAccountName, setUrlAccountName] = useState(
     accountName ? accountName : user.accountname
   );
