@@ -10,6 +10,7 @@ export default function AlertModal(props) {
     leftBtnText,
     rightBtnText,
     onClickRightBtnHandler,
+
   } = props;
   if (isModalOpen) {
     return (
