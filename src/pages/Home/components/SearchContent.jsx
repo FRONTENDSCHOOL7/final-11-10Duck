@@ -2,15 +2,31 @@ import { styled } from 'styled-components';
 import { FONT_SIZE, COLOR } from '../../../utils';
 
 export default function SearchContent(props) {
-    const { user } = props;
+    const { user, searchInput } = props;
 
     return (
         <DataStyle>
             <ImgStyle src={user.image} alt="프로필 이미지" />
-            <div className="ContentStyle">
-                <span>{user.username}</span>
-                <span>@{user.accountname}</span>
-            </div>
+            <ContentStyle>
+                {user.username.includes(searchInput) ? (
+                    <UserName>
+                        {user.username.split(searchInput)[0]}
+                        <span style={{ color: COLOR.borderOrangeColor }}>{searchInput}</span>
+                        {user.username.split(searchInput)[1]}
+                    </UserName>
+                ) : (
+                    <UserName>{user.username}</UserName>
+                )}
+                {user.accountname.includes(searchInput) ? (
+                    <UserAccount>
+                        @{user.accountname.split(searchInput)[0]}
+                        <span style={{ color: COLOR.borderOrangeColor }}>{searchInput}</span>
+                        {user.accountname.split(searchInput)[1]}
+                    </UserAccount>
+                ) : (
+                    <UserAccount>@{user.accountname}</UserAccount>
+                )}
+            </ContentStyle>
         </DataStyle>
     );
 }
@@ -19,25 +35,20 @@ const DataStyle = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+`;
+const ContentStyle = styled.article`
+    vertical-align: middle;
+`;
 
-    & > .ContentStyle {
-        vertical-align: middle;
-    }
+const UserName = styled.p`
+    font-size: ${FONT_SIZE.large};
+    margin-bottom: 6px;
+    color: ${COLOR.fontDarkColor};
+`;
 
-    & > .ContentStyle > span {
-        display: block;
-    }
-
-    & > .ContentStyle > span:first-child {
-        font-size: ${FONT_SIZE.large};
-        margin-bottom: 6px;
-        color: ${COLOR.fontDarkColor};
-    }
-
-    & > .ContentStyle > span:last-child {
-        font-size: ${FONT_SIZE.medium};
-        color: ${COLOR.fontPrimaryColor};
-    }
+const UserAccount = styled.p`
+    font-size: ${FONT_SIZE.medium};
+    color: ${COLOR.fontPrimaryColor};
 `;
 
 const ImgStyle = styled.img`

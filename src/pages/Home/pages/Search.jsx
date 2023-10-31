@@ -4,16 +4,12 @@ import LayoutContent from '../../../components/Layout/LayoutContent';
 import SearchHeader from '../../../components/Header/SearchHeader';
 import NavBar from '../../../components/Footer/NavBar';
 import SearchContent from '../components/SearchContent';
-import ProfileImg from '../../../assets/profile-example.png';
 import { useEffect, useState } from 'react';
 import useAPI from '../../../hooks/useAPI';
 import { api } from '../../../api/baseURL';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../../recoil/atom';
 
 export default function Search() {
     const { header } = useAPI();
-    //const user = useRecoilValue(userState);
 
     const [searchInput, setSearchInput] = useState('');
     const [searchList, setSearchList] = useState([]);
@@ -25,13 +21,7 @@ export default function Search() {
             });
             const resList = res.data.filter((data) => data.username.includes(searchInput) || data.accountname.includes(searchInput));
 
-            // const res = await api.get(`/user/searchuser/?keyword=${'ssduck'}`, {
-            //     headers: header,
-            // });
-            // const resList = res.data.filter((data) => data.username.includes('ssduck') || data.accountname.includes('ssduck'));
-
             setSearchList([...resList]);
-
             console.log('🌟유저 검색 성공');
         } catch (err) {
             console.error(err);
@@ -40,7 +30,7 @@ export default function Search() {
     };
 
     useEffect(() => {
-        fetchSearchUser();
+        searchInput.length > 0 && fetchSearchUser();
     }, [searchInput]);
     return (
         <Layout>
@@ -48,7 +38,7 @@ export default function Search() {
             <LayoutContent>
                 <SearchStyle>
                     {searchList.map((user) => {
-                        return <SearchContent user={user} />;
+                        return <SearchContent user={user} searchInput={searchInput} />;
                     })}
                 </SearchStyle>
             </LayoutContent>
