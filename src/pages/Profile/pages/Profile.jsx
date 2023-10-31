@@ -8,7 +8,7 @@ import PostList from "../components/PostList";
 import ProductScroller from "../../../components/Product/ProductScroller";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 import { api } from "../../../api/baseURL";
 import BottomModal from "../../../components/Modal/BottomModal";
@@ -64,6 +64,8 @@ export default function Profile() {
       onClickHandler: () => {},
     },
   ];
+
+  const navigate = useNavigate();
 
   const onClickBottomModalMenu = (alertTitle, rightBtnText) => {
     setAlertModal({ ...alertModal, alertTitle, rightBtnText });
@@ -122,12 +124,10 @@ export default function Profile() {
     fetchProduct();
   }, []);
 
-
-    useEffect(() => {
-        fetchProfileInfo();
-        fetchProduct();
-    }, [urlAccountName, isFollow]);
-
+  useEffect(() => {
+    fetchProfileInfo();
+    fetchProduct();
+  }, [urlAccountName, isFollow]);
 
   useEffect(() => {
     if (!accountName) {
@@ -198,7 +198,6 @@ export default function Profile() {
       )}
       {isModalOpen && <BottomModal menu={userModalMenuList} />}
 
-
       <AlertModal
         isModalOpen={isAlertModalOpen}
         alertTitle={alertModal.alertTitle}
@@ -212,6 +211,20 @@ export default function Profile() {
         leftBtnText={userAlertModal.leftBtnText}
         rightBtnText={userAlertModal.rightBtnText}
         onModalHandler={userAlertModalHandler}
+        onClickRightBtnHandler={() => {
+          setUser({
+            _id: "",
+            username: "",
+            email: "",
+            accountname: "",
+            intro: "",
+            image: "",
+            token: "",
+            refreshToken: "",
+          });
+          localStorage.removeItem("token");
+          navigate("/");
+        }}
       />
       <NavBar />
     </Layout>

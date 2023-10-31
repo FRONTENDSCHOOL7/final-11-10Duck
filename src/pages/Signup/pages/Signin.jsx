@@ -39,7 +39,7 @@ export default function Signin() {
       );
 
       console.log("🌟로그인 성공");
-      localStorage.setItem("user", res.data.user);
+      localStorage.setItem("token", res.data.user.token);
       setUser(res.data.user);
       navigate("/");
     } catch (err) {

@@ -20,11 +20,13 @@ export default function FeedFollow() {
 
   const navigate = useNavigate();
 
-  const isLogin = localStorage.getItem("user");
+  const isLogin = localStorage.getItem("token");
 
-  if (!isLogin) {
-    navigate("/signin-select");
-  }
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/signin-select");
+    }
+  }, [isLogin]);
 
   const fetchFollowerPost = async () => {
     try {
@@ -74,6 +76,13 @@ export default function FeedFollow() {
             ]}
           />
         )}
+        <AlertModal
+          isModalOpen={isAlertModalOpen}
+          onModalHandler={alertModalHandler}
+          alertTitle={"게시글을 신고할까요?"}
+          leftBtnText={"취소"}
+          rightBtnText={"삭제"}
+        />
       </Layout>
     );
   }

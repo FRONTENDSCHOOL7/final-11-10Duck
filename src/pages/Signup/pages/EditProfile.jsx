@@ -77,6 +77,8 @@ export default function EditProfile() {
         }
       );
       setUser(res.data.user);
+      localStorage.setItem("token", res.data.user.token);
+      navigate("/");
     } catch (err) {
       console.error(err);
     }
