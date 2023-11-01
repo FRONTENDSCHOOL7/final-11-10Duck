@@ -64,4 +64,9 @@ const SearchInput = styled.input`
         color: var(--C4C4C4, #c4c4c4);
         padding: 3px;
     }
+
+    &:focus {
+        outline-color: ${COLOR.btnPrimaryColor};
+        color: ${COLOR.btnPrimaryColor};
+    }
 `;
