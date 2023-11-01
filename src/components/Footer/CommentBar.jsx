@@ -17,6 +17,15 @@ export default function CommentBar({
   return (
     <FormContainer>
       <div>
+        {mode === "chat" ? (
+          <ImgUploadBtn
+            type="file"
+            accept="mage/jpg, image/png, image/jpeg"
+            onChange={onImageUploadHandler}
+          />
+        ) : (
+          <></>
+        )}
         <ProfileImg
           mode={mode}
           onClick={onImageUploadHandler}
@@ -99,4 +108,16 @@ const CommentBtn = styled.button`
   font-size: ${FONT_SIZE.large};
   font-weight: 500;
   cursor: ${(props) => props.inputLength && "pointer"};
+`;
+
+const ImgUploadBtn = styled.input`
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  vertical-align: middle;
+  position: absolute;
+  opacity: 0;
+  filter: Alpha(style=0, opacity=0);
+  background-color: transparent;
+  border: none;
 `;
