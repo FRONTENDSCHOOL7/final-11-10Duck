@@ -105,14 +105,21 @@ const NavStyle = styled.button`
         path,
         rect {
             fill: ${COLOR.bgPrimaryColor};
-            stroke: ${COLOR.borderOrangeColor};
+            stroke: ${COLOR.btnPrimaryColor};
+        }
+        p {
+            color: ${COLOR.btnPrimaryColor};
         }
     }
     &:hover {
         &:hover {
             path,
             rect {
-                stroke: ${COLOR.borderOrangeColor};
+                stroke: ${COLOR.btnPrimaryColor};
+            }
+
+            p {
+                color: ${COLOR.btnPrimaryColor};
             }
         }
     }
