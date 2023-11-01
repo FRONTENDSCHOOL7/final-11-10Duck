@@ -7,7 +7,7 @@ export default function ImageBalloon(props) {
   console.log("💡", src);
 
   return (
-    <ImageBalloonStyle>{!!src ? <></> : <img src={src} />}</ImageBalloonStyle>
+    <ImageBalloonStyle>{!src ? <></> : <img src={src} />}</ImageBalloonStyle>
   );
 }
 
@@ -15,7 +15,7 @@ const ImageBalloonStyle = styled.div`
   margin-top: 0.5em;
   text-align: right;
   & > img {
-    display: block;
+    display: inline-block;
     padding: 12px;
     right: 16px;
     background-color: ${COLOR.fontOrangeColor};

@@ -19,30 +19,17 @@ export default function ChatRoom() {
   const navigate = useNavigate();
 
   const onImageUploadHandler = (event) => {
-    encodeFileToBase64(event.target.files[0]);
-    onImageUploadHandler(event.target.files[0]);
-    const tempList = srcList;
-    setSrcList([]);
-    return tempList;
+    const fileBlob = event.target.files[0];
+
+    encodeFileToBase64(fileBlob);
   };
 
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
-    // reader.onload = () => {
-    // return (
-    //   <div>
-    //     <img src={reader.result} />
-    //   </div>
-    // );
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        console.log(reader.result);
-        srcList.push(reader.result);
-        resolve();
-      };
-    });
-    // };
+    reader.onload = (e) => {
+      setSrcList([...srcList, e.target.result]);
+    };
   };
 
   const onChangeHandler = (value) => {
@@ -90,9 +77,9 @@ export default function ChatRoom() {
         {messageList.map((item) => (
           <ChatBalloon message={item} />
         ))}
-        {srcList.map((item) => {
-          <ImageBalloon message={item} />;
-        })}
+        {srcList.map((item) => (
+          <ImageBalloon src={item} />
+        ))}
       </LayoutContent>
       <BottomModal
         isModalOpen={isModalOpen}
