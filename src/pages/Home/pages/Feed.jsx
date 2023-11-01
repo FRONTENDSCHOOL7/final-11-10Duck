@@ -13,6 +13,7 @@ import useAlertModal from "../../../hooks/useAlertModal";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
+import Vote from "../components/Vote";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -73,6 +74,7 @@ export default function FeedFollow() {
       <Layout>
         <MainHeader />
         <LayoutContent>
+          <Vote />
           {followerPostList.map((item) => (
             <PostItem
               key={item.id}
