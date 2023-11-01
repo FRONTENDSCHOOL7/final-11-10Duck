@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import LayoutContent from "../../components/Layout/LayoutContent";
-import MainLogo from "../../assets/full-logo.png";
+import MainLogo from "../../assets/logo/PurpleDuck.png";
 import { styled } from "styled-components";
 
 export default function Splash() {
@@ -24,7 +24,7 @@ const LogoContainerStyle = styled.div`
 `;
 
 const MainLogoStyle = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 144px;
+  height: 144px;
   object-fit: cover;
 `;

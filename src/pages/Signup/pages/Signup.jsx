@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Layout from "../../../components/Layout/Layout";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { COLOR, FONT_SIZE } from "../../../utils";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/baseURL";
@@ -13,9 +13,8 @@ export default function Signup() {
     password: "",
   });
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [disabledBtn, setDisabledBtn] = useState(false);
-  const [emailDuplicate, setEmailDuplicate] = useState(false);
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
+  const [disabledBtn, setDisabledBtn] = useState(true);
 
   const navigate = useNavigate();
 
@@ -34,40 +33,43 @@ export default function Signup() {
           },
         }
       );
-      console.log(res.data.message);
       if (res.data.message === "이미 가입된 이메일 주소 입니다.") {
         setEmailErrorMsg("*이미 가입된 이메일 주소입니다.");
         setDisabledBtn(true);
-        setEmailDuplicate(true);
       } else {
         setEmailErrorMsg("");
-        setDisabledBtn(false);
-        setEmailDuplicate(false);
+        if (!passwordErrorMsg) {
+          setDisabledBtn(false);
+        }
       }
     } catch (error) {
-      console.log(error);
       console.log("🔥이메일확인 실패");
     }
   };
 
-  function validateForm() {
-    if (emailDuplicate) {
-    } else if (user.password && user.password.length < 6) {
+  const checkPassword = () => {
+    if (user.password.length < 6) {
+      setPasswordErrorMsg("*비밀번호는 6자 이상이어야 합니다.");
       setDisabledBtn(true);
-      setErrorMsg("*비밀번호는 6자 이상이어야 합니다.");
-    } else if (user.email && user.password && user.password.length >= 6) {
-      setDisabledBtn(false);
-      setErrorMsg("");
     } else {
-      setDisabledBtn(true);
-      setErrorMsg("");
+      setPasswordErrorMsg("");
+      if (!emailErrorMsg) {
+        setDisabledBtn(false);
+      }
     }
-  }
+  };
 
-  useEffect(() => {
-    validateForm();
-    checkEmail();
-  });
+  const handleEmailBlur = () => {
+    if (user.email) {
+      checkEmail();
+    }
+  };
+
+  const handlePasswordBlur = () => {
+    if (user.password) {
+      checkPassword();
+    }
+  };
 
   return (
     <Layout>
@@ -82,6 +84,7 @@ export default function Signup() {
             setUser({ ...user, email: event.target.value });
           }}
           alert={emailErrorMsg}
+          onBlurHandler={handleEmailBlur}
         />
         <Input
           name="password"
@@ -92,7 +95,8 @@ export default function Signup() {
           onChangeHandler={(event) => {
             setUser({ ...user, password: event.target.value });
           }}
-          alert={errorMsg}
+          alert={passwordErrorMsg}
+          onBlurHandler={handlePasswordBlur}
         />
         <Button
           buttonText="다음"
@@ -123,4 +127,5 @@ const Title = styled.div`
   color: #000000;
   text-align: center;
   margin-bottom: 40px;
+  font-family: "PyeongChangPeace-Bold";
 `;

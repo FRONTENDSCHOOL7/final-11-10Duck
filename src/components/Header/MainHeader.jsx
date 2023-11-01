@@ -36,7 +36,8 @@ const IconImg = styled.img`
   margin-left: 0;
 `;
 const MarketTitle = styled.h2`
-  color: #000;
+  color: ${COLOR.bgOrangeColor};
   font-size: 18px;
   font-weight: 500;
+  font-family: "PyeongChangPeace-Bold";
 `;

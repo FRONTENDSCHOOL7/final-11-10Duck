@@ -49,4 +49,6 @@ const ButtonStyle = styled.button`
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   font-size: ${(props) =>
     props.size.toUpperCase() === "S" ? FONT_SIZE.medium : FONT_SIZE.large};
+
+  font-family: "PyeongChang";
 `;
