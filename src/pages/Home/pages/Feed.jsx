@@ -15,6 +15,9 @@ import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
 import Vote from "../components/Vote";
 import Story from "../components/Story/Story";
+import AddStory from "../components/Story/AddStory";
+import StoryButton from "../components/Story/StoryButton";
+import ShowStory from "../components/Story/ShowStory";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -22,6 +25,7 @@ export default function FeedFollow() {
   const [followerPostList, setFollowerPostList] = useState([]);
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
   const [user, setUser] = useRecoilState(userState);
+  const [isAddStoryOpen, setIsAddStoryOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -75,7 +79,14 @@ export default function FeedFollow() {
       <Layout>
         <MainHeader />
         <LayoutContent>
-          <Story />
+          <Story>
+            <StoryButton
+              onClickHandler={() => {
+                setIsAddStoryOpen(true);
+                setTimeout(() => setIsAddStoryOpen(false), 2500);
+              }}
+            />
+          </Story>
           <Vote />
           {followerPostList.map((item) => (
             <PostItem
@@ -111,6 +122,13 @@ export default function FeedFollow() {
           leftBtnText={"취소"}
           rightBtnText={"삭제"}
         />
+        <AddStory
+          isAddStoryOpen={true}
+          closeModal={() => {
+            setIsAddStoryOpen(false);
+          }}
+        />
+        {/* <ShowStory isShowStoryOpen={isAddStoryOpen} /> */}
       </Layout>
     );
   }
