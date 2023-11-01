@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Layout from "../../../components/Layout/Layout";
-import LogoIcon from "../../../assets/logo/10duck_Logo.png";
+import LogoIcon from "../../../assets/logo/WhiteDuck.png";
 import KakaoIcon from "../../../assets/message-circle.png";
 import GoogleIcon from "../../../assets/google.png";
 import FacebookIcon from "../../../assets/facebook.png";
