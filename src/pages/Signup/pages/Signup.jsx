@@ -127,5 +127,5 @@ const Title = styled.div`
   color: #000000;
   text-align: center;
   margin-bottom: 40px;
-}
+  font-family: "PyeongChangPeace-Bold";
 `;

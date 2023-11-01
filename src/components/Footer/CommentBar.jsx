@@ -99,4 +99,5 @@ const CommentBtn = styled.button`
   font-size: ${FONT_SIZE.large};
   font-weight: 500;
   cursor: ${(props) => props.inputLength && "pointer"};
+  font-family: "PyeongChangPeace";
 `;

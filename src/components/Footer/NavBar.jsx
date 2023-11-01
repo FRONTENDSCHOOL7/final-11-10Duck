@@ -88,6 +88,7 @@ const NavStyle = styled.button`
   background: none;
   cursor: pointer;
   padding: 12px 0 6px 0;
+  font-family: "PyeongChangPeace";
 
   & svg {
     width: 24px;

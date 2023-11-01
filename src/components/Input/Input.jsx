@@ -47,9 +47,11 @@ const InputStyle = styled.input`
   border-bottom: 1px solid ${COLOR.borderPrimaryColor};
   padding-top: 10px;
   padding-bottom: 9px;
+  background-color: ${COLOR.bgPrimaryColor};
   &:focus {
     outline: none;
     border-bottom: 1px solid ${COLOR.borderOrangeColor};
+    background-color: ${COLOR.bgPrimaryColor};
   }
   &::placeholder {
     color: ${(props) => props.placeholderColor};
