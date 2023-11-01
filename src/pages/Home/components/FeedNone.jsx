@@ -7,6 +7,7 @@ import SearchIcon from "../../../assets/icon/icon-symbol-logo-gray.png";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { FONT_SIZE, COLOR } from "../../../utils";
+import Vote from "./Vote";
 
 export default function FeedNone() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function FeedNone() {
     <Layout>
       <MainHeader />
       <LayoutContent>
+        <Vote />
         <FeedPage>
           <IconImg src={SearchIcon} alt="로고 아이콘" />
           <span className="msg">유저를 검색해 팔로우 해보세요!</span>
@@ -33,7 +35,7 @@ export default function FeedNone() {
 }
 
 const FeedPage = styled.div`
-  margin-top: 50%;
+  margin-top: 30%;
 
   & > .msg {
     color: ${COLOR.fontPrimaryColor};
