@@ -9,12 +9,28 @@ import CommentBar from "../../../components/Footer/CommentBar";
 import { useState } from "react";
 import ChatBalloon from "../components/ChatBalloon";
 import { useNavigate } from "react-router-dom";
+import ImageBalloon from "../components/ImageBalloon";
 
 export default function ChatRoom() {
   const { isModalOpen, onModalHandler } = useModal();
   const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
+  const [srcList, setSrcList] = useState([]);
   const navigate = useNavigate();
+
+  const onImageUploadHandler = (event) => {
+    const fileBlob = event.target.files[0];
+
+    encodeFileToBase64(fileBlob);
+  };
+
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    reader.onload = (e) => {
+      setSrcList([...srcList, e.target.result]);
+    };
+  };
 
   const onChangeHandler = (value) => {
     setInput(value);
@@ -39,15 +55,15 @@ export default function ChatRoom() {
   const basicMessageList = [
     {
       image: ProfileImg,
-      userName: "애월읍 위니브 감귤농장",
-      msg: "옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.",
-      time: "12:39",
+      userName: "이타치",
+      msg: "죄송한데 길 좀 물어봐도 될까요",
+      time: "13:30",
     },
     {
       image: ProfileImg,
-      userName: "애월읍 위니브 감귤농장",
-      msg: "안녕하세요. 감귤 사고싶어요요요요요",
-      time: "12:41",
+      userName: "이타치",
+      msg: "나뭇잎 마을로 가는 길을 까먹었는데 혹시 아세요?",
+      time: "13:31",
     },
   ];
 
@@ -61,6 +77,9 @@ export default function ChatRoom() {
         {messageList.map((item) => (
           <ChatBalloon message={item} />
         ))}
+        {srcList.map((item) => (
+          <ImageBalloon src={item} />
+        ))}
       </LayoutContent>
       <BottomModal
         isModalOpen={isModalOpen}
@@ -68,7 +87,7 @@ export default function ChatRoom() {
         onModalHandler={onModalHandler}
       />
       <CommentBar
-        onImageUploadHandler={() => {}}
+        onImageUploadHandler={onImageUploadHandler}
         mode="chat"
         content={input}
         onSubmitHandler={onSubmitHandler}

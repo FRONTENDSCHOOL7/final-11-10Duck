@@ -26,17 +26,17 @@ export default function ChatList() {
     {
       id: 1,
       image: ProfileImg,
-      userName: "애월읍 위니브 감귤농장",
-      msg: "이번에 정정 언제하맨마씸?",
-      date: "2020.10.25",
+      userName: "이타치",
+      msg: "죄송한데 길 좀 물어봐도 될까요",
+      date: "2023.11.09",
       unread: 1,
     },
     {
       id: 2,
       image: ProfileImg,
-      userName: "제주감귤마을",
-      msg: "깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지는 불태워 버렸다.",
-      date: "2020.10.25",
+      userName: "루피",
+      msg: "빅맘이 너 소개시켜 달라는데 괜찮음?",
+      date: "2023.11.08",
       unread: 0,
     },
   ];
