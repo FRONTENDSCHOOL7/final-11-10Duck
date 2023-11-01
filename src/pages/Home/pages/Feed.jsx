@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
 import Vote from "../components/Vote";
+import Story from "../components/Story/Story";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -74,6 +75,7 @@ export default function FeedFollow() {
       <Layout>
         <MainHeader />
         <LayoutContent>
+          <Story />
           <Vote />
           {followerPostList.map((item) => (
             <PostItem
