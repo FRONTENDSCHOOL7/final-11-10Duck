@@ -13,6 +13,7 @@ export default function SigninSelect() {
     <Layout>
       <SelectPage>
         <LogoImg src={LogoIcon}></LogoImg>
+        <TitleStyle>씁덕학개론</TitleStyle>
         <SelectSignin>
           <SelectButtonContent>
             <SelectButton
@@ -55,6 +56,14 @@ const LogoImg = styled.img`
   height: 144px;
   margin: 0 auto;
   margin-top: 150px;
+`;
+
+const TitleStyle = styled.div`
+  margin-top: 4px;
+  font-family: "PyeongChangPeace-Bold";
+  text-align: center;
+  color: ${COLOR.fontSecondaryColor};
+  font-size: 24px;
 `;
 
 const SelectSignin = styled.div`
