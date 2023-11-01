@@ -14,7 +14,7 @@ export default function Signin() {
     email: "",
     password: "",
   });
-
+  const [errorMsg, setErrorMsg] = useState("");
   const setUser = useSetRecoilState(userState);
 
   const navigate = useNavigate();
@@ -37,7 +37,12 @@ export default function Signin() {
           },
         }
       );
-
+      console.log(res.data.message);
+      if (res.data.message === "이메일 또는 비밀번호가 일치하지 않습니다.") {
+        setErrorMsg("*이메일  또는 비밀번호가 일치하지 않습니다. ");
+      } else {
+        setErrorMsg("");
+      }
       console.log("🌟로그인 성공");
       localStorage.setItem("token", res.data.user.token);
       setUser(res.data.user);
@@ -47,6 +52,7 @@ export default function Signin() {
       console.log("🔥로그인 실패");
     }
   };
+
   return (
     <Layout>
       <SigninPage>
@@ -63,6 +69,7 @@ export default function Signin() {
           onChangeHandler={(event) => {
             setUserData({ ...userData, password: event.target.value });
           }}
+          alert={errorMsg}
         />
         <Button
           buttonText="로그인"
