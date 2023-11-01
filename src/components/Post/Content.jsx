@@ -56,7 +56,7 @@ export default function Content(props) {
 }
 
 const ContentStyle = styled.section`
-  font-size: 14px;
+  font-size: ${FONT_SIZE.large};
   margin-left: 54px;
   cursor: ${(props) => (props.isMoveToContentPage ? "pointer" : "")};
 `;
