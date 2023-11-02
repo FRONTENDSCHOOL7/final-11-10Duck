@@ -8,12 +8,29 @@ import NavBar from '../../../components/Footer/NavBar';
 import Gallery from '../components/Gallery';
 import { api } from '../../../api/baseURL';
 import useAPI from '../../../hooks/useAPI';
+import useModal from '../../../hooks/useModal';
+import BottomModal from '../../../components/Modal/BottomModal';
+import AlertModal from '../../../components/Modal/AlertModal';
+import useAlertModal from '../../../hooks/useAlertModal';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../../recoil/atom';
+import { useNavigate } from 'react-router-dom';
 
 export default function LookAround() {
     const { header } = useAPI();
+    const [user, setUser] = useRecoilState(userState);
+    const navigate = useNavigate();
+
+    const { isModalOpen, isUserAlertModalOpen, userAlertModal, userModalMenuList, onModalHandler, userAlertModalHandler } = useModal();
+    const { isAlertModalOpen, alertModalHandler } = useAlertModal();
 
     const [userList, setUserList] = useState([]);
     const [galleyList, setGalleryList] = useState([]);
+    const [alertModal, setAlertModal] = useState({
+        alertTitle: '',
+        leftBtnText: '취소',
+        rightBtnText: '',
+    });
 
     const fetch10DuckUsers = async () => {
         try {
@@ -64,7 +81,7 @@ export default function LookAround() {
 
     return (
         <Layout>
-            <BasicHeader mode={'post'} />
+            <BasicHeader mode={'post'} onClickMoreBtnHandler={onModalHandler} />
             <LayoutContent>
                 <GalleryStyle>
                     {galleyList.map((post) => {
@@ -72,6 +89,35 @@ export default function LookAround() {
                     })}
                 </GalleryStyle>
             </LayoutContent>
+            <BottomModal isModalOpen={isModalOpen} menu={userModalMenuList} onModalHandler={onModalHandler} />
+            <AlertModal
+                isModalOpen={isAlertModalOpen}
+                alertTitle={alertModal.alertTitle}
+                leftBtnText={alertModal.leftBtnText}
+                rightBtnText={alertModal.rightBtnText}
+                onModalHandler={alertModalHandler}
+            />
+            <AlertModal
+                isModalOpen={isUserAlertModalOpen}
+                alertTitle={userAlertModal.alertTitle}
+                leftBtnText={userAlertModal.leftBtnText}
+                rightBtnText={userAlertModal.rightBtnText}
+                onModalHandler={userAlertModalHandler}
+                onClickRightBtnHandler={() => {
+                    setUser({
+                        _id: '',
+                        username: '',
+                        email: '',
+                        accountname: '',
+                        intro: '',
+                        image: '',
+                        token: '',
+                        refreshToken: '',
+                    });
+                    localStorage.removeItem('token');
+                    navigate('/');
+                }}
+            />
             <NavBar />
         </Layout>
     );
