@@ -17,6 +17,7 @@ export default function ChatRoom() {
   const [input, setInput] = useState("");
   const [srcList, setSrcList] = useState([]);
   const navigate = useNavigate();
+  const [num, setNum] = useState(0);
 
   const onImageUploadHandler = (event) => {
     const fileBlob = event.target.files[0];
@@ -28,7 +29,8 @@ export default function ChatRoom() {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     reader.onload = (e) => {
-      setSrcList([...srcList, e.target.result]);
+      onChangeHandler(e.target.result);
+      setNum(1);
     };
   };
 
@@ -38,8 +40,13 @@ export default function ChatRoom() {
 
   const onSubmitHandler = () => {
     const tempMessageList = messageList;
-    tempMessageList.push(input);
-    setMessageList(tempMessageList);
+    if (num === 1) {
+      setSrcList([...srcList, input]);
+      setNum(0);
+    } else if (num === 0) {
+      tempMessageList.push(input);
+      setMessageList(tempMessageList);
+    }
     setInput("");
   };
 
