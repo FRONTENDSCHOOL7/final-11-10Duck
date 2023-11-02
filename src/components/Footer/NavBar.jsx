@@ -4,6 +4,7 @@ import { ReactComponent as HomeIcon } from '../../assets/icon/icon-home.svg';
 import { ReactComponent as ChatIcon } from '../../assets/icon/icon-message-circle.svg';
 import { ReactComponent as PostIcon } from '../../assets/icon/icon-edit.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/icon/icon-user.svg';
+import { ReactComponent as MoreIcon } from '../../assets/icon/icon-more.svg';
 import { COLOR, FONT_SIZE } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +38,13 @@ export default function NavBar() {
         },
         {
             id: 3,
+            label: '둘러보기',
+            icon: <MoreIcon />,
+            url: '/lookaround',
+            isOn: false,
+        },
+        {
+            id: 4,
             label: '프로필',
             icon: <ProfileIcon />,
             url: '/profile',
