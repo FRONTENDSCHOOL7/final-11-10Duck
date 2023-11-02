@@ -4,7 +4,6 @@ import { COLOR } from "../../../utils";
 
 export default function ImageBalloon(props) {
   const { src } = props;
-  console.log("💡", src);
 
   return (
     <ImageBalloonStyle>{!src ? <></> : <img src={src} />}</ImageBalloonStyle>
@@ -13,8 +12,11 @@ export default function ImageBalloon(props) {
 
 const ImageBalloonStyle = styled.div`
   margin-top: 0.5em;
-  text-align: right;
+
   & > img {
+    box-sizing: border-box;
+    width: 100%;
+    object-fit: cover;
     display: inline-block;
     padding: 12px;
     right: 16px;
