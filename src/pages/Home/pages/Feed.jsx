@@ -83,7 +83,7 @@ export default function FeedFollow() {
             <StoryButton
               onClickHandler={() => {
                 setIsAddStoryOpen(true);
-                setTimeout(() => setIsAddStoryOpen(false), 2500);
+                // setTimeout(() => setIsAddStoryOpen(false), 2500);
               }}
             />
           </Story>
@@ -123,7 +123,7 @@ export default function FeedFollow() {
           rightBtnText={"삭제"}
         />
         <AddStory
-          isAddStoryOpen={true}
+          isAddStoryOpen={isAddStoryOpen}
           closeModal={() => {
             setIsAddStoryOpen(false);
           }}
