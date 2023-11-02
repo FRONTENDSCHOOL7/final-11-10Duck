@@ -20,6 +20,10 @@ import StoryButton from "../components/Story/StoryButton";
 import ShowStory from "../components/Story/ShowStory";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { styled } from "styled-components";
+import Button from "../../../components/Button";
+import SearchIcon from "../../../assets/icon/icon-symbol-logo-gray.png";
+import { COLOR, FONT_SIZE } from "../../../utils";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -96,30 +100,29 @@ export default function FeedFollow() {
     fetchFollowerPost();
   }, [user]);
 
-  if (!followerPostList.length) return <FeedNone />;
-  else {
-    return (
-      <Layout>
-        <MainHeader />
-        <LayoutContent>
-          <Story>
+  return (
+    <Layout>
+      <MainHeader />
+      <LayoutContent>
+        <Story>
+          <StoryButton
+            onClickHandler={() => {
+              setIsAddStoryOpen(true);
+            }}
+          />
+          {storyList.map((item) => (
             <StoryButton
               onClickHandler={() => {
-                setIsAddStoryOpen(true);
+                setIsShowStoryOpen(true);
+                setCurrentStory(item);
+                setTimeout(() => setIsShowStoryOpen(false), 2500);
               }}
             />
-            {storyList.map((item) => (
-              <StoryButton
-                onClickHandler={() => {
-                  setIsShowStoryOpen(true);
-                  setCurrentStory(item);
-                  setTimeout(() => setIsShowStoryOpen(false), 2500);
-                }}
-              />
-            ))}
-          </Story>
-          <Vote />
-          {followerPostList.map((item) => (
+          ))}
+        </Story>
+        <Vote />
+        {!!followerPostList.length ? (
+          followerPostList.map((item) => (
             <PostItem
               key={item.id}
               fetchFun={fetchFollowerPost}
@@ -129,38 +132,74 @@ export default function FeedFollow() {
                 setIsBottomModalOpen(!isBottomModalOpen);
               }}
             />
-          ))}
-        </LayoutContent>
-        <NavBar />
-        <BottomModal
-          isModalOpen={isBottomModalOpen}
-          onModalHandler={() => {
-            setIsBottomModalOpen(!isBottomModalOpen);
-          }}
-          menu={[
-            {
-              label: "신고하기",
-              onClickHandler: () => {
-                alertModalHandler.openModal();
-              },
+          ))
+        ) : (
+          <FeedPage>
+            <IconImg src={SearchIcon} alt="로고 아이콘" />
+            <span className="msg">유저를 검색해 팔로우 해보세요!</span>
+
+            <Button
+              buttonText={"검색하기"}
+              size={"M"}
+              onClickHandler={() => {
+                navigate("/search");
+              }}
+            />
+          </FeedPage>
+        )}
+      </LayoutContent>
+      <NavBar />
+      <BottomModal
+        isModalOpen={isBottomModalOpen}
+        onModalHandler={() => {
+          setIsBottomModalOpen(!isBottomModalOpen);
+        }}
+        menu={[
+          {
+            label: "신고하기",
+            onClickHandler: () => {
+              alertModalHandler.openModal();
             },
-          ]}
-        />
-        <AlertModal
-          isModalOpen={isAlertModalOpen}
-          onModalHandler={alertModalHandler}
-          alertTitle={"게시글을 신고할까요?"}
-          leftBtnText={"취소"}
-          rightBtnText={"삭제"}
-        />
-        <AddStory
-          isAddStoryOpen={isAddStoryOpen}
-          closeModal={() => {
-            setIsAddStoryOpen(false);
-          }}
-        />
-        <ShowStory isShowStoryOpen={isShowStoryOpen} story={currentStory} />
-      </Layout>
-    );
-  }
+          },
+        ]}
+      />
+      <AlertModal
+        isModalOpen={isAlertModalOpen}
+        onModalHandler={alertModalHandler}
+        alertTitle={"게시글을 신고할까요?"}
+        leftBtnText={"취소"}
+        rightBtnText={"삭제"}
+      />
+      <AddStory
+        isAddStoryOpen={isAddStoryOpen}
+        closeModal={() => {
+          setIsAddStoryOpen(false);
+        }}
+      />
+      <ShowStory isShowStoryOpen={isShowStoryOpen} story={currentStory} />
+    </Layout>
+  );
 }
+
+const FeedPage = styled.div`
+  margin-top: 30%;
+
+  & > .msg {
+    color: ${COLOR.fontPrimaryColor};
+    font-size: ${FONT_SIZE.large};
+    display: block;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  & > Button {
+    margin: 0 auto;
+  }
+`;
+
+const IconImg = styled.img`
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+`;
