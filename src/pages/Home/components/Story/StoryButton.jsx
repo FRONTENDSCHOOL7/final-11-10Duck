@@ -23,6 +23,7 @@ const StoryButtonStyle = styled.button`
   overflow: hidden;
   padding: 0;
   box-sizing: content-box;
+  margin-right: 12px;
 `;
 
 const ProfileImageStyle = styled.img`

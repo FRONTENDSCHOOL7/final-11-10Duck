@@ -18,6 +18,8 @@ import Story from "../components/Story/Story";
 import AddStory from "../components/Story/AddStory";
 import StoryButton from "../components/Story/StoryButton";
 import ShowStory from "../components/Story/ShowStory";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 export default function FeedFollow() {
   const { header } = useAPI();
@@ -26,10 +28,27 @@ export default function FeedFollow() {
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
   const [user, setUser] = useRecoilState(userState);
   const [isAddStoryOpen, setIsAddStoryOpen] = useState(false);
+  const [isShowStoryOpen, setIsShowStoryOpen] = useState(false);
+  const [storyList, setStoryList] = useState([]);
+  const [currentStory, setCurrentStory] = useState();
 
   const navigate = useNavigate();
 
   const isLogin = localStorage.getItem("token");
+
+  const fetchStory = async () => {
+    try {
+      let tempStoryList = [];
+      const querySnapshot = await getDocs(collection(db, "story"));
+      querySnapshot.forEach((doc) => {
+        tempStoryList.push(doc.data());
+      });
+
+      setStoryList(tempStoryList);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const fetchUserData = async () => {
     try {
@@ -49,13 +68,6 @@ export default function FeedFollow() {
     }
   };
 
-  useEffect(() => {
-    if (!isLogin) {
-      navigate("/signin-select");
-    }
-    fetchUserData();
-  }, [isLogin]);
-
   const fetchFollowerPost = async () => {
     try {
       const res = await api.get(`/post/feed`, {
@@ -68,6 +80,17 @@ export default function FeedFollow() {
       console.log("🔥팔로잉 게시글 불러오기 실패");
     }
   };
+
+  useEffect(() => {
+    fetchStory();
+  }, []);
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/signin-select");
+    }
+    fetchUserData();
+  }, [isLogin]);
 
   useEffect(() => {
     fetchFollowerPost();
@@ -83,9 +106,17 @@ export default function FeedFollow() {
             <StoryButton
               onClickHandler={() => {
                 setIsAddStoryOpen(true);
-                // setTimeout(() => setIsAddStoryOpen(false), 2500);
               }}
             />
+            {storyList.map((item) => (
+              <StoryButton
+                onClickHandler={() => {
+                  setIsShowStoryOpen(true);
+                  setCurrentStory(item);
+                  setTimeout(() => setIsShowStoryOpen(false), 2500);
+                }}
+              />
+            ))}
           </Story>
           <Vote />
           {followerPostList.map((item) => (
@@ -128,7 +159,7 @@ export default function FeedFollow() {
             setIsAddStoryOpen(false);
           }}
         />
-        {/* <ShowStory isShowStoryOpen={isAddStoryOpen} /> */}
+        <ShowStory isShowStoryOpen={isShowStoryOpen} story={currentStory} />
       </Layout>
     );
   }
