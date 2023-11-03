@@ -106,6 +106,7 @@ export default function FeedFollow() {
       <LayoutContent>
         <Story>
           <StoryButton
+            hasButton={true}
             onClickHandler={() => {
               setIsAddStoryOpen(true);
             }}
