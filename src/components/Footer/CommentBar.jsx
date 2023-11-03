@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { COLOR, FONT_SIZE } from "../../utils";
 import { useRecoilValue } from "recoil";
@@ -14,9 +14,14 @@ export default function CommentBar({
 }) {
   const user = useRecoilValue(userState);
 
+  const [textInput, setTextInput] = useState("");
+
+  useEffect(() => {
+    setTextInput(content);
+  }, [content]);
   return (
     <FormContainer>
-      <div>
+      <InputStyle>
         {mode === "chat" ? (
           <ImgUploadBtn
             type="file"
@@ -32,7 +37,7 @@ export default function CommentBar({
           src={mode === "chat" ? ImageBtn : user.image}
           alt="프로필 이미지"
         />
-        {/* 입력값 길이 늘어났을때 처리 필요 */}
+
         <label className="a11y-hidden" htmlFor="commentId">
           댓글 입력하기
         </label>
@@ -45,12 +50,12 @@ export default function CommentBar({
           }
           onChange={onChangeHandler}
         />
-      </div>
+      </InputStyle>
       <CommentBtn
         inputLength={content}
         onClick={(e) => {
           e.preventDefault();
-          onSubmitHandler();
+          textInput.length > 0 && onSubmitHandler();
         }}
       >
         {mode === "post" ? "게시" : "전송"}
@@ -79,6 +84,10 @@ const FormContainer = styled.form`
     position: absolute;
   }
 `;
+const InputStyle = styled.div`
+  display: flex;
+  flex-grow: 1;
+`;
 const ProfileImg = styled.img`
   width: 36px;
   height: 36px;
@@ -90,10 +99,12 @@ const ProfileImg = styled.img`
 const CommentInput = styled.input`
   border: none;
   margin-left: 18px;
+  background-color: ${COLOR.bgPrimaryColor};
+  width: 100%;
 
   &::placeholder {
-    color: var(--C4C4C4, #c4c4c4);
-    font-size: 14px;
+    color: ${COLOR.fontLightGrayColor};
+    font-size: ${FONT_SIZE.large};
   }
 
   &:focus {
@@ -104,7 +115,9 @@ const CommentBtn = styled.button`
   border: none;
   background: none;
   color: ${(props) =>
-    !props.inputLength ? `var(--C4C4C4, #c4c4c4)` : `${COLOR.fontOrangeColor}`};
+    !props.inputLength
+      ? `${COLOR.borderPrimaryColor}`
+      : `${COLOR.btnPrimaryColor}`};
   font-size: ${FONT_SIZE.large};
   font-weight: 500;
   cursor: ${(props) => props.inputLength && "pointer"};
@@ -121,4 +134,5 @@ const ImgUploadBtn = styled.input`
   filter: Alpha(style=0, opacity=0);
   background-color: transparent;
   border: none;
+  cursor: pointer;
 `;

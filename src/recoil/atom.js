@@ -16,3 +16,8 @@ export const userState = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const stepState = atom({
+  key: "stepState",
+  default: "splash",
+});

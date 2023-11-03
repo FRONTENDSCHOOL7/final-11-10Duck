@@ -37,9 +37,10 @@ export default function Search() {
             <SearchHeader setSearchInput={setSearchInput} />
             <LayoutContent>
                 <SearchStyle>
-                    {searchList.map((user) => {
-                        return <SearchContent user={user} searchInput={searchInput} />;
-                    })}
+                    {searchInput.length > 0 &&
+                        searchList.map((user) => {
+                            return <SearchContent user={user} searchInput={searchInput} />;
+                        })}
                 </SearchStyle>
             </LayoutContent>
             <NavBar />
