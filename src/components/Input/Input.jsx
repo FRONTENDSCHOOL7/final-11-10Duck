@@ -11,6 +11,7 @@ export default function Input(props) {
     onChangeHandler,
     placeholder,
     placeholderColor,
+    onBlurHandler,
     value,
     maxLength,
   } = props;
@@ -24,6 +25,7 @@ export default function Input(props) {
         onChange={onChangeHandler}
         placeholder={placeholder}
         placeholderColor={placeholderColor}
+        onBlur={onBlurHandler}
       />
       {alert && <AlertStyle>{alert}</AlertStyle>}
     </InputContainerStyle>
@@ -45,9 +47,11 @@ const InputStyle = styled.input`
   border-bottom: 1px solid ${COLOR.borderPrimaryColor};
   padding-top: 10px;
   padding-bottom: 9px;
+  background-color: ${COLOR.bgPrimaryColor};
   &:focus {
     outline: none;
     border-bottom: 1px solid ${COLOR.borderOrangeColor};
+    background-color: ${COLOR.bgPrimaryColor};
   }
   &::placeholder {
     color: ${(props) => props.placeholderColor};

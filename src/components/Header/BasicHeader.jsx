@@ -67,4 +67,6 @@ const IconImg = styled.img`
 const UserName = styled.p`
   font-size: ${FONT_SIZE.large};
   font-weight: 500;
+  color: ${COLOR.bgOrangeColor};
+  font-family: "PyeongChangPeace-Bold";
 `;

@@ -6,8 +6,8 @@ import NavBar from "../../../components/Footer/NavBar";
 import ProfileInfo from "../components/ProfileInfo";
 import PostList from "../components/PostList";
 import ProductScroller from "../../../components/Product/ProductScroller";
-import { useRecoilState } from "recoil";
-import { userState } from "../../../recoil/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { stepState, userState } from "../../../recoil/atom";
 import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 import { api } from "../../../api/baseURL";
@@ -21,6 +21,7 @@ export default function Profile() {
   const { header } = useAPI();
   const { accountName } = useParams();
   const [user, setUser] = useRecoilState(userState);
+  const setStep = useSetRecoilState(stepState);
 
   const [urlAccountName, setUrlAccountName] = useState(
     accountName ? accountName : user.accountname
@@ -236,6 +237,7 @@ export default function Profile() {
             refreshToken: "",
           });
           localStorage.removeItem("token");
+          setStep("splash");
           navigate("/");
         }}
       />

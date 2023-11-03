@@ -1,22 +1,22 @@
 export const COLOR = {
     borderPrimaryColor: '#DBDBDB',
-    borderSecondaryColor: '#F26E22',
-    borderOrangeColor: '#F26E22',
+    borderSecondaryColor: '#883BC5',
+    borderOrangeColor: '#883BC5',
 
-    bgPrimaryColor: '#FFFFFF',
+    bgPrimaryColor: '#FBF7FF',
     bgSecondaryColor: '#F2F2F2',
-    bgOrangeColor: '#EA7F42',
+    bgOrangeColor: '#883BC5',
     bgBorderColor: `#DBDBDB`,
 
-    btnPrimaryColor: '#F26E22',
-    btnSecondaryColor: '#FFFFFF',
-    btnDisabledColor: '#FFC7A7',
+    btnPrimaryColor: '#883BC5',
+    btnSecondaryColor: '#FBF7FF',
+    btnDisabledColor: '#D9A8FF',
 
     fontPrimaryColor: '#767676',
-    fontSecondaryColor: '#FFFFFF',
+    fontSecondaryColor: '#FBF7FF',
     fontDarkColor: '#000000',
     fontLightGrayColor: '#DBDBDB',
-    fontOrangeColor: '#F26E22',
+    fontOrangeColor: '#883BC5',
     fontDarkGrayColor: '#333333',
     fontRedColor: '#EB5757',
 };
@@ -29,6 +29,6 @@ export const FONT_SIZE = {
 };
 
 export const FILE = {
-    defaultProfileImage: '1698733625783.png',
-    defaultProfileImageUrl: 'https://api.mandarin.weniv.co.kr/1698733625783.png',
+    defaultProfileImage: '1698904346268.png',
+    defaultProfileImageUrl: 'https://api.mandarin.weniv.co.kr/1698904346268.png',
 };

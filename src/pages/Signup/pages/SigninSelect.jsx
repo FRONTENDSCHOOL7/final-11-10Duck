@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Layout from "../../../components/Layout/Layout";
-import LogoIcon from "../../../assets/symbol-logo-W.png";
+import LogoIcon from "../../../assets/logo/WhiteDuck.png";
 import KakaoIcon from "../../../assets/message-circle.png";
 import GoogleIcon from "../../../assets/google.png";
 import FacebookIcon from "../../../assets/facebook.png";
@@ -13,6 +13,7 @@ export default function SigninSelect() {
     <Layout>
       <SelectPage>
         <LogoImg src={LogoIcon}></LogoImg>
+        <TitleStyle>씁덕학개론</TitleStyle>
         <SelectSignin>
           <SelectButtonContent>
             <SelectButton
@@ -55,6 +56,14 @@ const LogoImg = styled.img`
   height: 144px;
   margin: 0 auto;
   margin-top: 150px;
+`;
+
+const TitleStyle = styled.div`
+  margin-top: 4px;
+  font-family: "PyeongChangPeace-Bold";
+  text-align: center;
+  color: ${COLOR.fontSecondaryColor};
+  font-size: 24px;
 `;
 
 const SelectSignin = styled.div`

@@ -3,6 +3,7 @@ import Button from '../../../components/Button';
 import Input from '../../../components/Input/Input';
 import Layout from '../../../components/Layout/Layout';
 import EditProfileIcon from '../../../assets/basic-profile-img.png';
+import DefaultProfileIcon from '../../../assets/logo/WhiteDuck.png';
 import { COLOR, FONT_SIZE, FILE } from '../../../utils';
 import AddImgButton from '../components/AddImgButton';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -30,21 +31,24 @@ export default function EditProfile() {
 
     const navigate = useNavigate();
 
-    const isButtonActive = [userData.username, userData.email, userData.password, userData.accountname].every((item) => !!item.length && errorMsg === '');
+    const isButtonActive = [userData.username.length >= 2 && userData.username.length <= 10, userData.email, userData.password, userData.accountname].every((item) => !!item && errorMsg === '');
 
     const signUp = async () => {
         try {
-            if (newImage) {
+            let profileImage = '';
+            if (!userData.image) {
+                profileImage = FILE.defaultProfileImageUrl;
+            } else {
+                console.log('===> newImage O');
                 const imageFileName = await changeImageToURL(userData.image);
                 const imageUrl = await AddAPIURLImage(imageFileName);
-                setUserData({ ...userData, image: imageUrl });
-            } else {
-                setUserData({ ...userData, image: FILE.defaultProfileImageUrl });
+                profileImage = `${imageUrl}`;
             }
+
             const res = await api.post(
                 '/user',
                 {
-                    user: userData,
+                    user: { ...userData, image: profileImage },
                 },
                 {
                     headers: {
@@ -52,13 +56,12 @@ export default function EditProfile() {
                     },
                 }
             );
-            setUser(res.data.user);
-            console.log(res.data);
+
             console.log('🌟회원가입 성공');
 
-            await signIn();
-
-            navigate('/');
+            await signIn().then(() => {
+                navigate('/');
+            });
         } catch (err) {
             console.error(err);
             console.log('🔥회원가입 실패');
@@ -83,9 +86,10 @@ export default function EditProfile() {
             );
             setUser(res.data.user);
             localStorage.setItem('token', res.data.user.token);
-            navigate('/');
+            console.log('🌟회원가입 후 로그인 성공');
         } catch (err) {
             console.error(err);
+            console.log('🔥회원가입 후 로그인 실패');
         }
     };
 
@@ -112,11 +116,11 @@ export default function EditProfile() {
         } catch (error) {}
     };
 
-    const handleAccountnameChange = (event) => {
+    const handleAccountname = (event) => {
         const accountname = event.target.value;
         const AccountnameValid = /^[a-zA-Z0-9_.]*$/.test(accountname);
         if (!AccountnameValid) {
-            setErrorMsg('영문, 숫자, 밑줄, 또는 마침표만 사용 가능합니다.');
+            setErrorMsg('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
         } else {
             setErrorMsg('');
             checkAccountname(accountname);
@@ -134,7 +138,7 @@ export default function EditProfile() {
             <EditProfilePage>
                 <Title>프로필 설정</Title>
                 <Text>나중에 언제든지 변경할 수 있습니다.</Text>
-                <ProfileImg src={newImage ? newImage : EditProfileIcon} />
+                <ProfileImg src={newImage ? newImage : DefaultProfileIcon} />
                 <AddImgButton onChangeHandler={setNewImage} onImageUploadHandler={onImageUploadHandler} />
                 <Input
                     type="text"
@@ -151,7 +155,7 @@ export default function EditProfile() {
                     labelText="계정 ID"
                     placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
                     placeholderColor={COLOR.fontLightGrayColor}
-                    onChangeHandler={handleAccountnameChange}
+                    onBlurHandler={handleAccountname}
                     alert={errorMsg}
                 />
                 <Input
