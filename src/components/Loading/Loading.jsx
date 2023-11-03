@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { keyframes, styled } from "styled-components";
 import { loadState } from "../../recoil/atom";
 import MainLogo from "../../assets/logo/PurpleDuck.png";
+import { COLOR } from "../../utils";
 
 export default function Loading() {
   const [isLoading, setIsLoading] = useRecoilState(loadState);
@@ -58,7 +59,7 @@ to {
 }`;
 
 const ProgressbarStyle = styled.div`
-  background-color: #9b1bf0;
+  background-color: ${COLOR.btnPrimaryColor};
   height: 12px;
   animation: ${progress} 1s ease-in-out;
 `;
@@ -73,9 +74,9 @@ const duckforward = keyframes`
 
 const LogoImageStyle = styled.img`
   position: absolute;
-  top: -65px;
+  top: -50px;
   left: -20px;
-  width: 80px;
+  width: 45px;
   object-fit: cover;
   transform: scaleX(-1);
   animation: ${duckforward} 1s ease-in-out;
