@@ -3,29 +3,11 @@ import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { userState } from "../../../../recoil/atom";
 import { COLOR, FONT_SIZE } from "../../../../utils";
+import { elapsedTime } from "../../../../utils/function";
 
 export default function ShowStory(props) {
   const { isShowStoryOpen, story } = props;
   const user = useRecoilValue(userState);
-
-  const elapsedTime = (date) => {
-    const start = new Date(date);
-    const end = new Date();
-
-    const seconds = Math.floor((end.getTime() - start.getTime()) / 1000);
-    if (seconds < 60) return "방금 전";
-
-    const minutes = seconds / 60;
-    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
-
-    const hours = minutes / 60;
-    if (hours < 24) return `${Math.floor(hours)}시간 전`;
-
-    const days = hours / 24;
-    if (days < 7) return `${Math.floor(days)}일 전`;
-
-    return `${start.toLocaleDateString()}`;
-  };
 
   if (isShowStoryOpen) {
     return (
@@ -34,7 +16,9 @@ export default function ShowStory(props) {
           <HeaderStyle>
             <HeaderImageStyle src={user.image} />
             <HeaderUserStyle>{`@${story.user}`}</HeaderUserStyle>
-            <HeaderTimeStyle>{elapsedTime(story.time)}</HeaderTimeStyle>
+            <HeaderTimeStyle>
+              {elapsedTime(story.date.toDate())}
+            </HeaderTimeStyle>
           </HeaderStyle>
           <TextStyle left={story.x} top={story.y}>
             {story.text}
