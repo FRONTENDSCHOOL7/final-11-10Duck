@@ -1,11 +1,18 @@
 import { styled } from 'styled-components';
 import { FONT_SIZE, COLOR } from '../../../utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchContent(props) {
     const { user, searchInput } = props;
 
+    const navigate = useNavigate();
+
     return (
-        <DataStyle>
+        <DataStyle
+            onClick={() => {
+                navigate(`/profile/${user.accountname}`);
+            }}
+        >
             <ImgStyle src={user.image} alt="프로필 이미지" />
             <ContentStyle>
                 {user.username.includes(searchInput) ? (
