@@ -9,8 +9,12 @@ import useModal from "../../../hooks/useModal";
 import BottomModal from "../../../components/Modal/BottomModal";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "../../../components/Modal/AlertModal";
+import { useSetRecoilState } from "recoil";
+import { stepState, userState } from "../../../recoil/atom";
 
 export default function ChatList() {
+  const setUser = useSetRecoilState(userState);
+  const setStep = useSetRecoilState(stepState);
   const {
     isModalOpen,
     isUserAlertModalOpen,
@@ -62,6 +66,21 @@ export default function ChatList() {
         leftBtnText={userAlertModal.leftBtnText}
         rightBtnText={userAlertModal.rightBtnText}
         onModalHandler={userAlertModalHandler}
+        onClickRightBtnHandler={() => {
+          setUser({
+            _id: "",
+            username: "",
+            email: "",
+            accountname: "",
+            intro: "",
+            image: "",
+            token: "",
+            refreshToken: "",
+          });
+          localStorage.removeItem("token");
+          setStep("splash");
+          navigate("/");
+        }}
       />
       <NavBar />
       <BottomModal
