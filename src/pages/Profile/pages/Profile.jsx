@@ -15,6 +15,7 @@ import BottomModal from "../../../components/Modal/BottomModal";
 import useModal from "../../../hooks/useModal";
 import AlertModal from "../../../components/Modal/AlertModal";
 import useAlertModal from "../../../hooks/useAlertModal";
+import Loading from "../../../components/Loading/Loading";
 
 export default function Profile() {
   const { header } = useAPI();
@@ -241,6 +242,7 @@ export default function Profile() {
         }}
       />
       <NavBar />
+      <Loading />
     </Layout>
   );
 }

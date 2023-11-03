@@ -18,7 +18,18 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
+  const isEmailValid = (email) => {
+    const emailForm = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailForm.test(email);
+  };
+
   const checkEmail = async () => {
+    if (!isEmailValid(user.email)) {
+      setEmailErrorMsg("*이메일 형식에 맞게 입력해 주세요.");
+      setDisabledBtn(true);
+      return;
+    }
+
     try {
       const res = await api.post(
         "/user/emailvalid",
@@ -33,6 +44,7 @@ export default function Signup() {
           },
         }
       );
+      console.log(res.data.message);
       if (res.data.message === "이미 가입된 이메일 주소 입니다.") {
         setEmailErrorMsg("*이미 가입된 이메일 주소입니다.");
         setDisabledBtn(true);

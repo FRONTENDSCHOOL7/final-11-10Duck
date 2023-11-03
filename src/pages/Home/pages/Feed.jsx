@@ -12,6 +12,7 @@ import useAlertModal from "../../../hooks/useAlertModal";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atom";
+import Loading from "../../../components/Loading/Loading";
 import Vote from "../components/Vote";
 import Story from "../components/Story/Story";
 import AddStory from "../components/Story/AddStory";

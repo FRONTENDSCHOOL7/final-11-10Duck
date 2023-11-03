@@ -21,3 +21,8 @@ export const stepState = atom({
   key: "stepState",
   default: "splash",
 });
+
+export const loadState = atom({
+  key: "loadState",
+  default: true,
+});
