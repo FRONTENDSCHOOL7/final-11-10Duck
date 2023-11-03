@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import MainHeader from "../../../components/Header/MainHeader";
 import Layout from "../../../components/Layout/Layout";
 import LayoutContent from "../../../components/Layout/LayoutContent";
-import FeedNone from "../components/FeedNone";
 import useAPI from "../../../hooks/useAPI";
 import PostItem from "../../../components/Post";
 import NavBar from "../../../components/Footer/NavBar";
@@ -87,7 +86,7 @@ export default function FeedFollow() {
 
   useEffect(() => {
     fetchStory();
-  }, []);
+  }, [isAddStoryOpen]);
 
   useEffect(() => {
     if (!isLogin) {

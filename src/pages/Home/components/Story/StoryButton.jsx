@@ -23,7 +23,6 @@ const StoryButtonStyle = styled.button`
   border-radius: 100%;
   border: 2px solid ${COLOR.borderOrangeColor};
   cursor: pointer;
-  /* overflow: hidden; */
   padding: 0;
   box-sizing: content-box;
   margin-right: 12px;
@@ -33,6 +32,7 @@ const ProfileImageStyle = styled.img`
   width: 50px;
   height: 50px;
   object-fit: cover;
+  border-radius: 100%;
 `;
 
 const PlusIconStyle = styled.img`
