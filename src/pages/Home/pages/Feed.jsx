@@ -112,6 +112,7 @@ export default function FeedFollow() {
           />
           {storyList.map((item) => (
             <StoryButton
+              story={item}
               onClickHandler={() => {
                 setIsShowStoryOpen(true);
                 setCurrentStory(item);

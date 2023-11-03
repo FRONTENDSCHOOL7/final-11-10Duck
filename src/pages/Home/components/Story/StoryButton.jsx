@@ -6,11 +6,14 @@ import { COLOR } from "../../../../utils";
 import PlusIcon from "../../../../assets/icon/icon-edit.png";
 
 export default function StoryButton(props) {
-  const { onClickHandler, hasButton } = props;
+  const { story, onClickHandler, hasButton } = props;
   const user = useRecoilValue(userState);
   return (
     <StoryButtonStyle onClick={onClickHandler}>
-      <ProfileImageStyle src={user.image} alt="프로필 이미지" />
+      <ProfileImageStyle
+        src={story ? story.userImage : user.image}
+        alt="프로필 이미지"
+      />
       {hasButton && <PlusIconStyle src={PlusIcon} alt="추가하기 아이콘" />}
     </StoryButtonStyle>
   );

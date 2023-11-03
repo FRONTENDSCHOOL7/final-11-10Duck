@@ -1,20 +1,17 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
-import { userState } from "../../../../recoil/atom";
 import { COLOR, FONT_SIZE } from "../../../../utils";
 import { elapsedTime } from "../../../../utils/function";
 
 export default function ShowStory(props) {
   const { isShowStoryOpen, story } = props;
-  const user = useRecoilValue(userState);
 
   if (isShowStoryOpen) {
     return (
       <PageStyle>
         <ContentStyle>
           <HeaderStyle>
-            <HeaderImageStyle src={user.image} />
+            <HeaderImageStyle src={story.userImage} />
             <HeaderUserStyle>{`@${story.user}`}</HeaderUserStyle>
             <HeaderTimeStyle>
               {elapsedTime(story.date.toDate())}

@@ -36,7 +36,11 @@ export default function AddStory(props) {
 
   const uploadStory = async () => {
     try {
-      await addDoc(collection(db, "story"), { ...content, date: new Date() });
+      await addDoc(collection(db, "story"), {
+        ...content,
+        date: new Date(),
+        userImage: user.image,
+      });
       closeModal();
     } catch (err) {
       console.error(err);
