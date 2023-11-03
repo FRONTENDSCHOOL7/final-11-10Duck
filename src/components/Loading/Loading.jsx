@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { keyframes, styled } from "styled-components";
 import { loadState } from "../../recoil/atom";
-import MainLogo from "../../assets/logo/10duck_Logo.png";
+import MainLogo from "../../assets/logo/PurpleDuck.png";
 
 export default function Loading() {
   const [isLoading, setIsLoading] = useRecoilState(loadState);
