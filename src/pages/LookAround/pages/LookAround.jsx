@@ -12,13 +12,13 @@ import useModal from '../../../hooks/useModal';
 import BottomModal from '../../../components/Modal/BottomModal';
 import AlertModal from '../../../components/Modal/AlertModal';
 import useAlertModal from '../../../hooks/useAlertModal';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../recoil/atom';
 import { useNavigate } from 'react-router-dom';
 
 export default function LookAround() {
     const { header } = useAPI();
-    const [user, setUser] = useRecoilState(userState);
+    const setUser = useSetRecoilState(userState);
     const navigate = useNavigate();
 
     const { isModalOpen, isUserAlertModalOpen, userAlertModal, userModalMenuList, onModalHandler, userAlertModalHandler } = useModal();
@@ -38,7 +38,7 @@ export default function LookAround() {
                 headers: header,
             });
 
-            res.data.forEach((user) => {
+            res.data && res.data.forEach((user) => {
                 user.accountname.includes('ssduck') && setUserList((prev) => [...prev, user]);
             });
 
@@ -54,7 +54,7 @@ export default function LookAround() {
                 headers: header,
             });
 
-            res.data.post.forEach((post) => {
+            res.data && res.data.post.forEach((post) => {
                 post.image && setGalleryList((prev) => [...prev, post]);
             });
 
@@ -70,7 +70,7 @@ export default function LookAround() {
     };
 
     useEffect(() => {
-        userList.length === 0 && fetch10DuckUsers();
+        !userList.length && fetch10DuckUsers();
     }, []);
 
     useEffect(() => {
@@ -84,7 +84,7 @@ export default function LookAround() {
             <BasicHeader mode={'post'} onClickMoreBtnHandler={onModalHandler} />
             <LayoutContent>
                 <GalleryStyle>
-                    {galleyList.map((post) => {
+                    {galleyList && galleyList.map((post) => {
                         return <Gallery key={post.id} post={post} />;
                     })}
                 </GalleryStyle>
