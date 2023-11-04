@@ -13,25 +13,40 @@ export default function Search() {
 
     const [searchInput, setSearchInput] = useState('');
     const [searchList, setSearchList] = useState([]);
+    const [allUserList, setAllUserList] = useState([]);
 
-    const fetchSearchUser = async () => {
+    const fetch10DuckUsers = async () => {
         try {
-            const res = await api.get(`/user/searchuser/?keyword=${searchInput}`, {
+            const res = await api.get(`user/searchuser/?keyword=ssduck`, {
                 headers: header,
             });
-            const resList = res.data.filter((data) => data.username.includes(searchInput) || data.accountname.includes(searchInput));
 
-            setSearchList([...resList]);
-            console.log('🌟유저 검색 성공');
+            res.data && res.data.forEach((user) => {
+                user.accountname.includes('ssduck') && setAllUserList((prev) => [...prev, user]);
+            });
+
+            console.log('🌟씁덕학개론 유저 목록 불러오기 성공');
         } catch (err) {
             console.error(err);
-            console.log('🔥유저 검색 실패');
+            console.log('🔥씁덕학개론 유저 목록 불러오기 실패');
         }
     };
 
+    const searchUsers = () => {
+        const res = allUserList.filter((user)=>{
+            return user.username.includes(searchInput) || user.accountname.includes(searchInput);
+        })
+        setSearchList(res)
+    }
+
+    useEffect(()=>{
+        fetch10DuckUsers();
+    },[])
+
     useEffect(() => {
-        searchInput.length > 0 && fetchSearchUser();
+        searchUsers();
     }, [searchInput]);
+    
     return (
         <Layout>
             <SearchHeader setSearchInput={setSearchInput} />
@@ -39,7 +54,7 @@ export default function Search() {
                 <SearchStyle>
                     {searchInput.length > 0 &&
                         searchList.map((user) => {
-                            return <SearchContent user={user} searchInput={searchInput} />;
+                            return <SearchContent user={user} searchInput={searchInput} key={user._id}/>;
                         })}
                 </SearchStyle>
             </LayoutContent>
