@@ -74,12 +74,10 @@ export default function LookAround() {
       <BasicHeader mode={"post"} onClickMoreBtnHandler={onModalHandler} />
       <LayoutContent>
         <GalleryStyle>
-          <Suspense fallback={<Loading />}>
-            {galleyList &&
-              sortShuffle(galleyList).map((post) => {
-                return <Gallery key={post.id} post={post} />;
-              })}
-          </Suspense>
+          {galleyList &&
+            sortShuffle(galleyList).map((post) => {
+              return <Gallery key={post.id} post={post} />;
+            })}
         </GalleryStyle>
       </LayoutContent>
       <BottomModal

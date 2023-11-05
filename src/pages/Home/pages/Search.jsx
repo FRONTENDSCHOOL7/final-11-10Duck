@@ -4,9 +4,10 @@ import LayoutContent from "../../../components/Layout/LayoutContent";
 import SearchHeader from "../../../components/Header/SearchHeader";
 import NavBar from "../../../components/Footer/NavBar";
 import SearchContent from "../components/SearchContent";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { ssduckUserListState } from "../../../recoil/atom";
+import Loading from "../../../components/Loading/Loading";
 
 export default function Search() {
   const ssduckUserList = useRecoilValue(ssduckUserListState);
@@ -25,7 +26,7 @@ export default function Search() {
   };
 
   useEffect(() => {
-    searchUsers();
+    ssduckUserList && searchUsers();
   }, [searchInput]);
 
   return (
@@ -46,6 +47,7 @@ export default function Search() {
         </SearchStyle>
       </LayoutContent>
       <NavBar />
+      <Loading />
     </Layout>
   );
 }
