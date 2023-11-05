@@ -64,13 +64,13 @@ export default function ChatRoom() {
       image: ProfileImg,
       userName: "이타치",
       msg: "죄송한데 길 좀 물어봐도 될까요",
-      time: "13:30",
+      time: "08:30",
     },
     {
       image: ProfileImg,
       userName: "이타치",
       msg: "나뭇잎 마을로 가는 길을 까먹었는데 혹시 아세요?",
-      time: "13:31",
+      time: "08:31",
     },
   ];
 
