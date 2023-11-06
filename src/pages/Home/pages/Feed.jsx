@@ -43,12 +43,17 @@ export default function FeedFollow() {
   const fetchStory = async () => {
     try {
       let tempStoryList = [];
+      const is24hour = new Date();
       const querySnapshot = await getDocs(collection(db, "story"));
       querySnapshot.forEach((doc) => {
         tempStoryList.push(doc.data());
       });
 
-      setStoryList(tempStoryList);
+      const filterStoryList = tempStoryList.filter((item) => {
+        return Math.floor(item.date.toDate().getDay() - is24hour.getDay()) <= 1;
+      });
+
+      setStoryList(filterStoryList);
     } catch (err) {
       console.error(err);
     }
