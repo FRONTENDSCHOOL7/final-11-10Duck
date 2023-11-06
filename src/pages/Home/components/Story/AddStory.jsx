@@ -39,11 +39,13 @@ export default function AddStory(props) {
   const uploadStory = async () => {
     try {
       const imageFile = await changeImageToURL(content.image);
+      console.log(imageFile);
+
       await addDoc(collection(db, "story"), {
         ...content,
         date: new Date(),
         userImage: user.image,
-        image: imageFile,
+        image: imageFile ? imageFile : "",
       });
       closeModal();
       setContent({
