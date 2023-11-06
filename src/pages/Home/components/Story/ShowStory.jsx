@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { COLOR, FONT_SIZE } from "../../../../utils";
-import { elapsedTime } from "../../../../utils/function";
+import { AddAPIURLImage, elapsedTime } from "../../../../utils/function";
 
 export default function ShowStory(props) {
   const { isShowStoryOpen, story } = props;
@@ -9,7 +9,7 @@ export default function ShowStory(props) {
   if (isShowStoryOpen) {
     return (
       <PageStyle>
-        <ContentStyle>
+        <ContentStyle backgroundImage={AddAPIURLImage(story.image)}>
           <HeaderStyle>
             <HeaderImageStyle src={story.userImage} />
             <HeaderUserStyle>{`@${story.user}`}</HeaderUserStyle>
@@ -60,10 +60,18 @@ const HeaderTimeStyle = styled.div`
 const ContentStyle = styled.div`
   height: 100%;
   width: 100%;
+  background: ${(props) =>
+    props.backgroundImage
+      ? `url(${props.backgroundImage})`
+      : `${COLOR.bgPrimaryColor}`};
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 50%;
 `;
 
 const TextStyle = styled.div`
   position: absolute;
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `${props.top}px`};
+  font-size: ${FONT_SIZE.medium};
 `;

@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../recoil/atom";
 import { COLOR } from "../../../../utils";
-import PlusIcon from "../../../../assets/icon/icon-edit.png";
 
 export default function StoryButton(props) {
   const { story, onClickHandler, hasButton } = props;
@@ -14,7 +13,7 @@ export default function StoryButton(props) {
         src={story ? story.userImage : user.image}
         alt="프로필 이미지"
       />
-      {hasButton && <PlusIconStyle src={PlusIcon} alt="추가하기 아이콘" />}
+      {hasButton && <PlusIconStyle>+</PlusIconStyle>}
     </StoryButtonStyle>
   );
 }
@@ -38,11 +37,17 @@ const ProfileImageStyle = styled.img`
   border-radius: 100%;
 `;
 
-const PlusIconStyle = styled.img`
+const PlusIconStyle = styled.div`
   position: absolute;
   bottom: -5px;
   right: 0;
   width: 20px;
   height: 20px;
   object-fit: cover;
+  background-color: ${COLOR.btnPrimaryColor};
+  border-radius: 100%;
+  color: ${COLOR.fontLightGrayColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

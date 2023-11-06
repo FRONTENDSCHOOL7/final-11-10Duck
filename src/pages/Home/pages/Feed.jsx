@@ -18,7 +18,7 @@ import Story from "../components/Story/Story";
 import AddStory from "../components/Story/AddStory";
 import StoryButton from "../components/Story/StoryButton";
 import ShowStory from "../components/Story/ShowStory";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { styled } from "styled-components";
 import Button from "../../../components/Button";
@@ -44,7 +44,10 @@ export default function FeedFollow() {
     try {
       let tempStoryList = [];
       const is24hour = new Date();
-      const querySnapshot = await getDocs(collection(db, "story"));
+      const storyRef = collection(db, "story");
+      const q = query(storyRef, orderBy("date", "desc"));
+      const querySnapshot = await getDocs(q);
+
       querySnapshot.forEach((doc) => {
         tempStoryList.push(doc.data());
       });
