@@ -123,9 +123,15 @@ const ContentContainerStyle = styled.section`
 `;
 
 const InputStyle = styled.input`
+  width: 100%;
   opacity: ${(props) => props.left};
   position: absolute;
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `${props.top}px`};
   border: none;
+  font-family: "PyeongChang";
+  &:focus {
+    outline: none;
+    background-color: ${COLOR.bgPrimaryColor};
+  }
 `;
