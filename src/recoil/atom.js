@@ -1,5 +1,6 @@
 import { recoilPersist } from "recoil-persist";
-const { atom } = require("recoil");
+import { api } from "../api/baseURL";
+const { atom, selector } = require("recoil");
 const { persistAtom } = recoilPersist();
 
 export const userState = atom({
@@ -25,4 +26,31 @@ export const stepState = atom({
 export const loadState = atom({
   key: "loadState",
   default: true,
+});
+
+export const ssduckUserListState = selector({
+  key: "ssduckUserListState",
+  get: async () => {
+    try {
+      const userList = [];
+      const res = await api.get(`user/searchuser/?keyword=ssduck`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      res.data &&
+        res.data.forEach((user) => {
+          user.accountname.includes("ssduck") && userList.push(user);
+        });
+
+      console.log("🌟씁덕학개론 유저 목록 불러오기 성공");
+
+      return userList;
+    } catch (err) {
+      console.error(err);
+      console.log("🔥씁덕학개론 유저 목록 불러오기 실패");
+    }
+  },
 });

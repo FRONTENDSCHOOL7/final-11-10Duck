@@ -4,9 +4,15 @@ import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function ChatBalloon(props) {
   const { message } = props;
+  const today = new Date();
+  const hour = today.getHours();
+  const min = today.getMinutes();
 
   return (
     <ChatBallonStyle>
+      <TimeStamp>
+        {String(hour).padStart(2, "0") + "." + String(min).padStart(2, "0")}
+      </TimeStamp>
       <span>{message}</span>
     </ChatBallonStyle>
   );
@@ -24,4 +30,11 @@ const ChatBallonStyle = styled.div`
     color: ${COLOR.fontSecondaryColor};
     font-size: ${FONT_SIZE.large};
   }
+`;
+
+const TimeStamp = styled.div`
+  font-size: ${FONT_SIZE.small};
+  color: ${COLOR.fontPrimaryColor};
+  display: inline-block;
+  padding-right: 6px;
 `;

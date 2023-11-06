@@ -3,7 +3,7 @@ import { FONT_SIZE, COLOR } from "../../../utils";
 
 export default function MsgContainer(props) {
   const { user } = props;
-  const { image, userName, msg, time } = user;
+  const { image, msg, time } = user;
 
   return (
     <MsgContainerStyle>
@@ -32,7 +32,7 @@ const ImgStyle = styled.img`
 const ContentStyle = styled.p`
   width: 240px;
   background-color: ${COLOR.bgPrimaryColor};
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${COLOR.bgBorderColor};
   border-radius: 0 10px 10px 10px;
   box-sizing: border-box;
   margin-left: 12px;
