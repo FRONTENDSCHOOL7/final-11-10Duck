@@ -100,9 +100,9 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 ## 📅 **4. 개발 일정**
 
-🐥 2023.06.01 - 2023.06.30
+🐥 2023.10.12 - 2023.11.09
 
-- 개발 일정은 노션의 [간트 차트](https://www.notion.so/14-OH-LEE-f89c38cec5a1439abf2b02d0c76e5376?pvs=4#285a18d7c0ff4ce58aacd87bf1be8366)와 [총괄 보드](https://www.notion.so/14-OH-LEE-f89c38cec5a1439abf2b02d0c76e5376?pvs=4#481e623f274a473e99504597add863e1)를 만들어 관리
+- 개발 일정은 노션의 [일정 캘린더](https://mammoth-sassafras-ff5.notion.site/50a2c43660624df18a9538ac1026565e?v=97c2e8ff773e4cc9ba3b1d99cd94d236&pvs=4)와 깃허브의 [프로젝트 관리](https://github.com/orgs/FRONTENDSCHOOL7/projects/3)를 만들어 관리
 
 <!-- <img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/fcc9054b-aa0a-4daf-ab99-27e6888befa4" /> -->
 
@@ -165,16 +165,6 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 }
 ```
 
-#### **Github Issue Template**
-
-<img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/6680ffae-877f-42f9-bfbe-deff07aa8f98" />
-
-<br/>
-
-#### **Github PR template**
-
-<img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/b186491a-726f-4c2c-9a85-de7b576aa3f0" />
-
 <br/>
 
 #### **커밋 컨벤션**
@@ -192,35 +182,6 @@ Rename 🚚: 파일 또는 폴더 명을 수정하거나 옮기는 작업만인 
 Remove 🔥: 코드(파일) 의 삭제할 경우
 ```
 
-<br/>
-
-#### **Styled Components 컨벤션**
-
-```
-wrapper: ~Wrapper
-ex) HeaderWrapper, NavbarWrapper
-
-wrapper가 필요없는 이름과 스타일드 컴포넌트 이름이 같을 경우: Styled~
-ex) StyledInput, StyledButton
-
-div태그: ~Box
-ex) InfoBox, ContentBox
-
-4. section태그: ~Section
-ex) InfoSection, ContentSection
-
-5. ul태그: ~List
-ex) InfoList, ContentList
-
-6. li태그: ~Item
-ex) InfoItem, ContentItem
-
-중첩은 최대 2단계까지만
-ex - list { li{ a{} } }까지
-
-li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
-```
-
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
 
@@ -229,49 +190,66 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
 ## 📂 **6. 프로젝트 폴더 구조**
 
 ```
-🏠 bangkkuseok
-├─ .github
-│  ├─ ISSUE_TEMPLATE  ─────────────── 📜 이슈 템플릿
-│  └─ PULL_REQUEST_TEMPLATE.md ────── 📜 PR 템플릿
-│─ .gitignore
-│─ .gitmessage   ──────────────────── 📜 커밋 템플릿
-│─ .prettierignore
-│─ .prettierrc   ──────────────────── ⚙️ prettier 설정 파일
-│─ .eslintrc     ──────────────────── ⚙️ eslint 설정 파일
-├─ public
-│  ├─ favicon.ico
-│  └─ index.html
-└─ 📂 src
-  ├─ 📂 api     ───────────────────── 📲 Axios 인스턴스 및 API 관련 모듈 함수
-  ├─ 📂 assets  ───────────────────── 🧸 폰트, 이미지 등 정적 리소스
-  ├─ 📂 atoms ─────────────────────── ✨ 리코일 관련 폴더
-  ├─ 📂 components
-  │  ├─ 📂 common ─────────────────── 📦 공통 컴포넌트
-  │  ├─ 📂 LoginSignUp ────────────── 📦 로그인, 회원가입 페이지에서 사용되는 컴포넌트
-  │  ├─ 📂 PostDetail  ────────────── 📦 게시글 상세 페이지에서 사용되는 컴포넌트
-  │  ├─ 📂 PostEdit   ─────────────── 📦 게시글 수정 페이지에서 사용되는 컴포넌
-  │  ├─ 📂 PostUpload   ───────────── 📦 게시글 업로드 페이지에서 사용되는 컴포넌트
-  │  ├─ 📂 Product   ──────────────── 📦 상품 관련 페이지에서 사용되는 컴포넌트
-  │  └─ 📂 Profile   ──────────────── 📦 프로필 관련 페이지에서 사용되는 컴포넌트
-  ├─ 📂 constants   ───────────────── 🎈 공통적으로 사용되는 상수
-  │  ├─ common.js
-  │  └─ validate.js
-  ├─ 📂 hooks ─────────────────────── ♻️ 커스텀 훅 폴더
-  │  ├─ useDebounce.js
-  │  ├─ useInputs.js
-  │  └─ useObserver.js
-  ├─ App.js
-  ├─ index.js
-  ├─ 📂 layout   ──────────────────── 🪅 공통으로 사용되는 레이아웃
-  ├─ 📂 mock   ────────────────────── 🧸 mock 데이터 폴더
-  ├─ 📂 pages   ───────────────────── 📲 라우팅이 적용된 주로 API를 요청하는 페이지 폴더
-  ├─ 📂 styles   ──────────────────── 💄 전역으로 적용할 css 파일들이 포함된 폴더
-  │  ├─ fonts.css
-  │  ├─ GlobalStyle.js
-  │  └─ theme.js
-  └─ 📂 utils    ──────────────────── 🧸 공통으로 사용되는 유틸 함수
-     ├─ filterPosts.js
-     └─ getTime.js
+🏠 final=11-10duck
+┣ .gitignore
+┣ .env
+┣ 📦public
+┃   ┣ 📜favicon.ico
+┃   ┣ 📜index.html
+┃   ┗ 📜manifest.json
+┗ 📦src
+    ┣ 📂api
+    ┃ ┗ 📜baseURL.js
+    ┣ 📂assets  ────────────────────────── 🧸 폰트, 이미지 등 정적 리소스
+    ┃ ┣ 📂icon
+    ┃ ┣ 📂logo
+    ┣ 📂components  ────────────────────── 📦 공통 컴포넌트
+    ┃ ┣ 📂Footer
+    ┃ ┣ 📂Header
+    ┃ ┣ 📂Input
+    ┃ ┣ 📂Layout
+    ┃ ┣ 📂Loading
+    ┃ ┣ 📂Modal
+    ┃ ┣ 📂Post
+    ┃ ┣ 📂Product
+    ┃ ┗ 📜Button.jsx
+    ┣ 📂constants   ─────────────────────── 🧸 mock 데이터 폴더
+    ┃ ┗ 📜product.js
+    ┣ 📂hooks♻️ 커스텀 훅 폴더
+    ┃ ┣ 📜useAPI.jsx
+    ┃ ┣ 📜useAlertModal.jsx
+    ┃ ┣ 📜useBackPage.jsx
+    ┃ ┣ 📜useCheckUser.jsx
+    ┃ ┗ 📜useModal.jsx
+    ┣ 📂pages   ────────────────────────── 📲 라우팅이 적용된 주로 API를 요청하는 페이지 폴더
+    ┃ ┣ 📂AddProduct
+    ┃ ┃ ┣ 📂components
+    ┃ ┃ ┃ ┣ 📜ImageButton.jsx
+    ┃ ┃ ┃ ┗ 📜InputImage.jsx
+    ┃ ┃ ┗ 📂pages
+    ┃ ┃ ┃ ┗ 📜AddProduct.jsx
+    ┃ ┣ 📂Chat
+    ┃ ┣ 📂Home
+    ┃ ┣ 📂LookAround
+    ┃ ┣ 📂Post
+    ┃ ┣ 📂PostUpload
+    ┃ ┣ 📂Profile
+    ┃ ┣ 📂Signup
+    ┃ ┗ 📂Splash
+    ┣ 📂recoil  ────────────────────────── ✨ 리코일 관련 폴더
+    ┃ ┗ 📜atom.js
+    ┣ 📂route   ────────────────────────── r📲 라우팅 설정 폴더
+    ┃ ┗ 📜AppRoutes.jsx
+    ┣ 📂styles  ────────────────────────── 💄 전역으로 적용할 css 파일들이 포함된 폴더
+    ┃ ┗ 📜GlobalStyles.js
+    ┣ 📂utils   ────────────────────────── 🧸 공통으로 사용되는 유틸 함수
+    ┃ ┣ 📜function.js
+    ┃ ┗ 📜index.js
+    ┣ 📜App.jsx
+    ┣ 📜firebase.js
+    ┣ 📜index.css
+    ┗ 📜index.js
+
 ```
 
 ## ✴️ **7. Git Branch 전략 - Github Flow**
@@ -280,16 +258,7 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
 
 <br />
 
-## 🤗 **8. 방꾸석에서는 이렇게 협업해요**
-
-### **코드리뷰**
-
-- VS code 라이브 쉐어
-  - 실시간으로 팀원들과 원격으로 코드를 수정하고 편리한 트러블 슈팅을 경험했다.
-  - 다양한 OS에서 사용이 가능하여 팀원들의 서로 다른 OS 차이에 구애받지 않았다.
-- PR 병합 규칙에 승인을 1회 이상으로 설정하여 PR을 무조건 확인할 수 있게 했다. 충돌을 방지하는 것과 더불어 팀원들의 코드에 리뷰를 달아주기 편리했다.
-
-<img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/4df379bb-93f2-4bcf-9da7-0a29c9c6e76f" />
+## 🤗 **8. 씁덕학개론에서는 이렇게 협업해요**
 
 ### **협업툴**
 
@@ -302,6 +271,10 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
 ### **소통**
 
 - 디스코드로 주 5~6회 회의를 진행하여 한 달간 22회의 회의를 진행했다. 오류 발생시 즉각적인 피드백과 문제해결이 가능했다.
+
+<br/>
+
+👉 [notion 바로가기](https://mammoth-sassafras-ff5.notion.site/Re-11-6b1db046902648aca2e4500adee0ca96?pvs=4)
 
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
@@ -364,7 +337,7 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
   - 버그 관리
   - 요구사항 문서 작성
 
-### **🖤 나영**
+### **🖤 주예**
 
 **🎨 디자인**
 
@@ -403,7 +376,7 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
 - 로딩 페이지
   - 회원가입 후 로그인 페이지로 이동하는 로딩페이지
 
-### **🖤 지원**
+### **🖤 규영**
 
 **🖥️ 화면 개발**
 
@@ -430,7 +403,7 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
   - 최근 검색 기록을 LocalStorage에 저장하여 최근 검색 표시
   - 검색 결과 더보기 기능 구현
 
-### **🖤 미현**
+### **🖤 서연**
 
 **📜 프로젝트 총괄 및 문서화**
 
@@ -485,7 +458,7 @@ li내에 스타일할 요소가 3개이상이면 li를 Item으로 빼기
   - BottomSheet 컴포넌트의 재사용성을 위해 [컴포넌트 리팩토링](https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/pull/60#issue-1762148761)
   - 무한 스크롤링을 위한 Observer API 적용 코드를 [useObserver Hooks](https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/commit/f20184e1ca6d45d64c22d3759b3ddc4a8e030bf3#diff-da3b68ddf380656f1e921fab250e05fef03fd5e46c30c4cddb7d74bcd804a483)로 만들어 사용
 
-### **🖤 보은**
+### **🖤 규영**
 
 **🖥️ 화면 개발**
 
@@ -807,21 +780,30 @@ const postFollowMutation = useMutation(postFollow, {
 
 ## ✴️ **14. 느낀점**
 
-### 🧸 이미현
+### 🧸 서주예
 
-노션에 처음 자기소개를 작성하고, 회고조와 만나 서먹서먹했던 때가 아직도 엊그제 같은데 벌써 4개월이라는 시간이 지나 멋사 팀 프로젝트 발표날이 왔다는게 아직도 믿겨지지 않습니다ㅎㅎ 제대로 팀 프로젝트를 해본 건 이번이 처음이라 깃을 다루면서 땀도 많이 흘리고 오류도 물론 많이 마주치게 됐습니다..ㅎㅎ 부족한 저였음에도 항상 좋은 반응을 해주고, 도움도 마다하지 않고 따라와주신 오리분들께 감사하단 말씀을 드리고 싶습니다! 덕분에 우리가 처음 목표했던 다양한 라이브러리의 사용, 협업 경험, 그리고 잘 마무리하는 방법까지 차곡차곡 쌓아서 또 하나의 기억 조각을 만들 수 있었습니다. 목표했던 것을 달성한 이번 경험을 토대로 앞으로의 목표들도 자신감 있게 '할 수 있다'는 마음을 가지고 나아갈 수 있길 바래요! 팀 외에도 도움을 준 멘토님, 강사님, 매니저님, 멋사 5기 어려분들도 너무 감사하고, 수고많으셨습니다. 추후 있을 리팩토링에서 다시 만나요 var var🖐️🖐️
+혼자서 리액트 프로젝트를 하다가, 협업은 처음이었는데 조장을 맡게 되어서, 조금 걱정되었지만! 서주예
+그래도 나 자신을 믿고 끝까지 넘어지지 않고 끝낼 수 있어서 좋은 경험이 되었다. 프로젝트를 하며 가장 기억에 남는 순간은, 아무래도 혼자 할 때와 다르게 다양한 코드를 볼 수 있었고, 그 과정에서 서로의 코드를 보고 상호보완해 주는 과정이 기억에 남는 것 같다. 개인의 성장을 생각하면 아쉬운 부분들이 너무 많다.
+조금 더 효율적으로 Cus tomHook을 사용하지 못 한 점들과, axios에 대한 추가 공부를 하지 않아서 제공해 주지만 유익한 기능을 적용하지 못한 상태로 프로젝트를 마무리해서 아쉬웠다. 또한 시간이 짧았기 때문에 안 써본 라이브러리들에 대해 공부하고 적용해보고 싶었지만, 익숙한 친구들 위주로 진행한 것도 조금 아쉬웠다.
+하지만 이런 부분들은 이후에 리팩토링과 추가 개발을 하면 해소할 수 있기 때 문에 괜찮다!
 
-### 🍙 오지원
+### 🍙 오규영
 
-처음 접해본 리액트로 진행하는 팀프로젝트라 처음엔 걱정이 되기도 했지만 좋은 팀원분들을 만나 이렇게 잘 마무리할 수 있었던 것 같습니다. 컨벤션을 정하고, 깃, 깃이슈, pr을 사용하여 조금 더 체계적으로 프로젝트를 진행하는 경험을 해본 것이 좋았고 무엇보다 선릉과 광화문을 팀원분들이랑 다니면서 만나서 함께 프로젝트를 진행했던 점이 좋았습니다. 맨날 모르는 것 투성이라 팀원분들을 많이 괴롭혔지만 옆에서 항상 많이 도와주시고 응원해주신 팀원분들 너무 감사하고 수고 많으셨습니다!
+첫 리엑트 프로젝트였고 구현하는데 비교적 짧은 시간이었지만 팀장님의 깔끔한 스케줄링과 실행력덕에 큰 문제없이 효율적으로 끝낼 수 있어 스트레스 없이 재밌게 코딩했다.
+개인적으로 리엑트 숙련도를 높이는 좋은 프로젝트였다고 생각한다. 그중 state의 스냅숏도 개념으로만 알고 있었는데 직접 에러 처리하며 해결한 부분이 기억에 남는다.
+또 css에 대한 막연한 공포가 있었는데 이번 기회로 조금은 극복한 거 같아 좋았다.
 
-### 🥰 이보은
+### 🥰 이서연
 
-깃헙으로 협업하는 것도 처음이었고 리액트로 프로젝트를 진행하는 것도 처음이었습니다. 초반에 깃헙 실수도 많이 했지만, 조원분들께 바로 도움을 요청하였고, 그에 대한 조원분들의 조언으로 전에는 사용할 생각을 하지 않았었던 깃헙 데스크탑을 깔았습니다. 결과적으로 정말 편하게 작업할 수 있었고, 이후 실수의 빈도가 점점 줄어드는 모습을 볼 수 있었습니다. 혼자서 했다면 끝내지 못했을텐데 조원분들, 그 외에 도움주신 분들의 도움으로 끝까지 잘 마치고 성장할 수 있었다고 생각합니다. 모두 감사합니다
+팀장님이 진행을 잘해주셔서 프로젝트 진행이 매우 진행이 잘 되었다. commit convention이나 git flow를 정하는 과정을 통해서 프로젝트를 진행할 때 정해야 할 부분들을 알게 되었다.
+이번 프로젝트를 통해서 styled component를 사용해서 컴포넌트의 스타일을 더 쉽게 관리해 볼 수 있었다. 또한 api 사용에 익숙지 않았는데 이번 기회로 알게 되었다.
+코드를 좀 더 간결하게 짤 수 있을 것 같은데 못해서 아쉽다. 혼자서 해결 못하는 부분을 빨리 도움 받았으면 좋았을 것 같다.
 
-### 🍊오나영
+### 🍊이은경
 
-혼자서는 하지 못할 깃, 컨벤션, 소통 등에 대해 배울 수 있었던 팀 프로젝트였습니다. 문제가 생겼을 때는 혼자서만 끙끙대기보다는 멘토님이나 조원들에게 서로 물어보며 더 나은 코드를 고민하고 개선하는 경험을 하여 뿌듯했고, 협업하는 방법과 태도에 대해 다시 한번 생각해보는 계기가 되었습니다. 또한 이번 프로젝트에서 recoil, react-query, threejs 등을 처음 사용하게 되었는데, 하기 전부터 겁먹지말고 시도해보는게 중요하다는걸 깨달았습니다. 이번 프로젝트를 통해 하드스킬도, 소프트스킬도 많이 성장했다고 느꼈습니다. 열심히 가르쳐주시고 함께 공부해주신 분들 모두 감사합니다!
+멋사를 통해서 js와 react를 처음 배웠는데, 프로젝트까지 경험할 수 있어서 좋았습니다. git을 이용할 때 git-flow 전략이 있는 것도 처음 알았고, 직접 코드를 짜면서 수업 당시에 이해하지 못했던 내용들(useState 등)도 다시 공부하고 적용하려고 노력하는 시간을 가질 수 있었습니다.
+프로젝트를 하면서 가장 아쉬웠던 것은 제 실력이었고, 그중에서도 api에 대한 지식과 매개변수로 어떤 값들이 오가는지에 대해서 이해가 많이 부족하다고 느꼈습니다.
+프로젝트를 하면서 좋은 조를 운 좋게 만났고, 프로젝트를 운영해 나가는 방식에서도 많이 배웠습니다. 프로젝트 이전의 저는, 개발하는 것이 겁이 나서 시작하기가 어려웠는데, 11조에서의 경험을 통해 프로젝트 이후로도 개인적인 공부와 개발을 해보고 싶다고 느꼈습니다.
 
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
