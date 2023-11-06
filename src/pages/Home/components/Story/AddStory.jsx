@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import CloseIcon from "../../../../assets/icon/close.png";
 import ImageButton from "./ImageButton";
-import { COLOR } from "../../../../utils";
+import { COLOR, FONT_SIZE } from "../../../../utils";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../recoil/atom";
+import Button from "../../../../components/Button";
+import { changeImageToURL } from "../../../../utils/function";
 
 export default function AddStory(props) {
   const { isAddStoryOpen, closeModal } = props;
@@ -36,12 +38,24 @@ export default function AddStory(props) {
 
   const uploadStory = async () => {
     try {
+      const imageFile = await changeImageToURL(content.image);
       await addDoc(collection(db, "story"), {
         ...content,
         date: new Date(),
         userImage: user.image,
+        image: imageFile,
       });
       closeModal();
+      setContent({
+        image: "",
+        text: "",
+        x: null,
+        y: null,
+        user: user.accountname,
+        token: user.token,
+        date: "",
+      });
+      setBackgroundImage(null);
     } catch (err) {
       console.error(err);
     }
@@ -55,10 +69,24 @@ export default function AddStory(props) {
           onClick={onClickContentAreaHandler}
         >
           <BtnContainerStyle>
-            <CloseBtnStyle onClick={closeModal}>
+            <CloseBtnStyle
+              onClick={() => {
+                closeModal();
+                setContent({
+                  image: "",
+                  text: "",
+                  x: null,
+                  y: null,
+                  user: user.accountname,
+                  token: user.token,
+                  date: "",
+                });
+                setBackgroundImage(null);
+              }}
+            >
               <CloseIconStyle src={CloseIcon} alt="닫기 아이콘" />
             </CloseBtnStyle>
-            <UploadBtnStyle onClick={uploadStory}>전송</UploadBtnStyle>
+            <Button buttonText="전송" size="s" onClickHandler={uploadStory} />
           </BtnContainerStyle>
         </ContentContainerStyle>
         <InputStyle
@@ -111,8 +139,6 @@ const CloseIconStyle = styled.img`
   object-fit: cover;
 `;
 
-const UploadBtnStyle = styled.button``;
-
 const ContentContainerStyle = styled.section`
   background: ${(props) =>
     props.backgroundImage
@@ -120,18 +146,23 @@ const ContentContainerStyle = styled.section`
       : `${COLOR.bgPrimaryColor}`};
   width: 100%;
   height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 50%;
 `;
 
 const InputStyle = styled.input`
   width: 100%;
   opacity: ${(props) => props.left};
+  font-size: ${FONT_SIZE.medium};
   position: absolute;
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `${props.top}px`};
   border: none;
   font-family: "PyeongChang";
+  background-color: transparent;
   &:focus {
     outline: none;
-    background-color: ${COLOR.bgPrimaryColor};
+    background-color: transparent;
   }
 `;

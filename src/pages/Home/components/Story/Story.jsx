@@ -8,9 +8,9 @@ export default function Story(props) {
 
 const ContainerStyle = styled.section`
   display: flex;
+  height: 60px;
   padding-top: 12px;
   overflow-x: scroll;
-
   &::-webkit-scrollbar {
     display: none;
   }
