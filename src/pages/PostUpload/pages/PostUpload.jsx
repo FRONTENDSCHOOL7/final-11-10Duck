@@ -11,6 +11,7 @@ import { userState } from "../../../recoil/atom";
 import { changeImageToURL } from "../../../utils/function";
 import { api } from "../../../api/baseURL";
 import useAPI from "../../../hooks/useAPI";
+import { COLOR } from "../../../utils";
 
 export default function PostUpload() {
   const [content, setContent] = useState({ text: "", image: "" });
@@ -119,8 +120,10 @@ const TextAreaContainerStyle = styled.textarea`
   width: 100%;
   border: none;
   resize: none;
+  background-color: ${COLOR.bgPrimaryColor};
   &:focus {
     outline: none;
+    background-color: ${COLOR.bgPrimaryColor};
   }
 `;
 
