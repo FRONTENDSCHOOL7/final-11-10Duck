@@ -13,10 +13,7 @@
 
 ![Axios](https://badgen.net/badge/Axios/v1.5.1/5A29E4?)
 ![StyledComponents](https://badgen.net/badge/StyledComponents/v6.1.0/DB7093?)
-
-<!-- 파이어베이스도 추가해주세요 규영님 -->
-<!-- ![Eslint](https://badgen.net/badge/Eslint/v8.42.0/4B32C3?) -->
-<!-- ![Prettier](https://badgen.net/badge/Prettier/v2.8.8/F7B93E?) -->
+![Firebase](https://badgen.net/badge/Firebase/v10.5.2/4B32C3?)
 
 ![Size](https://img.shields.io/github/languages/code-size/FRONTENDSCHOOL7/final-11-10Duck.svg)
 ![Top Language](https://img.shields.io/github/languages/top/FRONTENDSCHOOL7/final-11-10Duck.svg)
@@ -128,14 +125,13 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 | **커뮤니케이션**      | - `Notion`, `Discord`                                                                           |
 | **배포**              | - `Netlify` 작성                                                                                |
 
+<p>
 <img  src="https://img.shields.io/badge/react-2D333B?style=for-the-badge&logo=react&logoColor=61DAFB">
 <img  src="https://img.shields.io/badge/Recoil-2D333B?style=for-the-badge&logo=react&logoColor=3578E5">
 <img  src="https://img.shields.io/badge/Styled component-2D333B?style=for-the-badge&logo=styledcomponents&logoColor=#DB7093">
-
 <img  src="https://img.shields.io/badge/javascript-2D333B?style=for-the-badge&logo=javascript&logoColor=#F7DF1E">
-<!-- <img  src="https://img.shields.io/badge/prettier-2D333B?style=for-the-badge&logo=prettier&logoColor=#F7B93E"> -->
-
-<!-- 파이어베이스 필요필요필요!!! -->
+<img  src="https://img.shields.io/badge/firebase-2D333B?style=for-the-badge&logo=firebase&logoColor=##FFCA28">
+</p>
 
 #### why?
 
@@ -401,7 +397,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 <br />
 
-## ✴️ **7. 핵심 코드**
+## ✴️ 7. 핵심 코드
 
 <details>
     <summary><b>7-(1) 공통함수 Hook으로 관리하기</b></summary>
@@ -435,7 +431,7 @@ export default function useAlertModal() {
 
 <br />
 
-## ✴️ **8. 트러블 슈팅**
+## 🛑 8. 트러블 슈팅
 
 <details>
 	<summary><b>8-(1) Recoil 데이터가 새로고침할 때 마다 reset 되는 현상</b></summary>
@@ -487,47 +483,186 @@ export const userState = atom({
 <details>
 	<summary><b>8-(2) 전체 유저에 대한 조회로 인한 렌더링 시간 이슈</b></summary>
 
-- 규영님 파트 적으시면 될듯용
+#### 🚨 문제
+
+- 검색 페이지에서 처음 작성한 코드는 제공된 유저 검색 api를 사용해 검색 키워드에 맞는 유저를 리스트 state에 업데이트하는 코드를 작성했다.
+  하지만 DB를 모든 프로젝트 조가 같이 사용하는 환경이고, 조회해야하는 데이터 양이 많다 보니 검색어를 입력할때마다 성능이 좀 떨어졌다.
+  그리고 DB에 유저의 구분값 칼럼이 없어 원치 않는 유저도 같이 검색되는 문제점이 있었다.
 
 ```jsx
-// 기존 코드
-// 팔로우
-export const userState = atom({
-  key: "userState",
-  default: {
-    _id: "",
-    username: "",
-    email: "",
-    accountname: "",
-    intro: "",
-    image: "",
-    token: "",
-    refreshToken: "",
+// 검색 페이지 - 처음 작성한 코드
+const [searchInput, setSearchInput] = useState("");
+const [searchList, setSearchList] = useState([]);
+
+const fetchSearchUser = async () => {
+  try {
+    const res = await api.get(`/user/searchuser/?keyword=${searchInput}`, {
+      headers: header,
+    });
+    const resList = res.data.filter(
+      (data) =>
+        data.username.includes(searchInput) ||
+        data.accountname.includes(searchInput)
+    );
+
+    setSearchList([...resList]);
+    console.log("🌟유저 검색 성공");
+  } catch (err) {
+    console.error(err);
+    console.log("🔥유저 검색 실패");
+  }
+};
+
+// 검색어를 입력할때마다 볼륨이 큰 디비에서 매번 api를 호출한다.
+useEffect(() => {
+  searchInput.length > 0 && fetchSearchUser();
+}, [searchInput]);
+```
+
+#### 🪄 첫 번째 개선
+
+- 검색어를 입력할때 조회하는게 아닌 특정 유저 집단만 먼저 조회해 오도록 수정했다.
+  우선 우리 프로젝트의 유저만 선별하기 위해 유저 accountname에 라벨링 작업(’ssduck’)을 한 후 그 목록을 state에 넣었다. 그래서 검색시 api 조회를 처음 한 번만 하기 때문에 성능을 조금 개선할 수 있었다.
+  그리고 둘러보기 페이지에도 같이 적용 했다.
+
+```jsx
+// 검색 페이지 - 첫 번째 코드
+const fetch10DuckUsers = async () => {
+  try {
+    const res = await api.get(`user/searchuser/?keyword=ssduck`, {
+      headers: header,
+    });
+
+    res.data &&
+      res.data.forEach((user) => {
+        user.accountname.includes("ssduck") &&
+          setAllUserList((prev) => [...prev, user]);
+      });
+
+    console.log("🌟씁덕학개론 유저 목록 불러오기 성공");
+  } catch (err) {
+    console.error(err);
+    console.log("🔥씁덕학개론 유저 목록 불러오기 실패");
+  }
+};
+
+const searchUsers = () => {
+  const res = allUserList.filter((user) => {
+    return (
+      user.username.includes(searchInput) ||
+      user.accountname.includes(searchInput)
+    );
+  });
+  setSearchList(res);
+};
+
+useEffect(() => {
+  fetch10DuckUsers();
+}, []);
+
+useEffect(() => {
+  searchUsers();
+}, [searchInput]);
+```
+
+```jsx
+// 둘러보기 페이지 - 같이 적용
+const fetch10DuckUsers = async () => {
+  try {
+    const res = await api.get(`user/searchuser/?keyword=ssduck`, {
+      headers: header,
+    });
+
+    res.data.forEach((user) => {
+      user.accountname.includes("ssduck") &&
+        setUserList((prev) => [...prev, user]);
+    });
+
+    console.log("🌟씁덕학개론 유저 목록 불러오기 성공");
+  } catch (err) {
+    console.error(err);
+    console.log("🔥씁덕학개론 유저 목록 불러오기 실패");
+  }
+};
+const fetchUserPost = async (userAccountname) => {
+  try {
+    const res = await api.get(`/post/${userAccountname}/userpost`, {
+      headers: header,
+    });
+
+    res.data.post.forEach((post) => {
+      post.image && setGalleryList((prev) => [...prev, post]);
+    });
+
+    console.log(`🌟${userAccountname} 게시글 불러오기 성공`);
+  } catch (err) {
+    console.error(err);
+    console.log(`🔥${userAccountname} 게시글 불러오기 실패`);
+  }
+};
+
+const sortShuffle = (arr) => {
+  return arr.sort(() => Math.random() - 0.5);
+};
+
+useEffect(() => {
+  userList.length === 0 && fetch10DuckUsers();
+}, []);
+
+useEffect(() => {
+  sortShuffle(userList).forEach((user) => {
+    fetchUserPost(user.accountname);
+  });
+}, [userList]);
+```
+
+### 🪄 두 번째 개선
+
+두 페이지에서 같은 api 따로 조회하므로 공통화 작업을 했다.
+api로 가져온 데이터를 상태관리 할 수 있는 방법을 찾아 본 후 Recoil의 slector와 React-Query를 고민했고, 리엑트 상태관리 주제로 책 집필를 하며 경험해본 recoil selector를 사용했다.
+React-query를 사용하지 않은 이유는 크게 3가지이다.
+
+1. React-query에서 반환하는 상태에따라 컴포넌트를 구분하려면 프로젝트 전체 레이아웃을 변경해야한다.
+2. staleTime과 cacheTime 설정이 크게 의미 있는 컴포넌트가 많이 없다.
+3. 사용법이 미숙하다.
+   <br>
+
+```jsx
+// 리코일 비동기 처리
+export const ssduckUserListState = selector({
+  key: "ssduckUserListState",
+  get: async () => {
+    try {
+      const userList = [];
+      const res = await api.get(`user/searchuser/?keyword=ssduck`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      res.data &&
+        res.data.forEach((user) => {
+          user.accountname.includes("ssduck") && userList.push(user);
+        });
+
+      console.log("🌟씁덕학개론 유저 목록 불러오기 성공");
+
+      return userList;
+    } catch (err) {
+      console.error(err);
+      console.log("🔥씁덕학개론 유저 목록 불러오기 실패");
+    }
   },
 });
 ```
 
-- 🪄 해결 방법: recoil-persist 라이브러리를 사용하여 recoil 값이 새로고침되어도 리셋되지 않게 막을 수 있다.
+그래서 둘러보기와 검색 페이지에서 최소 한 번씩 호출하는 api를 처음 한 번 조회로 끝낼 수 있게 변경했다.
 
-```jsx
-// 팔로우
-export const userState = atom({
-  key: "userState",
-  default: {
-    _id: "",
-    username: "",
-    email: "",
-    accountname: "",
-    intro: "",
-    image: "",
-    token: "",
-    refreshToken: "",
-  },
-  effects_UNSTABLE: [persistAtom],
-});
-```
+#### ♻️ 고민해봐야할 점: 디바운싱
 
-- 🚨 고민해봐야할 점: 여기에 디바운싱 얘기 추가로 적으면 좋을 듯
+- 코드리뷰를 받으면서 디바운싱이란걸 알게됐다. 만약 유저를 필터링해서 사용하지 않고 입력값을 그대로 api 조회했다면 엄청난 낭비가 있었을 것이다. 만약 유료 api라면 쿼리 하나가 다 돈인데 내 통장은 텅장이 됐을것이다.
+- 디바운싱을 알아보면서 스로틀링도 알게되었는데 시간에 제한을 두는 디바운싱과 달리 실행 횟수에 제한을 거니 스크롤 작업에는 좋을거 같은데 검색기능에는 디바운싱을 적용하는것이 더 좋을 듯 하다.
 
 </details>
 
@@ -536,7 +671,7 @@ export const userState = atom({
 
 <br />
 
-## ✴️ **9. 리팩토링할 부분**
+## ♻️ 9. 리팩토링할 부분
 
 - 공통함수 util, hook으로 분리
 - 가독성이 높은 코드인가
@@ -556,7 +691,7 @@ export const userState = atom({
 
 <br />
 
-## ✴️ **10. 느낀점**
+## 👏 10. 느낀점
 
 ### 🐈‍⬛ 서주예
 
