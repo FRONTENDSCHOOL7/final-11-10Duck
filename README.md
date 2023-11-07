@@ -454,7 +454,52 @@ export const userState = atom({
 });
 ```
 
-  <img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/db688f75-6a3a-48b2-964f-04ac457059a2" />
+- 🪄 해결 방법: recoil-persist 라이브러리를 사용하여 recoil 값이 새로고침되어도 리셋되지 않게 막을 수 있다.
+
+```jsx
+// 팔로우
+export const userState = atom({
+  key: "userState",
+  default: {
+    _id: "",
+    username: "",
+    email: "",
+    accountname: "",
+    intro: "",
+    image: "",
+    token: "",
+    refreshToken: "",
+  },
+  effects_UNSTABLE: [persistAtom],
+});
+```
+
+- 🚨 고민해봐야할 점: 하지만 해당 라이브러리의 작동방식은 recoil에 정보를 Localstorage에 저장함으로써 새로고침을 해서 날아간 recoil정보를 매번 Localstorage에서 다시 받아오는 방식이다. 만약 유저에 대한 즁요한 정보가 담겨있는 경우라면 이 라이브러리를 사용해서 문제르르 해결하는 것이 옳지 않은 방법일 수도 있다.
+
+</details>
+
+<details>
+	<summary><b>8-(2) 전체 유저에 대한 조회로 인한 렌더링 시간 이슈</b></summary>
+
+- 규영님 파트 적으시면 될듯용
+
+```jsx
+// 기존 코드
+// 팔로우
+export const userState = atom({
+  key: "userState",
+  default: {
+    _id: "",
+    username: "",
+    email: "",
+    accountname: "",
+    intro: "",
+    image: "",
+    token: "",
+    refreshToken: "",
+  },
+});
+```
 
 - 🪄 해결 방법: recoil-persist 라이브러리를 사용하여 recoil 값이 새로고침되어도 리셋되지 않게 막을 수 있다.
 
@@ -476,9 +521,7 @@ export const userState = atom({
 });
 ```
 
-- 🪄 고민해봐야할 점: 하지만 해당 라이브러리의 작동방식은 recoil에 정보를 Localstorage에 저장함으로써 새로고침을 해서 날아간 recoil정보를 매번 Localstorage에서 다시 받아오는 방식이다. 만약 유저에 대한 즁요한 정보가 담겨있는 경우라면 이 라이브러리를 사용해서 문제르르 해결하는 것이 옳지 않은 방법일 수도 있다.
-
-<img width="250" src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/f696c189-eabe-4cb5-9e9e-2969bd9d4360" />
+- 🚨 고민해봐야할 점: 여기에 디바운싱 얘기 추가로 적으면 좋을 듯
 
 </details>
 
@@ -489,12 +532,18 @@ export const userState = atom({
 
 ## ✴️ **9. 리팩토링할 부분**
 
-- 웹 접근성 높이기
-- 이미지 압축 및 예외처리
-- 완전 반응형 적용하기
-- 스크롤 위치 기억시키기
-- 디바운싱 적용하기
-- react-query 적용하여 api 데이터 stale 관리하기
+- 공통함수 util, hook으로 분리
+- 가독성이 높은 코드인가
+- 코드의 길이가 너무 길지 않은가
+- Hook의 실행 속도
+- 스토리 기능
+  - 한 계정이 2개 이상의 게시글을 작성 했을 대 한번에 표현
+  - 시간 지나면 화면 넘기기
+  - 내가 팔로잉한 유저의 스토리만 확인하기
+- 투표기능
+  - 유저들이 직접 투표를 생성할 수 있게 기능 구현
+  - 투표 혹은 토론 창으로 페이지 분리하기
+- 굿즈 교환 기능 추가
 
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
