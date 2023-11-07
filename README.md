@@ -120,13 +120,13 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 ### 🛠️ 기술스택
 
-|                       |                                                                                     |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| 개발 환경             | - FE: `React`, `Axios`, `Recoil`, `styled-components`<br>- BE: `제공된 RESTful API` |
-| **버전 및 이슈 관리** | - `Git`, `Github`, `Notion`                                                         |
-| **프로젝트 관리**     | - `Github Issues`, `Github Pull Requests`                                           |
-| **커뮤니케이션**      | - `Notion`, `Discord`                                                               |
-| **배포**              | - `Netlify` 작성                                                                    |
+|                       |                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| 개발 환경             | - FE: `React`, `Axios`, `Recoil`, `styled-components`<br>- BE: `제공된 RESTful API`, `Firebase` |
+| **버전 및 이슈 관리** | - `Git`, `Github`, `Notion`                                                                     |
+| **프로젝트 관리**     | - `Github Issues`, `Github Pull Requests`                                                       |
+| **커뮤니케이션**      | - `Notion`, `Discord`                                                                           |
+| **배포**              | - `Netlify` 작성                                                                                |
 
 <img  src="https://img.shields.io/badge/react-2D333B?style=for-the-badge&logo=react&logoColor=61DAFB">
 <img  src="https://img.shields.io/badge/Recoil-2D333B?style=for-the-badge&logo=react&logoColor=3578E5">
@@ -143,8 +143,9 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
   - 트랜드 캐치와 기술 향상 목적으로 Redux 보다 비교적 러닝커브가 낮은 Recoil을 사용
 - 스타일링 :
   - 짧은 기간이고 재사용성을 높이기 위해 Styled Components를 사용했고 시멘틱 마크업을 유지하며 ​​개발
-- 배포 : - 지속적인 유지 보수를 위해 하루 배포 횟수가 적게 제한된 Vercel 보다 Netlify로 배포.
-<!-- - 일관된 코드 스타일과 코드 마찰 감소를 위해 Prettier를 사용했습니다. -->
+- 배포 :
+  - 지속적인 유지 보수를 위해 하루 배포 횟수가 적게 제한된 Vercel 보다 Netlify로 배포.
+  <!-- - 일관된 코드 스타일과 코드 마찰 감소를 위해 Prettier를 사용했습니다. -->
 
 #### 소통은?
 
