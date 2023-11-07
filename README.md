@@ -187,7 +187,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 ┃   ┣ 📜index.html
 ┃   ┗ 📜manifest.json
 ┗ 📦src
-    ┣ 📂api
+    ┣ 📂api ────────────────────────────── 📡 AXIOS 설정
     ┃ ┗ 📜baseURL.js
     ┣ 📂assets  ────────────────────────── 🧸 폰트, 이미지 등 정적 리소스
     ┃ ┣ 📂icon
@@ -204,7 +204,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
     ┃ ┗ 📜Button.jsx
     ┣ 📂constants   ─────────────────────── 🧸 mock 데이터 폴더
     ┃ ┗ 📜product.js
-    ┣ 📂hooks♻️ 커스텀 훅 폴더
+    ┣ 📂hooks ───────────────────────────── ♻️ 커스텀 훅 폴더
     ┃ ┣ 📜useAPI.jsx
     ┃ ┣ 📜useAlertModal.jsx
     ┃ ┣ 📜useBackPage.jsx
@@ -257,7 +257,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 |                                        splash                                         |                                        회원가입                                        |                                        로그인                                        |
 | :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
-| <img src="./src/assets/demo/demo-splash.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-sign-up.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-login.gif" align="center" width="300" height="500"> |
+| <img src="./src/assets/demo/demo-splash.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-sign-up.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-login.gif" align="center" width="250" height="500"> |
 
 ### 2) 홈
 
@@ -281,7 +281,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 |                                     포스트 화면                                     |                                       게시물 업로드                                        |                                        게시물 삭제                                         |
 | :---------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
-| <img src="./src/assets/demo/demo-post.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-post-upload.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-post-delete.gif" align="center" width="300" height="500"> |
+| <img src="./src/assets/demo/demo-post.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-post-upload.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-post-delete.gif" align="center" width="250" height="500"> |
 
 |                                        댓글 달기                                        |                                         댓글 삭제                                          |
 | :-------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
@@ -297,7 +297,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 |                                         프로필 수정                                         |                                        팔로잉하기                                        |                                        상품등록                                        |
 | :-----------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
-| <img src="./src/assets/demo/demo-edit-profile.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-following.gif" align="center" width="300" height="500"> | <img src="./src/assets/demo/demo-product.gif" align="center" width="300" height="500"> |
+| <img src="./src/assets/demo/demo-edit-profile.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-following.gif" align="center" width="250" height="500"> | <img src="./src/assets/demo/demo-product.gif" align="center" width="250" height="500"> |
 
 ### 8) 로그아웃
 
