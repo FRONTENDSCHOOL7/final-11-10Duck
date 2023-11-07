@@ -80,10 +80,10 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 <div align="center">
 
-| <img src="https://img.shields.io/badge/Project_Leader-FF5733" /><br/> ![Frontend](https://img.shields.io/badge/-Frontend-green) |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                 |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                 |
-| :-----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-|                  <img src="https://avatars.githubusercontent.com/u/94788360?v=4?s=120" width="120px;" alt=""/>                  | <img src="https://avatars.githubusercontent.com/u/87490781?v=4?s=120" width="120px;" alt=""/> | <img src="https://avatars.githubusercontent.com/u/105216377?v=4?s=120" width="120px;" alt=""/> | <img src="https://avatars.githubusercontent.com/u/138556895?v=4?s=120" width="120px;" alt=""/> |
-|                                             [🐈‍⬛서주예](https://github.com/samweol)                                              |                             [🍊오규영](https://github.com/oqoqoh)                             |                          [🍙이서연](https://github.com/catisverycute)                          |                             [🥰이은경](https://github.com/egyeong)                             |
+| <img src="https://img.shields.io/badge/Project_Leader-FF5733" /><br/> ![Frontend](https://img.shields.io/badge/-Frontend-green) |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                 |                                       <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                                       |
+| :-----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+|                  <img src="https://avatars.githubusercontent.com/u/94788360?v=4?s=120" width="120px;" alt=""/>                  | <img src="https://avatars.githubusercontent.com/u/87490781?v=4?s=120" width="120px;" alt=""/> | <img src="https://avatars.githubusercontent.com/u/105216377?v=4?s=120" width="120px;" alt=""/> | <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/138556895/5fa55139-865a-4f7f-9b58-ed95b3a64eba" width="120px;" alt=""/> |
+|                                             [🐈‍⬛서주예](https://github.com/samweol)                                              |                             [🍊오규영](https://github.com/oqoqoh)                             |                          [🍙이서연](https://github.com/catisverycute)                          |                                                   [🥰이은경](https://github.com/egyeong)                                                    |
 
 </div>
 
@@ -379,13 +379,16 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 **🖥️ 화면 개발**
 
-- 작성해주세요.
+- 피드 페이지
+- 채팅리스트 페이지
+- 채팅룸 페이지
+- 404 페이지
 
 <br/>
 
 **⚡ 기능 개발**
 
-- 작성해주세요.
+- 채팅 전송기능
 
 <br/>
 
