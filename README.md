@@ -14,6 +14,7 @@
 ![Axios](https://badgen.net/badge/Axios/v1.5.1/5A29E4?)
 ![StyledComponents](https://badgen.net/badge/StyledComponents/v6.1.0/DB7093?)
 
+<!-- 파이어베이스도 추가해주세요 규영님 -->
 <!-- ![Eslint](https://badgen.net/badge/Eslint/v8.42.0/4B32C3?) -->
 <!-- ![Prettier](https://badgen.net/badge/Prettier/v2.8.8/F7B93E?) -->
 
@@ -74,7 +75,7 @@ Re:액트부터 시작하는 이세계 코딩✨🧑‍💻입니다 !
 
 팀원 모두가 다양한 레벨의 애니메이션을 좋아하고,
 React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
-유명 애니 제목을 오마쥬하여 팀명을 짖게 되었습니다 :)
+유명 애니 제목을 오마쥬하여 팀명을 짓게 되었습니다 :)
 ```
 
 <div align="center">
@@ -82,7 +83,7 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 | <img src="https://img.shields.io/badge/Project_Leader-FF5733" /><br/> ![Frontend](https://img.shields.io/badge/-Frontend-green) |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                 |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                 |
 | :-----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
 |                  <img src="https://avatars.githubusercontent.com/u/94788360?v=4?s=120" width="120px;" alt=""/>                  | <img src="https://avatars.githubusercontent.com/u/87490781?v=4?s=120" width="120px;" alt=""/> | <img src="https://avatars.githubusercontent.com/u/105216377?v=4?s=120" width="120px;" alt=""/> | <img src="https://avatars.githubusercontent.com/u/138556895?v=4?s=120" width="120px;" alt=""/> |
-|                                             [🧸서주예](https://github.com/samweol)                                              |                             [🍊오규영](https://github.com/oqoqoh)                             |                          [🍙이서연](https://github.com/catisverycute)                          |                             [🥰이은경](https://github.com/egyeong)                             |
+|                                             [🐈‍⬛서주예](https://github.com/samweol)                                              |                             [🍊오규영](https://github.com/oqoqoh)                             |                          [🍙이서연](https://github.com/catisverycute)                          |                             [🥰이은경](https://github.com/egyeong)                             |
 
 </div>
 
@@ -108,6 +109,7 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 | **4주차**<br>(11/6 ~ 11/7)       | - 통합 테스트 및 에러 수정<br>- 배포(`Netlify`)<br>- README 작성                                                                                   |
 
 <br />
+<!-- 캘린더 이미지 추가하는 건 어때요 ? 툴을 찾아봐야할려나 -->
 
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
@@ -132,6 +134,8 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 <img  src="https://img.shields.io/badge/javascript-2D333B?style=for-the-badge&logo=javascript&logoColor=#F7DF1E">
 <!-- <img  src="https://img.shields.io/badge/prettier-2D333B?style=for-the-badge&logo=prettier&logoColor=#F7B93E"> -->
+
+<!-- 파이어베이스 필요필요필요!!! -->
 
 #### why?
 
@@ -271,13 +275,49 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 **🖥️ 화면 개발**
 
-- 작성해주세요.
+- 공통 버튼 컴포넌트
+- 공통 모달 컴포넌트
+- 공통 상품 컴포넌트
+- 게시글 컴포넌트
+- 로딩 컴포넌트
+- 투표 컴포넌트
+- Splash 페이지
+- 피드 페이지
+- 게시글 상세보기 페이지
+- 게시글 등록하기 페이지
+- 스토리 페이지
 
 <br/>
 
 **⚡ 기능 개발**
 
-- 작성해주세요.
+- 게시글 CRUD
+  - 게시글 텍스트와 이미지를 post요청을 통해 개발하였으며, 이때 인풋창은 텍스트 높이에 맞게 조절
+  - useParam을 사용하여 postId에 맞게 데이터를 뿌려주어 게시글 상세보기 가능
+  - delete 요청을 통해 게시글 삭제 구현
+- 댓글 및 좋아요 CRUD
+  - 댓글 및 좋아요를 post 요청을 통해 개발하였으며, 실시간으로 화면에 렌더링되게 구현
+  - delete 요청을 통해 댓글 삭제 구현
+  - userId를 통해 유저와 게시글 작성자를 확인 하고 타인의 경우 신고 기능 구현
+- 스토리 CRUD
+  - firebase를 사용하여 기능을 구현
+  - 사용자가 클릭한 위치에 텍스트를 입력할 수 있게 구현하고 이미지 추가 까지 가능
+  - 스토리는 24시간 이내만 필터링하여 화면에 렌더링
+- 투표
+  - firebase를 사용하여 기능 구현
+  - 투표하는 유저에 대한 정보를 받아 유저에게 1번의 투표만 가능하게 구현
+  - 투표를 하면 firebase 데이터를 바탕으로 비율을 계산해 결과가 바로 나오게 구현
+- 상품 CRUD
+  - 숫자를 입력하면 원단위로 반환해주는 함수를 개발하여 상품 등록 페이지에서 사용
+  - post 요청을 사용하여 상품 등록 기능 구현
+  - 공통적으로 버튼 활성화의 경우 array.every 메소드를 사용하여 간단하게 구현
+- 피드
+  - localstorage에서 유저 판별 이후 피드로 이동 기능 구현
+  - recoil에 저장된 유저 정보로 해당 유저의 팔로잉 유저들의 게시글만 Fetch
+- 로그인, 로그아웃, 회원가입
+- 공통 컴포넌트
+  - `Button`, `Input`, `BottomModal`, `AlertModal`, `Post`, `Product`
+  - 해당 컴포넌트들은 어디서도 재활용성 높게 신경써서 개발 후 명세서 작성
 
 <br/>
 
@@ -358,53 +398,28 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 ## ✴️ **7. 핵심 코드**
 
 <details>
-    <summary><b>7-(1) 주어진 API에서 데이터 필터링하기</b></summary>
+    <summary><b>7-(1) 공통함수 Hook으로 관리하기</b></summary>
 
-- 주어진 api를 그대로 사용해서는 모든 데이터 중 방꾸석의 데이터만 불러올 수 없었습니다. 따라서 content의 “space”, “keyword”를 추가하여 이들이 포함된 데이터만 필터링하여 모든 데이터를 보여주었습니다.
-
-```json
-content: '{"space":"침실","detail":"쉬폰 패브릭으로 침실의 분위기를 바꿀 수도 있답니다!"}’
-itemName: '{"name":"노란색 스탠드","keyword”:"조명"}’
-```
+- Modal 창이 있는 페이지마다 매번 State를 생성해주고 열고닫는 함수를 계속 생성해주는 것이 번거롭다고 판단하여 Hook으로 빼서 관리하기로 결정하였습니다.
 
 <br/>
-
-- 또한 약 6000개의 모든 데이터를 불러온 후 필터링하면 화면을 보여주기까지의 속도가 매우 느려지기 때문에 useInfiniteQuery를 사용하여 limit를 100으로 설정하여 데이터를 100개씩 불러와 필터링하는 방식으로 구현하여 로딩 속도를 개선했습니다. <br>
   [✨ feat: 홈페이지 전체 목록 로딩 속도 줄이기](https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/commit/15e880b003785dd84e3aaf7cbb6e407c44be34c5)
 
 ```jsx
-const {
-  data: homePostData,
-  isLoading: homeIsLoading,
-  fetchNextPage: homeFetchNextPage,
-} = useInfiniteQuery(
-  "homePostData",
-  ({ skip = count.current }) => getAllPost({ limit: 100, skip }),
-  {
-    getNextPageParam: (lastPage) => {
-      return lastPage.nextPage + 1;
-    },
-    onSuccess: (newData) => {
-      const pageParam = newData.pageParams.length - 1;
-      setAllPosts([...newData.pages[pageParam].data]);
-      if (newData.pages[pageParam].isLast) {
-        setIsLast(true);
-      }
+export default function useAlertModal() {
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
-      const allFiltered = allPosts.filter((post) =>
-        post.content?.includes('"space"')
-      );
-      setFilteredAllPosts((prevData) => [...prevData, ...allFiltered]);
+  const alertModalHandler = {
+    openModal: () => {
+      setIsAlertModalOpen(true);
     },
-  }
-);
+    closeModal: () => {
+      setIsAlertModalOpen(false);
+    },
+  };
 
-useEffect(() => {
-  if (!isLast) {
-    homeFetchNextPage();
-    count.current += 100;
-  }
-}, [homePostData, homeIsLoading, isLast, homeFetchNextPage]);
+  return { isAlertModalOpen, alertModalHandler };
+}
 ```
 
 </details>
@@ -417,38 +432,51 @@ useEffect(() => {
 ## ✴️ **8. 트러블 슈팅**
 
 <details>
-	<summary><b>8-(1) QueryClient Invalide Query 적용하기.</b></summary>
+	<summary><b>8-(1) Recoil 데이터가 새로고침할 때 마다 reset 되는 현상</b></summary>
 
-- 기존에 팔로우 요청을 보내면, 팔로우 요청은 성공하지만 기존 데이터가 그대로 캐시되어있어 새로고침을 해야만 팔로우 리스트를 다시 불러와 반영되는 문제가 발생했습니다
+- 로그인 후 api에서 넘겨주는 유저에 대한 정보를 recoil에 저장한 후 프로젝트 내부 안에서 사용하는데, 프로필 페이지에서 새로고침을 할 때 recoil의 user 정보가 초기화 되었고, 다시 setUser를 해주는 Feed 페이지에 돌아가야만 다시 user 값이 찬 상태로 돌아왔다.
 
 ```jsx
 // 기존 코드
 // 팔로우
-const postFollowMutation = useMutation(postFollow, {
-  onSuccess: () => {
-    queryClient.invalidateQueries("followers");
-  },
-  onError: () => {
-    console.error("팔로우 실패");
+export const userState = atom({
+  key: "userState",
+  default: {
+    _id: "",
+    username: "",
+    email: "",
+    accountname: "",
+    intro: "",
+    image: "",
+    token: "",
+    refreshToken: "",
   },
 });
 ```
 
   <img src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/db688f75-6a3a-48b2-964f-04ac457059a2" />
 
-- 🪄 해결 방법: react query의 Query Client에서 invalidateQueries()를 사용하여 기존에 조회했던 쿼리를 무효화시키고 데이터를 새로 조회해올 수 있다.
+- 🪄 해결 방법: recoil-persist 라이브러리를 사용하여 recoil 값이 새로고침되어도 리셋되지 않게 막을 수 있다.
 
 ```jsx
 // 팔로우
-const postFollowMutation = useMutation(postFollow, {
-  onSuccess: () => {
-    queryClient.invalidateQueries("followers");
+export const userState = atom({
+  key: "userState",
+  default: {
+    _id: "",
+    username: "",
+    email: "",
+    accountname: "",
+    intro: "",
+    image: "",
+    token: "",
+    refreshToken: "",
   },
-  onError: () => {
-    console.error("팔로우 실패");
-  },
+  effects_UNSTABLE: [persistAtom],
 });
 ```
+
+- 🪄 고민해봐야할 점: 하지만 해당 라이브러리의 작동방식은 recoil에 정보를 Localstorage에 저장함으로써 새로고침을 해서 날아간 recoil정보를 매번 Localstorage에서 다시 받아오는 방식이다. 만약 유저에 대한 즁요한 정보가 담겨있는 경우라면 이 라이브러리를 사용해서 문제르르 해결하는 것이 옳지 않은 방법일 수도 있다.
 
 <img width="250" src="https://github.com/FRONTENDSCHOOL5/final-14-BangKKuseok/assets/51310674/f696c189-eabe-4cb5-9e9e-2969bd9d4360" />
 
@@ -475,7 +503,7 @@ const postFollowMutation = useMutation(postFollow, {
 
 ## ✴️ **10. 느낀점**
 
-### 🧸 서주예
+### 🐈‍⬛ 서주예
 
 혼자서 리액트 프로젝트를 하다가, 협업은 처음이었는데 조장을 맡게 되어서, 조금 걱정되었지만! 서주예
 그래도 나 자신을 믿고 끝까지 넘어지지 않고 끝낼 수 있어서 좋은 경험이 되었다. 프로젝트를 하며 가장 기억에 남는 순간은, 아무래도 혼자 할 때와 다르게 다양한 코드를 볼 수 있었고, 그 과정에서 서로의 코드를 보고 상호보완해 주는 과정이 기억에 남는 것 같다. 개인의 성장을 생각하면 아쉬운 부분들이 너무 많다.
