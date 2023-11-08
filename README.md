@@ -38,7 +38,7 @@ PW: test1234
 
 > 📑 **프로젝트 발표자료**
 
-👉 [PPTX](https://mammoth-sassafras-ff5.notion.site/8c0c6215b5ee4c2f808d46545c2fe344?pvs=4)
+👉 [발표자료](https://mammoth-sassafras-ff5.notion.site/8c0c6215b5ee4c2f808d46545c2fe344?pvs=4)
 
 <br />
 
@@ -118,7 +118,7 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 <br />
 
-## ⚙️ **4. 기슬 스택 및 개발 환경**
+## ⚙️ **4. 기술 스택 및 개발 환경**
 
 ### 🛠️ 기술스택
 
