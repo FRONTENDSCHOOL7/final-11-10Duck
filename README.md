@@ -80,10 +80,11 @@ React로 하는 첫 프로젝트여서 많은 고민과 토론을 거쳐
 
 <div align="center">
 
-| <img src="https://img.shields.io/badge/Project_Leader-FF5733" /><br/> ![Frontend](https://img.shields.io/badge/-Frontend-green) |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                |                                       <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                                       |                                       <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                                       |
-| :-----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-|                  <img src="https://avatars.githubusercontent.com/u/94788360?v=4?s=120" width="120px;" alt=""/>                  | <img src="https://avatars.githubusercontent.com/u/87490781?v=4?s=120" width="120px;" alt=""/> | <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/105216377/901a59f4-adb8-417f-9a6e-a14d56ddcd7c" width="120px;" alt=""/> | <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/138556895/5fa55139-865a-4f7f-9b58-ed95b3a64eba" width="120px;" alt=""/> |
-|                                              [서주예](https://github.com/samweol)                                               |                              [오규영](https://github.com/oqoqoh)                              |                                                 [이서연](https://github.com/catisverycute)                                                  |                                                    [이은경](https://github.com/egyeong)                                                     |
+
+|              <img src="https://img.shields.io/badge/Project_Leader-FF5733" /><br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)              |                <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                |                                       <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                                       |                                       <br/> ![Frontend](https://img.shields.io/badge/-Frontend-green)                                       |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/94788360/0c3117db-a3ac-444d-affe-de54802b978a" width="120px;" height="120px" alt=""/> | <img src="https://avatars.githubusercontent.com/u/87490781?v=4?s=120" width="120px;" alt=""/> | <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/105216377/901a59f4-adb8-417f-9a6e-a14d56ddcd7c" width="120px;" alt=""/> | <img src="https://github.com/FRONTENDSCHOOL7/final-11-10Duck/assets/138556895/5fa55139-865a-4f7f-9b58-ed95b3a64eba" width="120px;" alt=""/> |
+|                                                          [🐈‍⬛서주예](https://github.com/samweol)                                                           |                             [🍊오규영](https://github.com/oqoqoh)                             |                                                [🍙이서연](https://github.com/catisverycute)                                                 |                                                   [🥰이은경](https://github.com/egyeong)                                                    |
 
 </div>
 
@@ -422,6 +423,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
 
 **⚡ 기능 개발**
 
+
 - 회원가입
   - 이메일 주소 및 비밀번호 입력 후 포커스 읽으면 바로 유형성 검사 및 경고 문구 기능 구현
   - api 요청으로 이메일 중복 검사 기능 구현
@@ -430,6 +432,7 @@ Remove 🔥: 코드(파일) 의 삭제할 경우
   - 이메일과 비밀번호를 모두 입력하면 다음 버튼이 활성화 구현
   - 로그인 성공시 유저 데이터 recoil에 저장
     <br/>
+
 
 ### **💜 이은경**
 
